@@ -8,6 +8,7 @@ Descubre la potencia de Arduino mientras exploramos su hardware sencillo, su sof
 
 - [00 - El entorno de desarrollo integrado Arduino (IDE)](/md/ard_00.md)
 - [01 - Nuestro primer programa](/md/ard_01.md)
+- [02 - Nuestro primer circuito](/md/ard_02.md)
 - [03 - Las entradas digitales](/md/ard_03.md)
 - [04 - Montaje pull-up y pull-down](/md/ard_04.md)
 - [05 - Las entradas analógicas](/md/ard_05.md)
