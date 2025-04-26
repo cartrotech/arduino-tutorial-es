@@ -1,96 +1,65 @@
-# 07 - Comunicació amb l'exterior
+# 07 - Comunicación con el exterior
 
-[img1]: ./../imatges/ard/ard_07_01.png "Monitor série"
-[img2]: ./../imatges/ard/ard_07_02.png "Velocitat de connexió"
-[img3]: ./../imatges/ard/ard_07_03.png "Final de línia"
+[img1]: ./../imatges/ard/ard_07_01.png "Monitor serie"
+[img2]: ./../imatges/ard/ard_07_02.png "Velocidad de conexión"
+[img3]: ./../imatges/ard/ard_07_03.png "Final de línea"
 
-## Objectius
+## Objetivos
 
-L'objectiu de la lliçó és comprendre la comunicació via port serie, per
-el que cal utilitzar la llibreria Serial. Veurem també operacions amb
-enters, els tipus String i char. Entendrem com operar amb Strings i la
-instrucció while.
+El objetivo de la lección es comprender la comunicación vía puerto serie, para lo cual hay que utilizar la librería Serial. Veremos también operaciones con enteros, los tipos String y char. Entenderemos cómo operar con Strings y la instrucción while.
 
-## Material requerit
+## Material requerido
 
-| Imatge                                                               | Descripció               |
+| Imagen                                                               | Descripción               |
 | -------------------------------------------------------------------- | ------------------------ |
 | <img src="./../imatges/mat/mat_portatil.jpg" width="50" height="50"> | PC                       |
 | <img src="./../imatges/mat/mat_cableusb.png" width="50" height="50"> | Cable USB                |
 | <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino UNO o compatible |
 
-## Comunicació Sèrie amb el món exterior
+## Comunicación Serie con el mundo exterior
 
-Més abans que després, necessitarem comunicar el nostre Arduino amb el
-nostre PC. Les raons són vàries, enviar-li ordres o rebre informació o
-senyals per exemple.
+Más tarde o más temprano, necesitaremos comunicar nuestro Arduino con nuestro PC. Las razones son varias, enviarle órdenes o recibir información o señales por ejemplo.
 
-Els PCs disposen de teclats, pantalles i adaptadors de xarxa, però amb
-Arduino hem d'usar el port USB que establirà una **connexió en sèrie**
-amb el nostre PC.
+Los PCs disponen de teclados, pantallas y adaptadores de red, pero con Arduino debemos usar el puerto USB que establecerá una **conexión en serie** con nuestro PC.
 
-La comunicació en sèrie és molt senzilla, basten dos fils per a enviar
-una diferència de tensió entre ells i poder marcar nivells alt (5V) i
-baix(0V) i amb això podem transmetre informació digital. Ara només ens
-falta pactar dues coses entre qui envia i qui rep:
+La comunicación en serie es muy sencilla, bastan dos hilos para enviar una diferencia de tensión entre ellos y poder marcar niveles alto (5V) y bajo(0V) y con eso podemos transmitir información digital. Ahora solo nos falta pactar dos cosas entre quien envía y quien recibe:
 
-- Un **codi comú** per a codificar els caràcters que enviem.
-- Un **acord de velocitat** per a saber a quin ritme cal llegir les dades.
+- Un **código común** para codificar los caracteres que enviamos.
+- Un **acuerdo de velocidad** para saber a qué ritmo hay que leer los datos.
 
-El codi comú que usarem amb Arduino es diu **codi ASCII** i és estàndard
-en tots els PCs. És una manera de codificar les lletres mitjançant
-números que representes aquests caràcters. Recordeu que només podem
-transmetre uns i zeros.
+El código común que usaremos con Arduino se llama **código ASCII** y es estándar en todos los PCs. Es una manera de codificar las letras mediante números que representan estos caracteres. Recordemos que solo podemos transmitir unos y ceros.
 
-Així per exemple la lletra A se representa pel numere 65, la B el 66, C
-el 67... Pràcticament tots els PCs actuals utilitzen aquest codi i això
-inclou a Windows, Mac i Linux (i per això podem llegir emails enviats
-des de diferents plataformes), però és important comprendre que aquest
-és un més entre diversos codis de caràcters possibles (EBCDIC per
-exemple).
+Así por ejemplo la letra A se representa por el número 65, la B el 66, C el 67... Prácticamente todos los PCs actuales utilizan este código y esto incluye a Windows, Mac y Linux (y por eso podemos leer emails enviados desde diferentes plataformas), pero es importante comprender que este es uno más entre varios códigos de caracteres posibles (EBCDIC por ejemplo).
 
-- Actualment, en realitat, se sol usar una extensió del **codi ASCII** (anomenada **Unicode**) que permet l'ús de caràcters no inclosos en la taula original, i que permeta representar caràcters com les Ñ, o accents per a l'espanyol, però també alfabets diferents com el Kanji xinés o l'alfabet ciríl·lic. I aquest és el motiu pel qual podeu llegir les lletres xineses o russes en les pàgines d'internet d'aquests països.
+- Actualmente, en realidad, se suele usar una extensión del **código ASCII** (llamada **Unicode**) que permite el uso de caracteres no incluidos en la tabla original, y que permite representar caracteres como la Ñ, o acentos para el español, pero también alfabetos diferentes como el Kanji chino o el alfabeto cirílico. Y este es el motivo por el cual puedes leer las letras chinas o rusas en las páginas de internet de estos países.
 
-L'altre factor a pactar per a realitzar una comunicació serie és la
-velocitat. Atés que només disposem de dos fils per a transmetre,
-necessitem saber quan cal llegir la línia i això es fa establint un
-acord de velocitat. Si la velocitat d'enviament és diferent de la
-velocitat de lectura, el missatge final serà irrecognoscible.
+El otro factor a pactar para realizar una comunicación serie es la velocidad. Dado que solo disponemos de dos hilos para transmitir, necesitamos saber cuándo hay que leer la línea y esto se hace estableciendo un acuerdo de velocidad. Si la velocidad de envío es diferente de la velocidad de lectura, el mensaje final será irreconocible.
 
-Bona part dels errors de comunicació sèrie programant amb Arduino se
-solen deure a una diferència de velocitat entre l'emissor i el
-receptor.
+Buena parte de los errores de comunicación serie programando con Arduino se deben a una diferencia de velocidad entre el emisor y el receptor.
 
-Aquesta velocitat es mesura en bits per segon (bauds) i veurem que
-Arduino suporta diferents velocitats de comunicació serie.
+Esta velocidad se mide en bits por segundo (baudios) y veremos que Arduino soporta diferentes velocidades de comunicación serie.
 
-## Establint la comunicació Sèrie
+## Estableciendo la comunicación Serie
 
-Arduino disposa d'una llibreria serie inclosa anomenada Serial, que ens
-permet envia informació al PC i per a usar-la simplement hem de
-demanar-li en el nostre **setup()** que la incloga. La instrucció que
-s'encarrega és:
+Arduino dispone de una librería serie incluida llamada Serial, que nos permite enviar información al PC y para usarla simplemente debemos pedirle en nuestro **setup()** que la incluya. La instrucción que se encarga es:
 
 ```Arduino
-Serial.begin( velocitat ) ;
+Serial.begin( velocidad ) ;
 ```
 
-- _Note's que Serial té la S majúscules i que C++ diferència entre majúscules i minúscules_
+- _Nota que Serial tiene la S mayúscula y que C++ diferencia entre mayúsculas y minúsculas_
 
-La velocitat és una valor entre 300 i 115.200 bits per segon. I sol ser
-costum establir-la en 9600 (el valor per defecte) però no hi ha cap raó
-per a això i aquesta no és una velocitat especialment alta.
+La velocidad es un valor entre 300 y 115.200 bits por segundo. Y suele ser costumbre establecerla en 9600 (el valor por defecto) pero no hay ninguna razón para esto y esta no es una velocidad especialmente alta.
 
-Per a enviar un missatge des de Arduino al nostre PC podem usar les
-funcions `Serial.print()` i `Serial.println()`.Vegem un exemple:
+Para enviar un mensaje desde Arduino a nuestro PC podemos usar las funciones `Serial.print()` y `Serial.println()`. Veamos un ejemplo:
 
 ```Arduino
 int LED = 10 ; int boton = 6 ;
-bool estat = false ;
+bool estado = false ;
 
 void setup()
 {
-    Serial.begin(9600) ; // Inicialitza el Port seriosa 9600 bits per segon
+    Serial.begin(9600) ; // Inicializa el Puerto serie a 9600 bits por segundo
 }
 
 void loop()
@@ -100,165 +69,132 @@ void loop()
 }
 ```
 
-El `Serial.println()` enviara el valor d'i al port serie de Arduino
-(_repetidament_. Per a llegir-ho en el nostre PC necessitem un monitor
-de port serie. El IDE de Arduino inclou un molt senzill, però suficient
-que s'invoca amb el botó del monitor:
+El `Serial.println()` enviará el valor de i al puerto serie de Arduino _repetidamente_. Para leerlo en nuestro PC necesitamos un monitor de puerto serie. El IDE de Arduino incluye uno muy sencillo, pero suficiente que se invoca con el botón del monitor:
 
-![Botó del monitor sèrie][img1]
+![Botón del monitor serie][img1]
 
-Necessitem a més assegurar-nos que la velocitat de connexió és la
-mateixa en tots dos extrems. Fixa't en la part inferior dreta del
-monitor serie:
+Necesitamos además asegurarnos que la velocidad de conexión es la misma en ambos extremos. Fíjate en la parte inferior derecha del monitor serie:
 
-![Velocitat de connexió][img2]
+![Velocidad de conexión][img2]
 
-Normalment la velocitat per defecte són els 9600 bits per segon o
-**bauds** en els quals hem programat la nostra porta serie, i si ho
-desplegau, veureu les diferents velocitats acceptables per a Arduino.
+Normalmente la velocidad por defecto son los 9600 bits por segundo o **baudios** en los cuales hemos programado nuestra puerto serie, y si lo desplegáis, veréis las diferentes velocidades aceptables para Arduino.
 
-- _Estrictament parlant, bits per segon i bauds no són exactament el mateix excepte sota certes condicions particulars que en Arduino es compleixen, per la qual cosa ací podem usar-los com a sinònims._
-- _En el món Arduino sembla haver-hi un acord d'usar velocitats baixes com 9600 en lloc de més altes com 115200, per a evitar problemes. Això és alguna cosa que fa anys estava justificat per problemes de transmissió, però amb la tecnologia actual no hi ha motiu per a això. És més, quan necessitem utilitzar dispositius de comunicacions com a adaptadors Ethernet o BlueTooth per a comunicar-nos, la velocitat haurà de pujar necessàriament._
+- _Estrictamente hablando, bits por segundo y baudios no son exactamente lo mismo excepto bajo ciertas condiciones particulares que en Arduino se cumplen, por lo que aquí podemos usarlos como sinónimos._
+- _En el mundo Arduino parece haber un acuerdo de usar velocidades bajas como 9600 en lugar de más altas como 115200, para evitar problemas. Esto es algo que hace años estaba justificado por problemas de transmisión, pero con la tecnología actual no hay motivo para esto. Es más, cuando necesitemos utilizar dispositivos de comunicaciones como adaptadores Ethernet o BlueTooth para comunicarnos, la velocidad tendrá que subir necesariamente._
 
-Ara que sabem enviar informació i resultats al PC, veurem com podem
-operar amb enters i mostrar el resultat a la porta serie. En C++ els
-operadors numèrics són els normals en càlcul (i alguns menys freqüents):
+Ahora que sabemos enviar información y resultados al PC, veremos cómo podemos operar con enteros y mostrar el resultado en la puerta serie. En C++ los operadores numéricos son los normales en cálculo (y algunos menos frecuentes):
 
-- Addició: +
+- Adición: +
 - Resta: --
-- Multiplicació: \*
-- Divisió sencera: / Quocient sense decimals (ja que operem amb enters)
-- Resta: % Retorna la resta d'una divisió.
+- Multiplicación: *
+- División entera: / Cociente sin decimales (ya que operamos con enteros)
+- Resto: % Retorna el resto de una división.
 
-En C++ hem d'expressar les operacions matemàtiques en una sola línia i
-utilitzar parèntesi per a garantir que s'opera com necessitem. Anem amb
-alguns exemples:
+En C++ debemos expresar las operaciones matemáticas en una sola línea y utilizar paréntesis para garantizar que se opera como necesitamos. Vamos con algunos ejemplos:
 
-| Operació           | Resultat     | Comentari                                                |
+| Operación           | Resultado     | Comentario                                                |
 | ------------------ | ------------ | -------------------------------------------------------- |
-| int i = 4 \* 2     | resultat = 8 |                                                          |
-| int i = 4 \* 2 / 3 | resultat = 2 | Perquè menysprea els decimals en ser sencer              |
-| int i = 14% 3      | resultat = 2 | La resta de 14 dividid entre 3                           |
-| int i = 2 + 8 / 2  | resultat = 6 | Calcula primer la divisió.                               |
-| int i = (2+8) / 2  | resultat = 5 | El parèntesi força al fet que es realitze primer la suma |
+| int i = 4 * 2     | resultado = 8 |                                                          |
+| int i = 4 * 2 / 3 | resultado = 2 | Porque desprecia los decimales al ser entero              |
+| int i = 14% 3      | resultado = 2 | El resto de 14 dividido entre 3                           |
+| int i = 2 + 8 / 2  | resultado = 6 | Calcula primero la división.                               |
+| int i = (2+8) / 2  | resultado = 5 | El paréntesis fuerza a que se realice primero la suma |
 
-Donada una expressió, la precedència d'operadors indica que operacions
-es realitzaren abans i quals després en funció del seu rang. Per als
-quals s'inicien en C++ no és fàcil saber que operadors tenen
-preferència, per la qual cosa és més segur que davant el dubte useu
-parèntesi.
+Dada una expresión, la precedencia de operadores indica qué operaciones se realizarán antes y cuáles después en función de su rango. Para los que se inician en C++ no es fácil saber qué operadores tienen preferencia, por lo que es más seguro que ante la duda uséis paréntesis.
 
-Els parèntesis forcen les operacions d'una forma clara i convé
-utilitzar-los davant el dubte perquè d'una altra manera, detectar els
-errors d'operació pot tornar-se molt difícil especialment quan un
-comença a programar.
+Los paréntesis fuerzan las operaciones de una forma clara y conviene utilizarlos ante la duda porque de otra manera, detectar los errores de operación puede volverse muy difícil especialmente cuando uno empieza a programar.
 
-L'operadora resta és més útil del que sembla a primera vista perquè ens
-permet saber si un numere és múltiple d'un altre. Suposem que volem
-saber si un número donat és parell.
+El operador resto es más útil de lo que parece a primera vista porque nos permite saber si un número es múltiplo de otro. Supongamos que queremos saber si un número dado es par.
 
-Podríem escriure un programa com aquest:
+Podríamos escribir un programa como este:
 
 ```Arduino
 void setup()
 {
-    Serial.begin(9600) ; // Inicialitza el Port serie
+    Serial.begin(9600) ; // Inicializa el Puerto serie
 }
 
 void loop()
 {
-    int i = 27 ; //El número en qüestió
+    int i = 27 ; //El número en cuestión
     if ( i % 2 == 0)
     {
-        Serial.println(\"És parell.\") ;
+        Serial.println("Es par.") ;
     }
     else
     {
-        Serial.println(\"És imparell\");
+        Serial.println("Es impar");
     }
 }
 ```
 
-Donant a i diferents valors podem comprovar com funciona l'operadora
-resta %. Tornarem sobre això quan vegem alguns exemples de com calcular
-nombres primers.
+Dando a i diferentes valores podemos comprobar cómo funciona el operador resto %. Volveremos sobre esto cuando veamos algunos ejemplos de cómo calcular números primos.
 
-En aquest programa hem usat d'una manera diferent el
-`Serial.println()` passant-li una **String** de text entre cometes.
-`Serial.print()` envia el text ( entre cometes) que li posem però no
-fa salt de línia quan acaba. En canvi `Serial.println()` fa el mateix
-i inclou al final aqueix salt de línia.
+En este programa hemos usado de una manera diferente el `Serial.println()` pasándole una **String** de texto entre comillas. `Serial.print()` envía el texto (entre comillas) que le ponemos pero no hace salto de línea cuando termina. En cambio `Serial.println()` hace lo mismo e incluye al final ese salto de línea.
 
 ```Arduino
 void setup()
 {
-    Serial.begin(9600) ; // Inicialitza el Port serie
+    Serial.begin(9600) ; // Inicializa el Puerto serie
 }
 
 void loop()
 {
-    Serial.print("Bon ") ;
-    Serial.print("Dia ") ;
-    Serial.println("a tots.") ;
+    Serial.print("Buen ") ;
+    Serial.print("Día ") ;
+    Serial.println("a todos.") ;
 }
 ```
 
-C++ disposa d'una mena de variables anomenades **Strings**, capaces de
-contindre textos. Podem operar amb elles simplement definint-les com
-qualsevol altra mena de C++:
+C++ dispone de una clase de variables llamadas **Strings**, capaces de contener textos. Podemos operar con ellas simplemente definiéndolas como cualquier otra clase de C++:
 
 ```Arduino
 void loop()
 {
-    int resultat = 25 ;
-    String s = " El resultat és: " ; // Note's que la S de String és majúsc.
+    int resultado = 25 ;
+    String s = " El resultado es: " ; // Nota que la S de String es mayúsc.
     Serial.print( s) ;
-    Serial.println( resultat);
+    Serial.println( resultado);
 }
 ```
 
-Un tipus **String** es defineix simplement posant entre cometes dobles
-un text, i es pot operar amb elles d'una forma similar a com operem amb
-enters. Prova:
+Un tipo **String** se define simplemente poniendo entre comillas dobles un texto, y se puede operar con ellas de una forma similar a como operamos con enteros. Prueba:
 
 ```Arduino
 
 void loop()
 {
     String a = "hola " ;
-    String b = "a tots." ;
+    String b = "a todos." ;
     Serial.println( a + b);
 }
 ```
 
-I també podem construir un **String** sobre la marxa així:
+Y también podemos construir un **String** sobre la marcha así:
 
 ```Arduino
 
 void loop()
 {
-    int resultat = 25 ;
-    String s = "El resultat és: ";
-    Serial.println( s + String( resultat ));
+    int resultado = 25 ;
+    String s = "El resultado es: ";
+    Serial.println( s + String( resultado ));
 }
 ```
 
-On imprimim el resultat de concatenar s String, i la conversió d'un int
-a String (L'operador + afig un String al final d'un altre).
+Donde imprimimos el resultado de concatenar s String, y la conversión de un int a String (El operador + añade un String al final de otro).
 
-## Rebent missatges a través del port Sèrie
+## Recibiendo mensajes a través del puerto Serie
 
-Fins ara només hem enviat missatges des de Arduino cap al PC, Però com
-rebem missatges en Arduino?
+Hasta ahora solo hemos enviado mensajes desde Arduino hacia el PC, ¿Pero cómo recibimos mensajes en Arduino?
 
-En primer lloc disposem d'una funció anomenada `Serial.parseInt()`
-que ens entrega el que s'escriu en el monitor serie convertit a enter:
+En primer lugar disponemos de una función llamada `Serial.parseInt()` que nos entrega lo que se escribe en el monitor serie convertido a entero:
 
 ```Arduino
 
 void loop()
 {
-    if (Serial.available() \> 0)
+    if (Serial.available() > 0)
     {
         int x = Serial.parseInt();
         Serial.println ( x) ;
@@ -266,21 +202,13 @@ void loop()
 }
 ```
 
-Aquest programa simplement rep en x els números que ens teclegen en la
-consola (quan premem intro) i si és un text, l'interpreta com a zero.
+Este programa simplemente recibe en x los números que nos teclean en la consola (cuando presionamos intro) y si es un texto, lo interpreta como cero.
 
-Hem utilitzat una altra funció `Serial.available()` que és un booleà.
-Convé per costum comprovar que abans de llegir el port serie hi ha
-alguna cosa que ens han enviat. Si n'hi ha, available() és True i en
-cas contrari és False.
+Hemos utilizado otra función `Serial.available()` que es un booleano. Conviene por costumbre comprobar que antes de leer el puerto serie hay algo que nos han enviado. Si hay, `available()` es True y en caso contrario es False.
 
-Per a llegir un **String** del port serie hem de complicar-nos una mica
-més i parlar del tipus **char**.
+Para leer un **String** del puerto serie debemos complicarnos un poco más y hablar del tipo **char**.
 
-Un dels majors maldecap en iniciar-se en C++ és comprendre la
-diferència, antiintuïtiva, entre **char** i **String**. **Char** és un
-tipus que representa un únic caràcter i es defineix amb cometes simples,
-a diferència de String que necessita cometes dobles:
+Uno de los mayores quebraderos de cabeza al iniciarse en C++ es comprender la diferencia, antiintuitiva, entre **char** y **String**. **Char** es un tipo que representa un único carácter y se define con comillas simples, a diferencia de String que necesita comillas dobles:
 
 ```Arduino
 char c = 'a' ;
@@ -288,16 +216,13 @@ char c = 'a' ;
 String s ="a" ;
 ```
 
-Encara que semble el mateix per a C++ són molt diferents.
+Aunque parece lo mismo para C++ son muy diferentes.
 
-Per a llegir una cadena des del port sèrie necessitem llegir un caràcter
-cada vegada i després muntar un String a partir d'ells, però abans,
-assegura't de seleccionar tots dos NL & CR en la part inferior del
-monitor serie, per a garantir que s'envia el caràcter de fi de línia:
+Para leer una cadena desde el puerto serie necesitamos leer un carácter cada vez y después montar un String a partir de ellos, pero antes, asegúrate de seleccionar ambos NL & CR en la parte inferior del monitor serie, para garantizar que se envía el carácter de fin de línea:
 
-![Final de línia][img3]
+![Final de línea][img3]
 
-Un programa per a llegir la consola seria una cosa així:
+Un programa para leer la consola sería algo así:
 
 ```Arduino
 
@@ -309,49 +234,43 @@ void setup()
 void loop ()
 {
     char c = ' ' ;
-    String missatge ="" ;
-    if (Serial.available()) //Comprovem si hi ha alguna cosa esperant
+    String mensaje ="" ;
+    if (Serial.available()) //Comprobamos si hay algo esperando
     {
-        while( c != '\\n') //Si n'hi ha, ho llegim fins a l'intro
+        while( c != '\n') //Si hay, lo leemos hasta el intro
         {
-            missatge = missatge + c ; // Afegim el llegit al missatge
-            c = Serial.read(); //Llegir 1 caràcter
+            mensaje = mensaje + c ; // Añadimos lo leído al mensaje
+            c = Serial.read(); //Leer 1 carácter
             delay(25);
         }
-        Serial.println( missatge); //En eixir imprimir el missatge
-        missatge = \"\" ; //Esborra-ho per a la pròxima vegada
+        Serial.println( mensaje); //Al salir imprimir el mensaje
+        mensaje = "" ; //Lo borramos para la próxima vez
     }
 }
 ```
 
-Ací usem una altra instrucció de C++ anomenada **while**. És similar a
-**if**, Executa repetidament el bloc que li segueix mentre es complisca
-la condició que li passem entre parèntesi:
+Aquí usamos otra instrucción de C++ llamada **while**. Es similar a **if**, Ejecuta repetidamente el bloque que le sigue mientras se cumpla la condición que le pasamos entre paréntesis:
 
 ```Arduino
-while ( condició)
+while ( condición)
 
 { ......... }
 ```
 
-Quan llig l'intro final del que escrivim, La condició c != '\n' es
-torna fals i ix del **while**.
+Cuando lee el intro final de lo que escribimos, La condición c != '\n' se vuelve falsa y sale del **while**.
 
-D'altra banda, comprovem si hi ha una cosa disponible a la porta serie
-i en aquest cas muntem el missatge llegint un **char** cada vegada i
-sumant-li-ho a missatge per a construir un **String** que puguem
-imprimir en eixir.
+Por otro lado, comprobamos si hay algo disponible en la puerta serie y en este caso montamos el mensaje leyendo un **char** cada vez y sumándolo a mensaje para construir un **String** que podamos imprimir al salir.
 
-- _El motiu del delay(25) és que a una velocitat tan lenta, enviar un char de 8 bits per la porta serie, tarda molt més del que tarda Arduino a executar les instruccions del while i tornar a començar. Per això si se suprimeix el delay (i us recomane la prova) llegirà un caràcter bo (de la paraula escrita i com 10 caràcters fem per a un Arduino UNO o Mega)._
-- _Si pugem la velocitat de comunicació a 115200 bits per segon, comprovàreu que no hi ha aquest problema ja que en multiplicar la velocitat d'enviament per més de 10 Arduino ja no té temps de tornar per més caràcters abans que arriben._
+- _El motivo del delay(25) es que a una velocidad tan lenta, enviar un char de 8 bits por la puerta serie, tarda mucho más de lo que tarda Arduino a ejecutar las instrucciones del while y volver a empezar. Por eso si se suprime el delay (y os recomiendo la prueba) leerá un carácter bueno (de la palabra escrita y como 10 caracteres hacemos para un Arduino UNO o Mega)._
+- _Si subimos la velocidad de comunicación a 115200 bits por segundo, comprobaréis que no hay este problema ya que al multiplicar la velocidad de envío por más de 10 Arduino ya no tiene tiempo de volver por más caracteres antes de que lleguen._
 
-## Resum de la sessió
+## Resumen de la sesión
 
-- Hem vist com establir la comunicació amb el PC extern, tant per a enviar com per a rebre missatges sencers i de text.
-- Hem presentat els tipus String i char.
-- Hem vist les regles bàsiques per a operar amb enters i amb Strings.
-- Presentem una nova instrucció: while.
+- Hemos visto cómo establecer la comunicación con el PC externo, tanto para enviar como para recibir mensajes enteros y de texto.
+- Hemos presentado los tipos String y char.
+- Hemos visto las reglas básicas para operar con enteros y con Strings.
+- Presentamos una nueva instrucción: while.
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
