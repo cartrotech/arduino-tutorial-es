@@ -30,7 +30,7 @@ Hasta ahora hemos usado siempre resistencias fijas, de un valor dado. Pero a vec
 
 Un potenciómetro es, simplemente, un mecanismo para proporcionar una resistencia variable.
 
-Hay potenciómetros de tantas grandezas, formas y colores como puedas imaginar, pero al final son una resistencia fija de un valor dado (10 kΩ en nuestro caso actual) y un mecanismo que permite deslizar un dial conductor sobre esa resistencia, que nos permite tomar una parte de ese valor.
+Hay potenciómetros de tantos tamaños, formas y colores como puedas imaginar, pero al final son una resistencia fija de un valor dado (10 kΩ en nuestro caso actual) y un mecanismo que permite deslizar un dial conductor sobre esa resistencia, que nos permite tomar una parte de ese valor.
 
 Por eso un potenciómetro siempre tiene 3 pines en fila. Los de los extremos se comportan como una resistencia del valor de fondo de escala del potenciómetro, y un pin central que va tomando valores de resistencia en función del movimiento que hacemos con el ajuste.
 

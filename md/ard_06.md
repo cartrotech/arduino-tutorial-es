@@ -1,128 +1,125 @@
-# 06 - Les eixides analògiques
+# 06 - Las salidas analógicas
 
-[img1]: ./../imatges/ard/ard_06_01.png "Senyal digital"
-[img2]: ./../imatges/ard/ard_06_02.png "Senyal analògica"
+[img1]: ./../imatges/ard/ard_06_01.png "Señal digital"
+[img2]: ./../imatges/ard/ard_06_02.png "Señal analógica"
 [img3]: ./../imatges/ard/ard_06_03.png "PWM"
-[img4]: ./../imatges/ard/ard_06_04.png "Eixides amb PWM"
-[img5]: ./../imatges/ard/ard_06_05.png "Esquema de muntatge"
+[img4]: ./../imatges/ard/ard_06_04.png "Salidas con PWM"
+[img5]: ./../imatges/ard/ard_06_05.png "Esquema de montaje"
 
-## Finalitat
+## Finalidad
 
-Comprendre les diferències entre analògic i digital. Conèixer les eixides quasi analògiques de Arduino i què és la modulació per polsos (PWM).
+Comprender las diferencias entre analógico y digital. Conocer las salidas cuasi analógicas de Arduino y qué es la modulación por pulsos (PWM).
 
-## Material requerit
+## Material requerido
 
-|                                 Imatge                                 | Descripció               |
+|                                 Imagen                                 | Descripción               |
 | :--------------------------------------------------------------------: | :----------------------- |
 |   <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino Uno o compatible |
 | <img src="./../imatges/mat/mat_protoboard.png" width="50" height="50"> | Una protoboard           |
-|   <img src="./../imatges/mat/mat_cables.png" width="50" height="50">   | Cables de connexió       |
-|    <img src="./../imatges/mat/mat_led.png" width="50" height="50">     | Un díode led             |
-|  <img src="./../imatges/mat/mat_resis330.png" width="50" height="50">  | Una resistència 330 Ohms |
+|   <img src="./../imatges/mat/mat_cables.png" width="50" height="50">   | Cables de conexión       |
+|    <img src="./../imatges/mat/mat_led.png" width="50" height="50">     | Un diodo led             |
+|  <img src="./../imatges/mat/mat_resis330.png" width="50" height="50">  | Una resistencia 330 Ohms |
 
-## Analògic i digital
+## Analógico y digital
 
-Totes les senyals que hem treballat fins ara amb el nostre Arduino, de
-entrada o de eixida, tenen una característica comú: són digitals, es a
-dir que poden prendre un valor ALT o BAIX, però no valor intermedis.
+Todas las señales que hemos trabajado hasta ahora con nuestro Arduino, de
+entrada o de salida, tienen una característica común: son digitales, es
+decir que pueden tomar un valor ALTO o BAJO, pero no valores intermedios.
 
-Si representem el valor d'un **senyal digital** al llarg del temps,
-veuríem alguna cosa així:
+Si representamos el valor de una **señal digital** a lo largo del tiempo,
+veríamos algo así:
 
-![Senyal digital][img1]
+![Señal digital][img1]
 
-En la vida moltes coses son així, aproves o suspens, encens la llum o
-l'apagues, però moltes altres son variables mesurables contínues i poden
-tenir qualsevol valor que imaginem, com l'angle de les agulles del
-rellotge o la temperatura, que dins de valors finits poden prendre tants
-valors intermedis com puguem imaginar.
+En la vida muchas cosas son así, apruebas o suspensos, enciendes la luz o
+la apagas, pero muchas otras son variables medibles continuas y pueden
+tener cualquier valor que imaginemos, como el ángulo de las agujas del
+reloj o la temperatura, que dentro de valores finitos pueden tomar tantos
+valores intermedios como podamos imaginar.
 
-A aquesta classe de variables les diem **analògiques** i una
-representació per contraposició al **digital**, seria una mica com això:
+A esta clase de variables las llamamos **analógicas** y una
+representación por contraposición a lo **digital**, sería algo así:
 
-![Senyal analògica][img2]
+![Señal analógica][img2]
 
-No és rar que vulguem controlar alguna cosa del món exterior amb un
-senyal analògic de manera que el comportament del sistema seguisca
-aqueix senyal. Podem per exemple voler variar la lluminositat d'un
-díode LED i no simplement apagar-lo o encendre'l.
+No es raro que queramos controlar algo del mundo exterior con una
+señal analógica de manera que el comportamiento del sistema siga
+esa señal. Podemos por ejemplo querer variar la luminosidad de un
+diodo LED y no simplemente apagarlo o encenderlo.
 
-En aquesta lliçó aprendrem a enviar senyals analògics als pins d'eixida
+En esta lección aprenderemos a enviar señales analógicas a los pines de salida
 de Arduino.
 
-## Eixides quasi analògiques
+## Salidas cuasi analógicas
 
-Fins ara hem vist com activar les eixides digitals de Arduino, per a
-encendre i apagar un LED per exemple. Però no hem vist com modificar la
-intensitat de la lluentor d'aqueix LED. Per a això, hem de modificar la
-tensió d'eixida del nostre Arduino, o en altres paraules hem de poder
-presentar un valor analògic d'eixida.
+Hasta ahora hemos visto cómo activar las salidas digitales de Arduino, para
+encender y apagar un LED por ejemplo. Pero no hemos visto cómo modificar la
+intensidad del brillo de ese LED. Para esto, tenemos que modificar la
+tensión de salida de nuestro Arduino, o en otras palabras tenemos que poder
+presentar un valor analógico de salida.
 
-Per a començar hem de deixar clar que els Arduino manquen d'eixides
-analògiques pures que puguen fer això (amb la notable excepció del
+Para empezar debemos dejar claro que los Arduino carecen de salidas
+analógicas puras que puedan hacer esto (con la notable excepción del
 Arduino DUE).
 
-Però com els xics de Arduino són llestos, van decidir emprar un truc,
-perquè amb una eixida digital puguem aconseguir que quasi semble una
-eixida analògica.
+Pero como los chicos de Arduino son listos, decidieron usar un truco,
+para que con una salida digital pudiéramos conseguir que casi parezca una
+salida analógica.
 
-A aquest truc se'n diu **PWM**, sigles de Pulse Width Modulation, o
-**modulació d'ample de polsos**. La idea bàsica és posar eixides
-digitals que varien de forma molt ràpida de manera que el valor eficaç
-del senyal d'eixida siga equivalent a un senyal analògic de menor
-voltatge.
+A este truco se le llama **PWM**, siglas de Pulse Width Modulation, o
+**modulación de ancho de pulsos**. La idea básica es poner salidas
+digitales que varían de forma muy rápida de manera que el valor eficaz
+de la señal de salida sea equivalente a una señal analógica de menor
+tensión.
 
 ![PWM][img3]
 
-El sorprenent és que el truc funciona.
+Lo sorprendente es que el truco funciona.
 
-Fixar-vos en l'amplària del pols quadrat de dalt. Quant mes ample és,
-mes tensió mitjana hi ha present entre els pins, i això en el món
-exterior és equivalent a un valor analògic de tensió comprés entre 0 i
-5V. Al 50% és equivalent a un senyal analògic del 50% de 5V, és a dir
-2,5. Si mantenim els 5V un 75% del temps, serà l'equivalent a un senyal
-analògic de 75% de 5V = 3,75 V.
+Fíjate en el ancho del pulso cuadrado de arriba. Cuanto más ancho es,
+más tensión media hay presente entre los pines, y esto en el mundo
+exterior es equivalente a un valor analógico de tensión comprendido entre 0 y 5V. Al 50% es equivalente a una señal analógica del 50% de 5V, es decir 2,5V. Si mantenemos los 5V un 75% del tiempo, será el equivalente a una señal analógica de 75% de 5V = 3,75 V.
 
-Per a poder usar un pin digital de Arduino com a eixida analògica, el
-declarem en el **Setup()** igual que si fóra digital:
+Para poder usar un pin digital de Arduino como salida analógica, lo
+declaramos en el **Setup()** igual que si fuera digital:
 
 ```Arduino
 pinMode( 9, OUTPUT) ;
 ```
 
-La diferència ve a l'hora d'escriure en el pin:
+La diferencia viene a la hora de escribir en el pin:
 
 ```Arduino
-digitalWrite(9, HIGH);//Fica 5V en la eixida
-digitalWrite(9, LOW);//Fica 0V en la eixida
-analogWrite( 9, V) ;//analogWrite escriu en el pin de eixida un valor entre 0 i 5V, depenent de V (que deu estar entre 0 y 255).
+digitalWrite(9, HIGH);//Pone 5V en la salida
+digitalWrite(9, LOW);//Pone 0V en la salida
+analogWrite( 9, V) ;//analogWrite escribe en el pin de salida un valor entre 0 y 5V, dependiendo de V (que debe estar entre 0 y 255).
 ```
 
-D'aquesta manera si connectem un LED a una d'aquestes eixides PWM
-podem modificar la seua lluentor sense més que variar el valor que
-escrivim en el pin.
+De esta manera si conectamos un LED a una de estas salidas PWM
+podemos modificar su brillo sin más que variar el valor que
+escribimos en el pin.
 
-Però hi ha una restricció. No tots els pins digitals de Arduino accepten
-posar valors PWM en l'eixida. Solament aquells que tenen un símbol \~
-davant del número. Fixar-vos en la numeració dels pins de la imatge:
+Pero hay una restricción. No todos los pines digitales de Arduino aceptan
+poner valores PWM en la salida. Solamente aquellos que tienen un símbolo ~
+delante del número. Fíjate en la numeración de los pines de la imagen:
 
-![Pins amb PWM][img4]
+![Pines con PWM][img4]
 
-- Solament els pins 3, 5, 6, 9, 10 i 11 poden fer PWM i simular un valor analògic en la seua eixida.
-- Si intentes fer això amb un pin diferent, Arduino accepta l'ordre tranquil·lament, sense error, però per a valors de 0 a 127 entén que és _BAIX_ i per a la resta posa _ALT_ i segueix amb la seua vida satisfet amb el deure compliment.
+- Solamente los pines 3, 5, 6, 9, 10 y 11 pueden hacer PWM y simular un valor analógico en su salida.
+- Si intentas hacer esto con un pin diferente, Arduino acepta la orden tranquilamente, sin error, pero para valores de 0 a 127 entiende que es _BAJO_ y para el resto pone _ALTO_ y sigue con su vida satisfecho con el deber cumplido.
 
-## Modificant la lluentor d'un LED
+## Modificando el brillo de un LED
 
-Farem el típic muntatge d'una resistència i un díode LED, similar al de
-la lliçó 2, però assegurant-nos d'usar un dels pins digitals que poden
-donar senyals PWM. En la imatge he usat el pin 9.
+Haremos el típico montaje de una resistencia y un diodo LED, similar al de
+la lección 2, pero asegurándonos de usar uno de los pines digitales que pueden
+dar señales PWM. En la imagen he usado el pin 9.
 
-![Muntatge][img5]
+![Montaje][img5]
 
-Podem escriure un programa semblant a això:
+Podemos escribir un programa similar a esto:
 
 ```Arduino
-\\Codi: ARD_06_01
+//Código: ARD_06_01
 
 void setup()
 {
@@ -131,7 +128,7 @@ void setup()
 
 void loop()
 {
-    for ( int i= 0 ; i\<255 ; i++)
+    for ( int i= 0 ; i<255 ; i++)
     {
         analogWrite (9, i) ;
         delay( 10);
@@ -139,12 +136,12 @@ void loop()
 }
 ```
 
-El LED va augmentant la lluentor fins a un màxim i torna a començar
-bruscament. Podem modificar una mica el programa perquè la transició
-siga menys violenta:
+El LED va aumentando el brillo hasta un máximo y vuelve a empezar
+bruscamente. Podemos modificar un poco el programa para que la transición
+sea menos violenta:
 
 ```Arduino
-//Codi: ARD_06_02
+//Código: ARD_06_02
 
 void setup()
 {
@@ -153,7 +150,7 @@ void setup()
 
 void loop()
 {
-    for ( int i= -255 ; i\<255 ; i++)
+    for ( int i= -255 ; i<255 ; i++)
     {
         analogWrite (9, abs(i)) ;
         delay( 10);
@@ -161,20 +158,20 @@ void loop()
 }
 ```
 
-Hem fet el cicle de pujar i baixar la lluentor del LED amb un únic
-bucle. La funció **abs(num)**, retorna el valor absolut o sense signe
-d'un número **num**, i per això mentre que i viatja de -255 a 255,
-**abs(i)** va de 255 a 0 i volta a pujar a 255.
+Hemos hecho el ciclo de subir y bajar el brillo del LED con un único
+bucle. La función **abs(num)**, retorna el valor absoluto o sin signo
+de un número **num**, y por eso mientras que i viaja de -255 a 255,
+**abs(i)** va de 255 a 0 y vuelve a subir a 255.
 
-## Conceptes importants
+## Conceptos importantes
 
-- Descrivim a grans trets la diferencia ens valors digitals i valors
-  analògics.
-- Hem vist com simular valors analògics en una eixida digital de
+- Describimos a grandes rasgos la diferencia entre valores digitales y valores
+  analógicos.
+- Hemos visto cómo simular valores analógicos en una salida digital de
   Arduino.
-  - Només amb les eixides que ho accepten: pins 3, 5, 6, 9, 10 i 1.
-  - Podem assignar valors entre 0 i 255.
+  - Solo con las salidas que lo aceptan: pines 3, 5, 6, 9, 10 y 11.
+  - Podemos asignar valores entre 0 y 255.
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
