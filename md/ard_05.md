@@ -1,133 +1,131 @@
-# 05 - Les entrades analògiques
+# 05 - Las entradas analógicas
 
-[img1]: ./../imatges/ard/ard_05_01.png "Esquema elèctric"
-[img2]: ./../imatges/ard/ard_05_02.png "Connexió d'un potenciòmetre"
-[img3]: ./../imatges/ard/ard_05_03.png "Conversió analògic-digital"
-[img4]: ./../imatges/ard/ard_05_04.png "Entrades analògiques"
-[img5]: ./../imatges/ard/ard_05_05.png "Esquema de muntatge"
-[img6]: ./../imatges/ard/ard_05_06.png "Eixida pel monitor sèrie"
+[img1]: ./../imatges/ard/ard_05_01.png "Esquema eléctrico"
+[img2]: ./../imatges/ard/ard_05_02.png "Conexión de un potenciómetro"
+[img3]: ./../imatges/ard/ard_05_03.png "Conversión analógica-digital"
+[img4]: ./../imatges/ard/ard_05_04.png "Entradas analógicas"
+[img5]: ./../imatges/ard/ard_05_05.png "Esquema de montaje"
+[img6]: ./../imatges/ard/ard_05_06.png "Salida por el monitor serie"
 
-## Objectius
+## Objetivos
 
-- Conéixer els potenciòmetres.
-- Comprendre la conversió analògica a digital.
-- Aprendre a usar les portes analògiques de Arduino.
+- Conocer los potenciómetros.
+- Comprender la conversión analógica a digital.
+- Aprender a usar las puertas analógicas de Arduino.
 
-## Material requerit
+## Material requerido
 
-|                                  Imatge                                   | Descripció               |
+|                                  Imagen                                   | Descripción               |
 | :-----------------------------------------------------------------------: | :----------------------- |
 |     <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">     | Arduino Uno o compatible |
 |  <img src="./../imatges/mat/mat_protoboard.png" width="50" height="50">   | Una protoboard           |
-|    <img src="./../imatges/mat/mat_cables.png" width="50" height="50">     | Cables de connexió       |
-|      <img src="./../imatges/mat/mat_led.png" width="50" height="50">      | Un díode led             |
-|   <img src="./../imatges/mat/mat_resis330.png" width="50" height="50">    | Una resistència 330 Ohms |
-| <img src="./../imatges/mat/mat_potenciometre.png" width="50" height="50"> | Un potenciòmetre         |
+|    <img src="./../imatges/mat/mat_cables.png" width="50" height="50">     | Cables de conexión       |
+|      <img src="./../imatges/mat/mat_led.png" width="50" height="50">      | Un diodo led             |
+|   <img src="./../imatges/mat/mat_resis330.png" width="50" height="50">    | Una resistencia 330 Ohms |
+| <img src="./../imatges/mat/mat_potenciometre.png" width="50" height="50"> | Un potenciómetro         |
 
-## Els potenciòmetres
+## Los potenciómetros
 
-Fins ara hem usat sempre resistències fixes, d'un valor donat. Però a vegades és convenient disposar d'un senyal variable per a controlar el circuit que ens interessa. Imagineu el volum d'un equip de música, o el dial que sintonitza una emissora en una ràdio FM.
+Hasta ahora hemos usado siempre resistencias fijas, de un valor dado. Pero a veces es conveniente disponer de una señal variable para controlar el circuito que nos interesa. Imagina el volumen de un equipo de música, o el dial que sintoniza una emisora en una radio FM.
 
-Un potenciòmetre és, simplement, un mecanisme per a proporcionar una resistència variable.
+Un potenciómetro es, simplemente, un mecanismo para proporcionar una resistencia variable.
 
-Hi ha potenciòmetres de tantes grandàries, formes i acolorisca,s com pugueu imaginar, però al final són una resistència fixa d'un valor donat (10 kΩ en el nostre cas actual) i un mecanisme que permeta lliscar un dial conductor sobre aqueixa resistència, que ens permeta prendre una part d'aqueix valor.
+Hay potenciómetros de tantas grandezas, formas y colores como puedas imaginar, pero al final son una resistencia fija de un valor dado (10 kΩ en nuestro caso actual) y un mecanismo que permite deslizar un dial conductor sobre esa resistencia, que nos permite tomar una parte de ese valor.
 
-Per això un potenciòmetre sempre té 3 pins en fila. Els de l'extrem es comporten com una resistència del valor de fons d'escala del potenciòmetre, i un pin central que va prenent valors de resistència en funció del moviment que fem amb l'ajust.
+Por eso un potenciómetro siempre tiene 3 pines en fila. Los de los extremos se comportan como una resistencia del valor de fondo de escala del potenciómetro, y un pin central que va tomando valores de resistencia en función del movimiento que hacemos con el ajuste.
 
-Muntarem un circuit com aquest (en el qual el potenciòmetre aquesta retolat Pot1):
+Montaremos un circuito como este (en el cual el potenciómetro está etiquetado Pot1):
 
-![Esquema elèctric][img1]
+![Esquema eléctrico][img1]
 
-La idea és connectar 5V i GND als extrems del Potenciòmetre (no importa com és l'un i l'altre) i després connectar el pin central al positiu de un LED i el negatiu a GND directe, passant per una resistència de limitació.
+La idea es conectar 5V y GND a los extremos del Potenciómetro (no importa cuál es uno y cuál otro) y luego conectar el pin central al positivo de un LED y el negativo a GND directamente, pasando por una resistencia de limitación.
 
-D'aquesta manera quan girem el potenciòmetre estarem modificant la tensió que apliquem a l'entrada del LED, que variara entre 0 i 5V (Encara que ara semble estrany és molt senzill) i haurem aconseguit un regulador d'intensitat del LED.
+De esta manera cuando giramos el potenciómetro estaremos modificando la tensión que aplicamos a la entrada del LED, que variará entre 0 y 5V (Aunque ahora parezca extraño es muy sencillo) y habremos conseguido un regulador de intensidad del LED.
 
-- _Amb una resistència de 10k la intensitat en el circuit serà de: 5V / 10.000Ω = 0,5 mA. Molt poc per a aconseguir il·luminar el LED que requereix uns 20 mA. Així que durant la major part del gir del potenciòmetre el LED estarà apagat._
-- _Important: No oblides la resistència R1.Encara que el potenciòmetre limite la intensitat, hi ha un moment en què arribara a zero i ací i el teu LED morirà en acte de servei._
+- _Con una resistencia de 10k la intensidad en el circuito será de: 5V / 10.000Ω = 0,5 mA. Muy poco para conseguir iluminar el LED que requiere unos 20 mA. Así que durante la mayor parte del giro del potenciómetro el LED estará apagado._
+- _Importante: No olvides la resistencia R1. Aunque el potenciómetro limite la intensidad, hay un momento en que llegará a cero y aquí tu LED morirá en acto de servicio._
 
-## Circuit per a protoboard
+## Circuito para protoboard
 
-El muntatge en la protoboard seria similar a això ja que utilitzarem el Arduino simplement per a donar tensió al circuit i res més, Veureu que la intensitat de la llum vària de manera contínua en girar el potenciòmetre.
+El montaje en la protoboard sería similar a esto ya que utilizaremos el Arduino simplemente para dar tensión al circuito y nada más. Verás que la intensidad de la luz varía de manera continua al girar el potenciómetro.
 
-![Potenciòmetre mès led][img2]
+![Potenciómetro más led][img2]
 
-- _Recorda que a causa de l'excés de resistència del potenciòmetre de prova, durant la major part del gir de l'ajust el LED estarà apagat._
-- _Note's que en aquest cas utilitzem el nostre Arduino simplement com a font d'alimentació per a donar tensió al circuit._
+- _Recuerda que a causa del exceso de resistencia del potenciómetro de prueba, durante la mayor parte del giro del ajuste el LED estará apagado._
+- _Nótese que en este caso utilizamos nuestro Arduino simplemente como fuente de alimentación para dar tensión al circuito._
 
-## Arduino i les entrades analògiques
+## Arduino y las entradas analógicas
 
-Amb Arduino hem vist que podem influir en el món exterior aplicant eixides tot / res en els pins digitals i també que usant PWM podem simular bastant satisfactòriament senyals analògics en alguns
-d'aqueixos pins.
+Con Arduino hemos visto que podemos influir en el mundo exterior aplicando salidas todo/nada en los pines digitales y también que usando PWM podemos simular bastante satisfactoriamente señales analógicas en algunos de esos pines.
 
-També hem vist com detectar pulsacions de botons, definint com a entrades els pins digitals. Però en moltes ocasions els sensors que usem per a supervisar el món exterior, ens entreguen un senyal analògic. És el cas dels sensors de temperatura o distància, de pressió, d'intensitat de corrent en un circuit o de cabal d'aigua en una canonada.
+También hemos visto cómo detectar pulsaciones de botones, definiendo como entradas los pines digitales. Pero en muchas ocasiones los sensores que usamos para supervisar el mundo exterior, nos entregan una señal analógica. Es el caso de los sensores de temperatura o distancia, de presión, de intensidad de corriente en un circuito o de caudal de agua en una tubería.
 
-Per a llegir aquest tipus de senyals continus necessitem un convertidor analògic a digital (o ADC per les seues sigles en anglés) i que ens permet llegir el valor d'un senyal analògic en un moment donat.
+Para leer este tipo de señales continuas necesitamos un convertidor analógico a digital (o ADC por sus siglas en inglés) y que nos permita leer el valor de una señal analógica en un momento dado.
 
-Aquests convertidors prenen una mostra del valor actual del senyal i ens entreguen el seu _valor instantani_, mesurat en Volts.
+Estos convertidores toman una muestra del valor actual de la señal y nos entregan su _valor instantáneo_, medido en Voltios.
 
-Mitjançant la lectura repetida de mostres al llarg del temps podem reconstruir el senyal original amb major o menor precisió, depenent de l'exactitud de la nostra mesura i de la velocitat a la qual puga prendre aqueixes mostres.
+Mediante la lectura repetida de muestras a lo largo del tiempo podemos reconstruir la señal original con mayor o menor precisión, dependiendo de la exactitud de nuestra medida y de la velocidad a la que pueda tomar esas muestras.
 
-![Conversió analógic-digital][img3]
+![Conversión analógico-digital][img3]
 
-Arduino UNO disposa de sis convertidors analògic a digital, nominats d'A0 fins a A5, retolades com ANALOG IN:
+Arduino UNO dispone de seis convertidores analógico a digital, nombrados de A0 hasta A5, etiquetados como ANALOG IN:
 
-![Entrades analògiques][img4]
+![Entradas analógicas][img4]
 
-Vegem com usar les entrades analògiques amb un circuit com aquest, en el qual donem tensió als extrems d'un potenciòmetre i connectem el pin central (el variable) a l'entrada de la porta A5 de Arduino:
+Veamos cómo usar las entradas analógicas con un circuito como este, en el cual damos tensión a los extremos de un potenciómetro y conectamos el pin central (el variable) a la entrada de la puerta A5 de Arduino:
 
-![Esquema de muntatge][img5]
+![Esquema de montaje][img5]
 
-- _Sembla bon moment per a destacar que els convertidors ADC lligen valors de tensió i no resistència, per tant, el que llegirem és **la caiguda de tensió** en el potenciòmetre a mesura que
-  girem l'ajust._
+- _Parece buen momento para destacar que los convertidores ADC leen valores de tensión y no resistencia, por tanto, lo que leeremos es **la caída de tensión** en el potenciómetro a medida que giramos el ajuste._
 
-La primera curiositat és que no necessitem declarar en el **setup()** que usarem una porta analògica. I la segona és que per a prendre una mostra (llegir) del pin A5, usarem la instrucció:
+La primera curiosidad es que no necesitamos declarar en el **setup()** que usaremos una puerta analógica. Y la segunda es que para tomar una muestra (leer) del pin A5, usaremos la instrucción:
 
-`int Val = analogRead(A5) ;`
+`int Val = analogRead(A5);`
 
-- Els convertidors de Arduino UNO i Mega són de 10 bits de resolució pel que ens retornarà valors entre 0 i 2^10 = 1.024 per a tensions entre 0 i 5V. En canvi el Arduino DUE disposa de convertidors de 12 bits pel que el valor de les seues lectures estarà entre 0 i 2^12 o siga 4.096, és a dir té millor resolució (però només pot llegir fins a 3,3V).
-- Assegura't de no usar sensors que puguen donar més de 5V màxim (amb Arduino UNO i Mega), ja que danyaries el xip principal de Arduino.
+- Los convertidores de Arduino UNO y Mega son de 10 bits de resolución por lo que nos retornará valores entre 0 y 2^10 = 1.024 para tensiones entre 0 y 5V. En cambio el Arduino DUE dispone de convertidores de 12 bits por lo que el valor de sus lecturas estará entre 0 y 2^12 o sea 4.096, es decir tiene mejor resolución (pero solo puede leer hasta 3,3V).
+- Asegúrate de no usar sensores que puedan dar más de 5V máximo (con Arduino UNO y Mega), ya que dañarías el chip principal de Arduino.
 
-Escriurem un programa que llija el valor del pin A5 i l'envie a la consola perquè puguem visualitzar-lo.
+Escribiremos un programa que lea el valor del pin A5 y lo envíe a la consola para que podamos visualizarlo.
 
-## Usant les portes analògiques
+## Usando las puertas analógicas
 
-Prova aquest programa:
+Prueba este programa:
 
 ```Arduino
-//Codi: ARD_05_01
+//Código: ARD_05_01
 
 void setup()
 {
-    Serial.begin(9600); // Iniciem la porta serie
+    Serial.begin(9600); // Iniciamos la puerta serie
 }
 
 void loop()
 {
-    int Lectura = analogRead(A5) ;
-    Serial.println( Lectura);
-    delay(200) ;
+    int Lectura = analogRead(A5);
+    Serial.println(Lectura);
+    delay(200);
 }
 ```
 
-Quan ho bolques, arranca la consola i voràs que a mesura que gires l'ajust les lectures varien de manera contínua reflectint la posició del potenciòmetre, les lectures reflecteixen la caiguda en volts.
+Cuando lo vuelcas, arranca la consola y verás que a medida que giras el ajuste las lecturas varían de manera continua reflejando la posición del potenciómetro, las lecturas reflejan la caída en voltios.
 
-![Monitor sèrie][img6]
+![Monitor serie][img6]
 
-No puc resistir-me a proposar-vos aquesta prova: Desconnecta el potenciòmetre de la porta A5 i observa els resultats que Arduino envia a la consola. Perquè ixen aqueixos valors?
+No puedo resistirme a proponeros esta prueba: Desconecta el potenciómetro de la puerta A5 y observa los resultados que Arduino envía a la consola. ¿Por qué salen esos valores?
 
-- Al no estar l'A5 connectat a cap referència vàlida, està surant i els valors que captura són mostra d'aqueixa incoherència. En realitat el que està fent la teua Duino és captar soroll aleatori de radiofreqüència i intentar donar-li sentit, però ho té malament, com podeu veure.
-- No obstant això en condicions normals els valors que llegirà seràn relativament baixos. Vols que les oscil·lacions cresquen en valor?. Fàcil. Posa-li una antena. Val un simple cable de protoboard connectat des de l'A5 a res (O si agafes l'altre extrem entre els dits, _tú mateix faràs d'antena_).
+- Al no estar el A5 conectado a ninguna referencia válida, está flotando y los valores que captura son muestra de esa incoherencia. En realidad lo que está haciendo tu Arduino es captar ruido aleatorio de radiofrecuencia e intentar darle sentido, pero lo tiene mal, como podéis ver.
+- No obstante en condiciones normales los valores que leerá serán relativamente bajos. ¿Quieres que las oscilaciones crezcan en valor? Fácil. Ponle una antena. Vale un simple cable de protoboard conectado desde el A5 a nada (O si agarras el otro extremo entre los dedos, _tú mismo harás de antena_).
 
-## Un últim comentari
+## Un último comentario
 
-Déiem en una lliçó anterior, que la fidelitat amb què podem mostrejar un senyal analògic depenia, bàsicament, de la resolució de la mostra i de la velocitat a la qual podíem mostrejar el senyal (Sample Rate en anglés).
+Decíamos en una lección anterior, que la fidelidad con la que podemos muestrear una señal analógica dependía, básicamente, de la resolución de la muestra y de la velocidad a la que podíamos muestrear la señal (Sample Rate en inglés).
 
-Ja vam dir que la família Arduino, disposa de convertidors de 10 bits pel que la nostra resolució és de 2^10 = 1.024 i en el cas del DUE de 2^12 = 4.096. Però fins ara no hem vist a quina velocitat podem prendre mostres amb el nostre Arduino. Ho comprovarem, amb aquest mateix circuit.
+Ya dijimos que la familia Arduino, dispone de convertidores de 10 bits por lo que nuestra resolución es de 2^10 = 1.024 y en el caso del DUE de 2^12 = 4.096. Pero hasta ahora no hemos visto a qué velocidad podemos tomar muestras con nuestro Arduino. Lo comprobaremos, con este mismo circuito.
 
-Tenim una funció anomenada **millis()** que ens indica en mil·lisegons el temps transcorregut des que iniciem Arduino i la podem usar per a veure quantes mostres podem prendre per segon.
+Tenemos una función llamada **millis()** que nos indica en milisegundos el tiempo transcurrido desde que iniciamos Arduino y la podemos usar para ver cuántas muestras podemos tomar por segundo.
 
 ```Arduino
-//Codi: ARD_05_02}
+//Código: ARD_05_02
 
 void setup()
 {
@@ -136,36 +134,35 @@ void setup()
 
 void loop()
 {
-    unsigned long T ;
-    int n = 0 ;
+    unsigned long T;
+    int n = 0;
     T = millis();
-    while (millis() \<= T + 1000) // Mentre no passe un Segon = 1000 ms
+    while (millis() <= T + 1000) // Mientras no pase un Segundo = 1000 ms
     {
-        analogRead( A5) ;
-        n++ ; // Comptem cada vegada que llegim
+        analogRead(A5);
+        n++; // Contamos cada vez que leemos
     }
     Serial.println(n);
 }
 ```
 
-- _Hem usat un unsigned long per a guardar millis perquè és el tipus que Arduino usa internament per al seu rellotge. Seria un error manejar millis amb un int perquè el seu valor màxim és 32.767 i
-  mesurant mil·lisegons el comptador desbordaria en poca més de 32 segons._
+- _Hemos usado un unsigned long para guardar millis porque es el tipo que Arduino usa internamente para su reloj. Sería un error manejar millis con un int porque su valor máximo es 32.767 y midiendo milisegundos el contador desbordaría en poco más de 32 segundos._
 
-Si correu aquest programa en un Arduino UNO us donarà, si fa no fa, un resultat de 8.940 mostres o lectures per segon. No està malament.
+Si ejecutas este programa en un Arduino UNO te dará, más o menos, un resultado de 8.940 muestras o lecturas por segundo. No está mal.
 
-És adequat per a mostrejar senyals que no varien massa ràpid amb el temps, com són quasi tots els sensors habituals en la indústria, però que es quedarà curt si voleu mostrejar senyals d'àudio.
+Es adecuado para muestrear señales que no varían demasiado rápido con el tiempo, como son casi todos los sensores habituales en la industria, pero que se quedará corto si quieres muestrear señales de audio.
 
-- _Per a jugar amb àudio és millor usar un Arduino DUE. Té una velocitat de rellotge 4 vegades més ràpida (us farà falta), capacitat de mostreig a velocitat d'àudio (40 Khz) i autèntics convertidors DAC (digital to analog converters)._
-- De fet no és complicat augmentar la velocitat de mostreig fins a unes 20.000 mostres per segon amb un Arduino UNO, però per a això hem de pontejar Arduino i saltar a programar el xip interior Atmega 328. No és moment per a això, però hi ha formes.
+- _Para jugar con audio es mejor usar un Arduino DUE. Tiene una velocidad de reloj 4 veces más rápida (te hará falta), capacidad de muestreo a velocidad de audio (40 Khz) y auténticos convertidores DAC (digital to analog converters)._
+- De hecho no es complicado aumentar la velocidad de muestreo hasta unas 20.000 muestras por segundo con un Arduino UNO, pero para esto tenemos que puentear Arduino y saltar a programar el chip interior Atmega 328. No es momento para esto, pero hay formas.
 
-## Resum de la lliçò
+## Resumen de la lección
 
-- Ja coneixem l'ús del potenciòmetre.
-- Hem presentat els conceptes bàsics en la conversió analògica a digital.
-- Vam aprendre a llegir les portes analògiques de Arduino.
-- Sabem que podem llegir les portes analògiques unes 8.900 vegades per segon amb una resolució de 10 bits, és a dir entre 0 i 1.024.
-- Hem conegut la funció **millis()**.
+- Ya conocemos el uso del potenciómetro.
+- Hemos presentado los conceptos básicos en la conversión analógica a digital.
+- Aprendimos a leer las puertas analógicas de Arduino.
+- Sabemos que podemos leer las puertas analógicas unas 8.900 veces por segundo con una resolución de 10 bits, es decir entre 0 y 1.024.
+- Hemos conocido la función **millis()**.
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
