@@ -1,40 +1,32 @@
-# 08 - Crear gràfiques utilitzant el port serie
+# 08 - Crear gráficas utilizando el puerto serie
 
-[img1]: ./../imatges/ard/ard_08_01.png "Traçador"
-[img2]: ./../imatges/ard/ard_08_02.png "Gràfica una variable"
-[img3]: ./../imatges/ard/ard_08_03.png "Gràfica dos variables"
+[img1]: ./../imatges/ard/ard_08_01.png "Trazador"
+[img2]: ./../imatges/ard/ard_08_02.png "Gráfica una variable"
+[img3]: ./../imatges/ard/ard_08_03.png "Gráfica dos variables"
 
-## Objectius
+## Objetivos
 
-Aprendre a usar el **Traçador Sèrie** per a fer **gràfiques** amb el IDE
-de Arduino i incloure **diverses variables** en la gràfica.
+Aprender a usar el **Trazador Serie** para hacer **gráficas** con el IDE de Arduino e incluir **diversas variables** en la gráfica.
 
-## Material requerit
+## Material requerido
 
-| Imatge                                                               | Descripció               |
+| Imagen                                                               | Descripción               |
 | -------------------------------------------------------------------- | ------------------------ |
 | <img src="./../imatges/mat/mat_portatil.jpg" width="50" height="50"> | PC                       |
 | <img src="./../imatges/mat/mat_cableusb.png" width="50" height="50"> | Cable USB                |
 | <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino UNO o compatible |
 
-## Dibuixar una gràfica utilitzant el Traçador Sèrie
+## Dibujar una gráfica utilizando el Trazador Serie
 
-Ja hem utilitzat moltes vegades el monitor serie del IDE per a mostrar
-valors de les variables del nostre programa. Però en certes ocasions pot
-ser útil veure-ho en forma **de gràfica** en comptes d'en dades
-numèriques, per exemple, per a veure la tendència de les dades d'una
-forma senzilla i clara.
+Ya hemos utilizado muchas veces el monitor serie del IDE para mostrar valores de las variables de nuestro programa. Pero en ciertas ocasiones puede ser útil verlo en forma **de gráfica** en lugar de datos numéricos, por ejemplo, para ver la tendencia de los datos de una forma sencilla y clara.
 
-Perquè resulta que el IDE de Arduino incorpora des de la versió 1.6.6
-una eina anomenada **Traçador Sèrie** que ens permet precisament crear
-gràfiques a partir de les variables que li indiquem. És molt senzilla
-d'usar i de moment no ofereix moltes opcions, però segurament vagen
-afegint característiques noves amb noves versions.
+Resulta que el IDE de Arduino incorpora desde la versión 1.6.6 una herramienta llamada **Trazador Serie** que nos permite precisamente crear gráficas a partir de las variables que le indiquemos. Es muy sencilla de usar y por ahora no ofrece muchas opciones, pero seguramente irán añadiendo características nuevas con nuevas versiones.
 
-Per a utilitzar-la no hem d'aprendre res nou quant a la programació.
-Simplement farem un programa que mostre un valor pel port serie. Podeu
-utilitzar aquest programeta que genera números aleatoris cada cert
-temps:
+Para utilizarla no tenemos que aprender nada nuevo en cuanto a la programación.
+
+Simplemente haremos un programa que muestre un valor por el puerto serie. Puedes
+utilizar este pequeño programa que genera números aleatorios cada cierto
+tiempo:
 
 ```Arduino
 
@@ -52,26 +44,26 @@ void loop()
 }
 ```
 
-Ara en comptes d'obrir el Monitor Sèrie, obrirem el Traçador Sèrie,
-que està en la barra d'eines, just davall.
+Ahora en lugar de abrir el Monitor Serie, abriremos el Trazador Serie,
+que está en la barra de herramientas, justo debajo.
 
-![Traçador][img1]
+![Trazador][img1]
 
-I quan carreguem el programa en la placa, veurem com es va generant una
-**gràfica** a partir dels valors aleatoris que va agafant la variable.
+Y cuando cargamos el programa en la placa, veremos cómo se va generando una
+**gráfica** a partir de los valores aleatorios que va tomando la variable.
 
-![Gràfica una variable][img2]
+![Gráfica una variable][img2]
 
-## COM INCLOURE MÉS VARIABLES
+## CÓMO INCLUIR MÁS VARIABLES
 
-L'eina també ens dona l'opció de mostrar diverses variables alhora en
-la mateixa gràfica. La manera de fer-ho és també molt senzilla,
-simplement haurem de treure les dues variables pel port serie però
-utilitzant un separador "," entre ells, i automàticament els dibuixarà
-en la mateixa gràfica amb un color diferent.
+La herramienta también nos da la opción de mostrar varias variables a la vez en
+la misma gráfica. La manera de hacerlo es también muy sencilla,
+simplemente tendremos que enviar las dos variables por el puerto serie pero
+utilizando un separador "," entre ellas, y automáticamente las dibujará
+en la misma gráfica con un color diferente.
 
-Si afegim una altra variable que prenga també valors aleatoris al
-programa anterior, el programa quedaria de la següent forma
+Si añadimos otra variable que tome también valores aleatorios al
+programa anterior, el programa quedaría de la siguiente forma:
 
 ```Arduino
 
@@ -93,16 +85,16 @@ void loop()
 }
 ```
 
-![Gràfica dos variables][img3]
+![Gráfica dos variables][img3]
 
-## Resum de la sessió
+## Resumen de la sesión
 
-Hem descobert una nova eina que ens permet fer **gràfiques** fàcilment
-des del mateix IDE de Arduino.
+Hemos descubierto una nueva herramienta que nos permite hacer **gráficas** fácilmente
+desde el mismo IDE de Arduino.
 
-- Sabem incorporar **diverses variables** a la gràfica.
-- Ara que sabem que existeix aquesta eina i com s'utilitza, podeu incorporar-la als vostres projectes per a realitzar gràfiques de les mesures de sensors , la velocitat d'un motor, o el que se us passe pel cap.
+- Sabemos incorporar **diversas variables** a la gráfica.
+- Ahora que sabemos que existe esta herramienta y cómo se utiliza, puedes incorporarla a tus proyectos para realizar gráficas de las medidas de sensores, la velocidad de un motor, o lo que se te pase por la mente.
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
