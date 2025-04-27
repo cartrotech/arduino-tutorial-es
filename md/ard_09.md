@@ -1,64 +1,64 @@
-# 09 - Sensor de cop i de vibració
+# 09 - Sensor de golpe y de vibración
 
-## Finalitat
+## Finalidad
 
-Presentar el sensor de cop i de vibració (KY-002 i KY-031), a més de continuar treballant les entrades digitals per saber detectar senyals molt breus.
+Presentar el sensor de golpe y de vibración (KY-002 y KY-031), además de continuar trabajando las entradas digitales para saber detectar señales muy breves.
 
 ## Material
 
-|                                 Imatge                                 | Descripció                                                           |
+|                                 Imagen                                 | Descripción                                                           |
 | :--------------------------------------------------------------------: | :------------------------------------------------------------------- |
-|   <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino Uno o compatible amb S4A i amb el firmware per S4A carregat. |
+|   <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino Uno o compatible con S4A y con el firmware para S4A cargado. |
 | <img src="./../imatges/mat/mat_protoboard.png" width="50" height="50"> | Una protoboard                                                       |
-|   <img src="./../imatges/mat/mat_cables.png" width="50" height="50">   | Cables de connexió                                                   |
-|   <img src="./../imatges/mat/mat_KY-002.png" width="50" height="50">   | Un mòdul KY-002, sensor de cop                                       |
-|   <img src="./../imatges/mat/mat_KY-031.png" width="50" height="50">   | Un mòdul KY-031, detector de vibració                                |
+|   <img src="./../imatges/mat/mat_cables.png" width="50" height="50">   | Cables de conexión                                                   |
+|   <img src="./../imatges/mat/mat_KY-002.png" width="50" height="50">   | Un módulo KY-002, sensor de golpe                                   |
+|   <img src="./../imatges/mat/mat_KY-031.png" width="50" height="50">   | Un módulo KY-031, detector de vibración                             |
 
-## ¿Cóm funcionen els mòduls?
+## ¿Cómo funcionan los módulos?
 
-El mòdul del conmutador de vibració KY-002 (vibration switch module) exteriorment presenta una forma cilíndrica. Les dues parts actives a l'interior del sensor són un moll conductor al centre envoltat per una placa també conductora. Aquesta configuració fa que quan s'aplica
-qualsevol tipus de xoc al mòdul, la molla entra en contacte amb la coberta cilíndrica i el circuit es tanca.
+El módulo del conmutador de vibración KY-002 (vibration switch module) exteriormente presenta una forma cilíndrica. Las dos partes activas en el interior del sensor son un muelle conductor en el centro rodeado por una placa también conductora. Esta configuración hace que cuando se aplica
+cualquier tipo de golpe al módulo, el muelle entra en contacto con la cubierta cilíndrica y el circuito se cierra.
 
-El mòdul sensor de cop KY-031 és similar al mòdul de vibració. La diferència principal entre aquests dos és la seva sensibilitat. El sensor de vibració detecta fins i tot un xoc petit, mentre que el sensor de cops requereix un cop potent o una sacsejada per activar-lo.
+El módulo sensor de golpe KY-031 es similar al módulo de vibración. La diferencia principal entre estos dos es su sensibilidad. El sensor de vibración detecta incluso un golpe pequeño, mientras que el sensor de golpes requiere un golpe potente o una sacudida para activarlo.
 
-Els dos mòduls porten una resistència de 10 K Ohm incorporada entre el pin central i el pin "S" per a ser usat com a muntatge **pull up o pull down** segons es requerisca. Els contactes de l'interruptor connecten els dos pins externs.
+Los dos módulos llevan una resistencia de 10 K Ohm incorporada entre el pin central y el pin "S" para ser usado como montaje **pull up o pull down** según se requiera. Los contactos del interruptor conectan los dos pines externos.
 
-Tots dos mòduls canvien l'estat del connector de eixida quan detecten el cop o vibració i el mantenen únicament mentre dura la pertorbació, és a dir, s'obté una senyal d'una durada molt breu. Si fem el muntatge habitual tindrem una configuració pull up, la eixida estarà a l'estat alt fins que el sensor s'active que passarà a estat baix.
+Ambos módulos cambian el estado del conector de salida cuando detectan el golpe o vibración y lo mantienen únicamente mientras dura la perturbación, es decir, se obtiene una señal de una duración muy breve. Si hacemos el montaje habitual tendremos una configuración pull up, la salida estará en estado alto hasta que el sensor se active que pasará a estado bajo.
 
-## Muntatge
+## Montaje
 
-L'esquema electrònic és molt senzill, com que tenim una senyal digital l'arreplegarem per l'entrada 2 i aprofitarem el led de la placa arduino, connectat al pin 13 per veure la eixida.
+El esquema electrónico es muy sencillo, como que tenemos una señal digital la recogeremos por la entrada 2 y aprovecharemos el led de la placa arduino, conectado al pin 13 para ver la salida.
 
-![Esquema-electronic](../imatges/ard/ard_09_01.png)
-![esquema-muntatge](../imatges/ard/ard_09_02.png)
+![Esquema-electrónico](../imatges/ard/ard_09_01.png)
+![esquema-montaje](../imatges/ard/ard_09_02.png)
 
-## Programació
+## Programación
 
-[Codi:ARD_09.ino](../codi/ARD_09.ino)
+[Código:ARD_09.ino](../codi/ARD_09.ino)
 
 ```Arduino
 
-int Led = 13; //assigna a la variable Led el valor de 13
+int Led = 13; //asigna a la variable Led el valor de 13
 
-int buttonpin = 2; //assigna a la variable buttonpin el valor 2
+int buttonpin = 2; //asigna a la variable buttonpin el valor 2
 
-int val; //defineix val com enter
+int val; //define val como entero
 
 void setup()
 {
-  pinMode(Led, OUTPUT); //defineix el pin 13 com eixida
-  pinMode(buttonpin, INPUT); //defineix el pin 2 com entrada digital
+  pinMode(Led, OUTPUT); //define el pin 13 como salida
+  pinMode(buttonpin, INPUT); //define el pin 2 como entrada digital
 }
 
 void loop()
 {
-  val = digitalRead(buttonpin); //llig el valor de l'entrada 2 i l'assigna a la variable val
-  if (val == HIGH) //comproba si el sensor s'activat, recordeu que si detecta l'entrada 2 passara a estat baix
+  val = digitalRead(buttonpin); //lee el valor de la entrada 2 y lo asigna a la variable val
+  if (val == HIGH) //comprueba si el sensor está activado, recordad que si detecta la entrada 2 pasará a estado bajo
   {
     digitalWrite(Led, LOW);
   }
 
-else //quan el sensor envia senyal, el led 13 //s'encen durant 2 segons
+else //cuando el sensor envía señal, el led 13 //se enciende durante 2 segundos
   {
     digitalWrite(Led, HIGH);
     delay(2000);
@@ -66,11 +66,11 @@ else //quan el sensor envia senyal, el led 13 //s'encen durant 2 segons
 }
 ```
 
-## Conceptes importants
+## Conceptos importantes
 
-- Detecció de senyals molt breus
-- Muntatge pull-up i pull-down
+- Detección de señales muy breves
+- Montaje pull-up y pull-down
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
