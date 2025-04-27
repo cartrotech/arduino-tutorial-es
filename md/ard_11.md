@@ -1,81 +1,81 @@
 # 11 - La pantalla LCD
 
-## Finalitat
+## Finalidad
 
-- Muntatge d'una pantalla LCD de 16x02
-- Enviar informació a la pantalla LCD
-- Còm definir caracters especials
+- Montaje de una pantalla LCD de 16x02
+- Enviar información a la pantalla LCD
+- Cómo definir caracteres especiales
 
 ## Material
 
-|                                  Imatge                                   | Descripció                                                           |
+|                                  Imagen                                   | Descripción                                                           |
 | :-----------------------------------------------------------------------: | :------------------------------------------------------------------- |
-|     <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">     | Arduino Uno o compatible amb S4A i amb el firmware per S4A carregat. |
+|     <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">     | Arduino Uno o compatible con S4A y con el firmware para S4A cargado. |
 |  <img src="./../imatges/mat/mat_protoboard.png" width="50" height="50">   | Una protoboard                                                       |
-|    <img src="./../imatges/mat/mat_cables.png" width="50" height="50">     | Cables de connexió                                                   |
-| <img src="./../imatges/mat/mat_potenciometre.png" width="50" height="50"> | Un potenciòmetre                                                     |
+|    <img src="./../imatges/mat/mat_cables.png" width="50" height="50">     | Cables de conexión                                                   |
+| <img src="./../imatges/mat/mat_potenciometre.png" width="50" height="50"> | Un potenciómetro                                                     |
 |   <img src="./../imatges/mat/mat_LCD16x02.png" width="50" height="50">    | Una pantalla LCD 16x02                                               |
 
-## Descripció del material
+## Descripción del material
 
-La pantalla LCD-1602 és una pantalla de cristall líquid de 16 caràcters de 2 línies de baixa potència, amb interfície sèrie. Podeu descarregar la fulla de característiques (en anglés)
+La pantalla LCD-1602 es una pantalla de cristal líquido de 16 caracteres de 2 líneas de baja potencia, con interfaz serie. Puedes descargar la hoja de características (en inglés)
 [aquí](../datasheet/LCD1602A.pdf).
 
 ![pantalla-lcd](../imatges/ard/ard_11_01.png)
 
-Les pantalles LCD (Liquid Cristall Display) són una de les formes més senzilles i econòmiques de dotar d'un display a un autòmat.
+Las pantallas LCD (Liquid Crystal Display) son una de las formas más sencillas y económicas de dotar de un display a un autómata.
 
-El Hitachi HD44780 és un dels controladors de LCDs més àmpliament estesos per la seua senzillesa i baix preu. L'HD44780 està dissenyat per a controlar LCDs monocroms de fins a 80 caràcters alfanumèrics i símbols. També disposa d'una xicoteta memòria RAM per a configurar els nostres propis caràcters o dibuixos.
+El Hitachi HD44780 es uno de los controladores de LCDs más ampliamente extendidos por su sencillez y bajo precio. El HD44780 está diseñado para controlar LCDs monocromos de hasta 80 caracteres alfanuméricos y símbolos. También dispone de una pequeña memoria RAM para configurar nuestros propios caracteres o dibujos.
 
-Les pantalles LCD amb el controlador HD44770 es fabriquen en diferents grandàries, sent comunes 16x02 (2 línies de 16 caràcters), 20x02, 20x04 i 40x02.
+Las pantallas LCD con el controlador HD44770 se fabrican en diferentes tamaños, siendo comunes 16x02 (2 líneas de 16 caracteres), 20x02, 20x04 y 40x02.
 
-Les pantalles LCD disposen de retroil·luminació posterior en blava o en verd. El contrast pot ser variat connectant un potenciòmetre al LCD.
+Las pantallas LCD disponen de retroiluminación posterior en azul o en verde. El contraste puede ser variado conectando un potenciómetro al LCD.
 
-Connectar directament un LCD a Arduino requereix una gran quantitat de pins. Sol ser aconsellable emprar un **adaptador a bus I2C**, com veurem en la propera entrada.
+Conectar directamente un LCD a Arduino requiere una gran cantidad de pines. Suele ser aconsejable emplear un **adaptador a bus I2C**, como veremos en la próxima entrada.
 
-## Muntatge
+## Montaje
 
-![esquema-muntatge](../imatges/ard/ard_11_02.png)
+![esquema-montaje](../imatges/ard/ard_11_02.png)
 ![esquema-electric](../imatges/ard/ard_11_03.png)
 
-Com podeu veure són necessaris un bon número de cables per fer les connexions, així que és molt fàcil equivocar-se. Per això es recomana utilitzar un mòdul I2C, que simplifica moltíssim el muntatge.
+Como podéis ver son necesarios un buen número de cables para hacer las conexiones, así que es muy fácil equivocarse. Por eso se recomienda utilizar un módulo I2C, que simplifica muchísimo el montaje.
 
-La relació dels pins i la seua connexió tant per al arduino com per a la pantalla és la següent:
+La relación de los pines y su conexión tanto para el arduino como para la pantalla es la siguiente:
 
 |          | LCD                                        | Arduino              |
 | :------- | :----------------------------------------- | :------------------- |
-| 01 - GND | negatiu pantalla                           | GND                  |
-| 02 - Vcc | positiu pantalla                           | 5V                   |
-| 03 - V0  | ajust del contrast                         | Pot 10K pin variable |
-| 04 - RS  | registre de senyal de selecció             | Pin 12               |
-| 05 - R/W | senyal de selecció de lectura / escriptura | GND                  |
-| 06 - E   | senyal d'activació d'operació              | Pin 11               |
+| 01 - GND | negativo pantalla                           | GND                  |
+| 02 - Vcc | positivo pantalla                           | 5V                   |
+| 03 - V0  | ajuste del contraste                        | Pot 10K pin variable |
+| 04 - RS  | registro de señal de selección             | Pin 12               |
+| 05 - R/W | señal de selección de lectura / escritura  | GND                  |
+| 06 - E   | señal de activación de operación           | Pin 11               |
 | 07 - D0  |                                            |                      |
 | 08 - D1  |                                            |                      |
 | 09 - D2  |                                            |                      |
 | 10 - D3  |                                            |                      |
-| 11 - D4  | Transferència de dades                     | Pin 05               |
-| 12 - D5  | Transferència de dades                     | Pin 04               |
-| 13 - D6  | Transferència de dades                     | Pin 03               |
-| 14 - D7  | Transferència de dades                     | Pin 02               |
-| 15 - A   | il·luminació de fons                       | 5V                   |
-| 16 - K   | il·luminació de fons                       | GND                  |
+| 11 - D4  | Transferencia de datos                     | Pin 05               |
+| 12 - D5  | Transferencia de datos                     | Pin 04               |
+| 13 - D6  | Transferencia de datos                     | Pin 03               |
+| 14 - D7  | Transferencia de datos                     | Pin 02               |
+| 15 - A   | iluminación de fondo                       | 5V                   |
+| 16 - K   | iluminación de fondo                       | GND                  |
 
 ---
 
-## Programació
+## Programación
 
-Per aquest muntatge pujarem el exemple contingut en «Fitxer>Exemples>LiquidCrystal>Hello world».
+Para este montaje subiremos el ejemplo contenido en «Archivo>Ejemplos>LiquidCrystal>Hello world».
 
-La llibreria necessària per controlar la pantalla LCD s'anomena «LiquidCrystal» i podeu consultar la referència a l'enllaç <https://www.arduino.cc/en/Reference/LiquidCrystal>
+La librería necesaria para controlar la pantalla LCD se llama «LiquidCrystal» y puedes consultar la referencia en el enlace <https://www.arduino.cc/en/Reference/LiquidCrystal>
 
 ```Arduino
 
-Codi: ARD_11.ino
+Código: ARD_11.ino
 
-#include <LiquidCrystal.h>  // inclou el codi de la biblioteca
+#include <LiquidCrystal.h>  // incluye el código de la biblioteca
 
-// inicialitza la biblioteca associant qualsevol pin d'interfície LCD necessari al número de pin arduino al qual estigui connectat
+// inicializa la biblioteca asociando cualquier pin de interfaz LCD necesario al número de pin arduino al que esté conectado
 
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
@@ -83,37 +83,37 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 void setup()
 {
 
-  lcd.begin(16, 2);  // configura el nombre de columnes i files de la pantalla LCD
-  lcd.print("hello, world!");  // Escriu un missatge a la pantalla LCD
+  lcd.begin(16, 2);  // configura el número de columnas y filas de la pantalla LCD
+  lcd.print("hello, world!");  // Escribe un mensaje en la pantalla LCD
 
 }
 
 void loop()
 {
 
-  lcd.setCursor(0, 1);  // posiciona el cursor a la columna 0, línia 1 (Nota: la línia 1 és la segona fila, ja que el recompte comença per 0)
-  lcd.print(millis() / 1000);  // imprimeix el nombre de segons des del reinici
+  lcd.setCursor(0, 1);  // posiciona el cursor en la columna 0, línea 1 (Nota: la línea 1 es la segunda fila, ya que el conteo comienza por 0)
+  lcd.print(millis() / 1000);  // imprime el número de segundos desde el reinicio
 
 }
 ```
 
-## Definint els teus propis caràcters
+## Definiendo tus propios caracteres
 
-Definirem un caràcter propi, el símbol de graus centígrads, per exemple.
+Definiremos un carácter propio, el símbolo de grados centígrados, por ejemplo.
 
-El primer que heu de saber, és que els caràcters es defineixen amb un array de 8×8, com si els dibuixàreu en una quadricula d'aqueixa grandària, i emplenant el quadradet pertinent.
+Lo primero que debes saber, es que los caracteres se definen con un array de 8×8, como si los dibujaras en una cuadrícula de ese tamaño, y rellenando el cuadradito pertinente.
 
-Així per exemple per al símbol del grau seria:
+Así por ejemplo para el símbolo del grado sería:
 
-![figura-grau](../imatges/ard/ard_11_04.png)
+![figura-grado](../imatges/ard/ard_11_04.png)
 
-Abans del setup(), en les declaracions i definicions es on creem els caràcters personals.
+Antes del setup(), en las declaraciones y definiciones es donde creamos los caracteres personales.
 
 ```Arduino
 
 byte grado[8] =
 {
-  0b00001100, // _Els definim com binaris_ 0bxxxxxxx
+  0b00001100, // _Los definimos como binarios_ 0bxxxxxxx
   0b00010010,
   0b00010010,
   0b00001100,
@@ -124,17 +124,17 @@ byte grado[8] =
 };
 ```
 
-Per a muntar els caràcters definits usem:
+Para montar los caracteres definidos usamos:
 
 ```Arduino
 
 lcd.createChar(0, euro);
-lcd.createChar(1, grau);
+lcd.createChar(1, grado);
 ```
 
-I ara ja estan disponibles. Tingueu en compte que només podem definir 8 caràcters especials en un moment donat
+Y ahora ya están disponibles. Ten en cuenta que solo podemos definir 8 caracteres especiales en un momento dado
 
-Aquí tenim un exemple de codi:
+Aquí tenemos un ejemplo de código:
 
 ```Arduino
 
@@ -156,11 +156,11 @@ byte grado[8] =
 void setup()
 
 {
-  lcd.begin(16, 2); // inicialitzar el LCD
-  lcd.createChar(1, grado); // crea el caràcter grado
+  lcd.begin(16, 2); // inicializar el LCD
+  lcd.createChar(1, grado); // crea el carácter grado
   lcd.setCursor(0, 0); // posiciona el cursor
-  lcd.print("Estamos a 25 "); // missatge
-  lcd.write(1); // escritura del caràcter persona
+  lcd.print("Estamos a 25 "); // mensaje
+  lcd.write(1); // escritura del carácter personal
 }
 
 void loop()
@@ -170,12 +170,12 @@ void loop()
 }
 ```
 
-## Conceptes importants
+## Conceptos importantes
 
-- Conèixer les pantalles LCD
-- Comprendre la connexió amb arduino
-- Aprendre a crear els nostres propis caràcters.
+- Conocer las pantallas LCD
+- Comprender la conexión con arduino
+- Aprender a crear nuestros propios caracteres.
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
