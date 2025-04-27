@@ -1,67 +1,67 @@
-# 12 - El mòdul de polsador
+# 12 - El módulo de pulsador
 
-## Finalitat
+## Finalidad
 
-- Com utilitzar els polsadors
+- Cómo utilizar los pulsadores
 
 ## Material
 
-|                                 Imatge                                 | Descripció                                                           |
+|                                 Imagen                                 | Descripción                                                           |
 | :--------------------------------------------------------------------: | :------------------------------------------------------------------- |
-|   <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino Uno o compatible amb S4A i amb el firmware per S4A carregat. |
+|   <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino Uno o compatible con S4A y con el firmware para S4A cargado. |
 | <img src="./../imatges/mat/mat_protoboard.png" width="50" height="50"> | Una protoboard                                                       |
-|   <img src="./../imatges/mat/mat_cables.png" width="50" height="50">   | Cables de connexió                                                   |
-|   <img src="./../imatges/mat/mat_KY-004.png" width="50" height="50">   | Un mòdul polsador (KY-004)                                           |
+|   <img src="./../imatges/mat/mat_cables.png" width="50" height="50">   | Cables de conexión                                                   |
+|   <img src="./../imatges/mat/mat_KY-004.png" width="50" height="50">   | Un módulo pulsador (KY-004)                                           |
 
-## Descripció del material
+## Descripción del material
 
-**Polsadors**
+**Pulsadores**
 
-Els commutadors són components realment simples. Quan premeu un botó o gireu una palanca, es connecten dos contactes junts perquè l’electricitat puga circular per ells. Un _polsador_ és un commutador que retorna a la posició de repòs quan deixem d’actuar sobre ell.
+Los conmutadores son componentes realmente simples. Cuando presionas un botón o giras una palanca, conectan dos contactos juntos para que la electricidad pueda circular por ellos. Un _pulsador_ es un conmutador que vuelve a la posición de reposo cuando dejamos de actuar sobre él.
 
-Els petits interruptors tàctils que s’utilitzen en aquesta lliçó tenen quatre connexions, que poden ser una mica confós.
+Los pequeños interruptores táctiles que se utilizan en esta lección tienen cuatro conexiones, lo que puede ser un poco confuso.
 
-![Polsador i esquema](../imatges/ard/ard_12_01.png)
+![Pulsador y esquema](../imatges/ard/ard_12_01.png)
 
-En realitat, només hi ha realment dues connexions elèctriques, ja que a l'interior del paquet d'interruptors els pins B i C estan connectats junts, igual que A i D.
+En realidad, solo hay realmente dos conexiones eléctricas, ya que dentro del paquete de interruptores los pines B y C están conectados juntos, igual que A y D.
 
-**Mòdul polsador**
+**Módulo pulsador**
 
-Una resistència de 10 K ohm incorporada està connectada entre el pin central i el pin "S" i es pot utilitzar com a resistència de pull-up o pull-down. El polsador connecta els dos pins externs.
+Una resistencia de 10 K ohm incorporada está conectada entre el pin central y el pin "S" y se puede utilizar como resistencia de pull-up o pull-down. El pulsador conecta los dos pines externos.
 
-![Mòdul polsador](../imatges/ard/ard_12_02.png)
+![Módulo pulsador](../imatges/ard/ard_12_02.png)
 
-## Muntatge
+## Montaje
 
-Anem a fer que el led integrat en la placa arduino i connectat al pin 13 parpellege quan polsem el botó. Per aconseguir-ho cal cablejar la «output» del mòdul al pin 3 de arduino, la Vcc amb 5V i Gnd amb Gnd. Com veieu el muntatge és molt senzill.
+Vamos a hacer que el LED integrado en la placa Arduino y conectado al pin 13 parpadee cuando pulsemos el botón. Para conseguirlo hay que cablear la «output» del módulo al pin 3 de Arduino, la Vcc con 5V y Gnd con Gnd. Como veis el montaje es muy sencillo.
 
-![Esquema elèctric](../imatges/ard/ard_12_03.png)
-![Muntatge](../imatges/ard/ard_12_04.png)
+![Esquema eléctrico](../imatges/ard/ard_12_03.png)
+![Montaje](../imatges/ard/ard_12_04.png)
 
-## Programació
+## Programación
 
 ```Arduino
 
 /*
-CARTROTECH (www.qode66.xyz)
-Projecte nº: ARD012
-Data: 29.08.2021
-Descripcio: Llegir un polsador i fer parpellejar el led del pin 13
+CARTROTECH (https://cartrotech.github.io)
+Proyecto nº: ARD012
+Fecha: 29.08.2021
+Descripción: Leer un pulsador y hacer parpadear el LED del pin 13
 */
 
-int Led = 13; //Assigna el pin Led
-int pols = 3; //Assigna el pin al polsador
-int val; //Defineix una variable
+int Led = 13; //Asigna el pin Led
+int pols = 3; //Asigna el pin al pulsador
+int val; //Define una variable
 
 void setup()
 {
-    pinMode(Led, OUTPUT); //Configura el pin 13 (Led) com eixida
-    pinMode(pols, INPUT); //Configura el pin 3 (pols) com entrada
+    pinMode(Led, OUTPUT); //Configura el pin 13 (Led) como salida
+    pinMode(pols, INPUT); //Configura el pin 3 (puls) como entrada
 }
 
 void loop()
 {
-    val = digitalRead(pols); //llig el valor de l'entrada 3 i l'assigna a val
+    val = digitalRead(pols); //lee el valor de la entrada 3 y lo asigna a val
     if (val == HIGH)
     {
         digitalWrite (Led,LOW);
@@ -76,11 +76,11 @@ void loop()
 }
 ```
 
-## Conceptes importants
+## Conceptos importantes
 
-- Continuem utilitzant les resistències pull-up o pull-down quan usem polsadors
-- Hem aprofitat part del codi del blinking led en aquest programa.
+- Seguimos utilizando las resistencias pull-up o pull-down cuando usamos pulsadores
+- Hemos aprovechado parte del código del blinking led en este programa.
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
