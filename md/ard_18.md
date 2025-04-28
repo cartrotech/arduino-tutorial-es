@@ -1,83 +1,83 @@
-# 18 - Mòdul foto-interruptor
+# 18 - Módulo foto-interruptor
 
-## Objectius
+## Objetivos
 
-- Conèixer el mòdul foto-interruptor
+- Conocer el módulo foto-interruptor
 
 ## Material
 
-|                               Imatge                               | Descripció                      |
+|                               Imagen                               | Descripción                      |
 | :----------------------------------------------------------------: | :------------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.       |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió              |
-| <img src="./../imatges/mat/mat_KY-010.png" width="50" height="50"> | Mòdul foto-interruptor (KY-010) |
-| <img src="./../imatges/mat/mat_KY-012.png" width="50" height="50"> | Mòdul brunzidor actiu (KY-012)  |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.       |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión              |
+| <img src="./../imatges/mat/mat_KY-010.png" width="50" height="50"> | Módulo foto-interruptor (KY-010) |
+| <img src="./../imatges/mat/mat_KY-012.png" width="50" height="50"> | Módulo zumbador activo (KY-012)  |
 
-## Descripció
+## Descripción
 
-### Funcionament
+### Funcionamiento
 
-El mòdul de foto-interruptor per a Arduino activarà un senyal quan es
-bloquege la llum entre l'espai del sensor.
+El módulo de foto-interruptor para Arduino activará una señal cuando se
+bloquee la luz entre el espacio del sensor.
 
-![Funcionament foto-interruptor](../imatges/ard/ard_18_01.jpeg)
+![Funcionamiento foto-interruptor](../imatges/ard/ard_18_01.jpeg)
 
-### Especificacions
+### Especificaciones
 
-El mòdul de foto-interruptor consta d'un emissor / detector òptic en la
-part davantera i dues resistències (1 kΩ i 33 Ω) en la part posterior.
-El sensor utilitza un feix de llum entre l'emissor i el detector per a
-comprovar si la trajectòria entre tots dos està bloquejada per un
-objecte opac.
+El módulo de foto-interruptor consta de un emisor / detector óptico en la
+parte delantera y dos resistencias (1 kΩ y 33 Ω) en la parte posterior.
+El sensor utiliza un haz de luz entre el emisor y el detector para
+comprobar si la trayectoria entre ambos está bloqueada por un
+objeto opaco.
 
-- Voltatge de funcionament: 3.3 ~ 5V
-- Dimensions: 18,5 mm x 15 mm
+- Voltaje de funcionamiento: 3.3 ~ 5V
+- Dimensiones: 18,5 mm x 15 mm
 
-## Connexió
+## Conexión
 
-Connecte la línia d'alimentació (enmig) i terra (esquerra) a + 5V i GND
-respectivament. Connecte el senyal (S) al pin 3 del Arduino.
+Conecte la línea de alimentación (en medio) y tierra (izquierda) a + 5V y GND
+respectivamente. Conecte la señal (S) al pin 3 del Arduino.
 
-| Mòdul        | Arduino |
+| Módulo        | Arduino |
 | ------------ | ------- |
-| - (esquerra) | GND     |
-| + (enmig)    | + 5V    |
-| S (dreta)    | Pin 3   |
+| - (izquierda) | GND     |
+| + (en medio)    | + 5V    |
+| S (derecha)    | Pin 3   |
 
-![Diagrama de muntatge foto-interruptor](../imatges/ard/ard_18_02.png)
+![Diagrama de montaje foto-interruptor](../imatges/ard/ard_18_02.png)
 
-Com podeu veure utilitzem un brunzidor actiu per emetre un so quan el
-mòdul s'active.
+Como podéis ver utilizamos un zumbador activo para emitir un sonido cuando el
+módulo se active.
 
-![Esquema elèctric foto-interruptor](../imatges/ard/ard_18_03.png)
+![Esquema eléctrico foto-interruptor](../imatges/ard/ard_18_03.png)
 
-## Programació
+## Programación
 
-**Codi: ARD_18**
+**Código: ARD_18**
 
 ```Arduino
 /*
-* Projecte nº: ARD018
-* Data: 20.10.2021
-* Descripcio: Funcionament del modul foto-interruptor
+* Proyecto nº: ARD018
+* Fecha: 20.10.2021
+* Descripción: Funcionamiento del módulo foto-interruptor
 * Nota:
 *
 */
 
-int Led = 13; // defineix el pin de l'avisador
-int buttonpin = 3; // defineix el pin de senyal del foto-interruptor
-int val; //defineix una variable numerica
+int Led = 13; // define el pin del avisador
+int buttonpin = 3; // define el pin de señal del foto-interruptor
+int val; //define una variable numérica
 
 void setup()
 {
-  pinMode(Led, OUTPUT); // LED pin com eixida
-  pinMode(buttonpin, INPUT); //Foto-interruptor pin com entrada
+  pinMode(Led, OUTPUT); // LED pin como salida
+  pinMode(buttonpin, INPUT); //Foto-interruptor pin como entrada
 }
 
 void loop()
 {
-  val=digitalRead(buttonpin); //llig el valor del sensor
-  if(val == HIGH) // activa el led/avisador quan el sensor es bloqueja
+  val=digitalRead(buttonpin); //lee el valor del sensor
+  if(val == HIGH) // activa el led/avisador cuando el sensor se bloquea
   {
     digitalWrite(Led,HIGH);
   }
@@ -88,6 +88,6 @@ void loop()
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
