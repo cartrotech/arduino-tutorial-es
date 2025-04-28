@@ -1,90 +1,89 @@
-# 21 - Mòduls de detecció de so
+# 21 - Módulos de detección de sonido
 
-## Visió general
+## Visión general
 
-En aquest experiment, aprendrem a utilitzar el sensor de veu d'alta
-sensibilitat. Hi han dos tipus: el mòdul de micròfon gran i el mòdul de
-micròfon xicotet.
+En este experimento, aprenderemos a utilizar el sensor de voz de alta
+sensibilidad. Hay dos tipos: el módulo de micrófono grande y el módulo de
+micrófono pequeño.
 
 ## Material
 
-|                               Imatge                               | Descripció                      |
+|                               Imagen                               | Descripción                      |
 | :----------------------------------------------------------------: | :------------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.       |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió              |
-| <img src="./../imatges/mat/mat_KY-037.png" width="50" height="50"> | Mòdul micròfon gran (KY-037)    |
-| <img src="./../imatges/mat/mat_KY-038.png" width="50" height="50"> | Mòdul micròfon xocotet (KY-038) |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.       |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión              |
+| <img src="./../imatges/mat/mat_KY-037.png" width="50" height="50"> | Módulo micrófono grande (KY-037)    |
+| <img src="./../imatges/mat/mat_KY-038.png" width="50" height="50"> | Módulo micrófono pequeño (KY-038) |
 
-## Mòdul de micròfon gran
+## Módulo de micrófono grande
 
-Un mòdul de micròfon amb una càpsula d'electret de gran format d'alta
-sensibilitat.
+Un módulo de micrófono con una cápsula de electret de gran formato de alta
+sensibilidad.
 
-És un mòdul de detecció de so que té dos pins de senyal d'eixida. un
-pin digital (D0), quan detecta algun so fins a un cert llindar, pot
-emetre un nivell alt o baix. Un pin analògic (A0), pot donar en temps
-real la senyal de voltatge d'eixida del micròfon.
+Es un módulo de detección de sonido que tiene dos pines de señal de salida. Un
+pin digital (D0), cuando detecta algún sonido hasta un cierto umbral, puede
+emitir un nivel alto o bajo. Un pin analógico (A0), puede dar en tiempo real la señal de voltaje de salida del micrófono.
 
-Un potenciòmetre permet ajustar el nivell.
+Un potenciómetro permite ajustar el nivel.
 
-![Mòdul micròfon KY-037](../imatges/ard/ard_21_01.png)
+![Módulo micrófono KY-037](../imatges/ard/ard_21_01.png)
 
-## Mòdul de micròfon xicotet
+## Módulo de micrófono pequeño
 
-Un mòdul de micròfon amb una xicoteta càpsula electret.
+Un módulo de micrófono con una pequeña cápsula electret.
 
-L'eixida "DO" (activa alta) es canvia quan el nivell de so excedeix
-un nivell preestablit. Un potenciòmetre permet ajustar el nivell.
+La salida "DO" (activa alta) cambia cuando el nivel de sonido excede
+un nivel preestablecido. Un potenciómetro permite ajustar el nivel.
 
-Excepte per la grandària més xicoteta de la càpsula i la seua menor
-sensibilitat, el mòdul és idèntic al mòdul "Micròfon gran"
+Excepto por el tamaño más pequeño de la cápsula y su menor
+sensibilidad, el módulo es idéntico al módulo "Micrófono grande"
 
-![Mòdul micròfon KY-038](../imatges/ard/ard_21_02.png)
+![Módulo micrófono KY-038](../imatges/ard/ard_21_02.png)
 
-## Sensor de so
+## Sensor de sonido
 
-El mòdul del sensor de so proporciona una manera fàcil de detectar el so
-i generalment s'usa per a detectar la intensitat del so. Aquest mòdul
-es pot utilitzar per a aplicacions de seguretat, commutació i
-supervisió. La seua precisió es pot ajustar fàcilment per a la
-conveniència d'ús.
+El módulo del sensor de sonido proporciona una manera fácil de detectar el sonido
+y generalmente se usa para detectar la intensidad del sonido. Este módulo
+se puede utilizar para aplicaciones de seguridad, conmutación y
+supervisión. Su precisión se puede ajustar fácilmente para la
+conveniencia de uso.
 
-Utilitza un micròfon que subministra l'entrada a un amplificador,
-detector de pics i búfer.
+Utiliza un micrófono que suministra la entrada a un amplificador,
+detector de picos y buffer.
 
-Quan el sensor detecta un so, proporciona un voltatge de senyal
-d'eixida que s'envia a un microcontrolador que realitza el
-processament necessari.
+Cuando el sensor detecta un sonido, proporciona un voltaje de señal
+de salida que se envía a un microcontrolador que realiza el
+procesamiento necesario.
 
-![Sensor de so](../imatges/ard/ard_21_03.png)
+![Sensor de sonido](../imatges/ard/ard_21_03.png)
 
-Aquests micròfons s'utilitzen àmpliament en circuits electrònics per a
-detectar sons menors o vibracions de l'aire que al seu torn es
-converteixen en senyals elèctrics per al seu ús posterior. Les dues
-potes, com es mostra en la imatge de dalt, s'utilitzen per a realitzar
-la connexió elèctrica amb el circuit.
+Estos micrófonos se utilizan ampliamente en circuitos electrónicos para
+detectar sonidos menores o vibraciones del aire que a su vez se
+convierten en señales eléctricas para su uso posterior. Las dos
+patas, como se muestra en la imagen de arriba, se utilizan para realizar
+la conexión eléctrica con el circuito.
 
-![Coberta del sensor de so](../imatges/ard/ard_21_04.png)
+![Cubierta del sensor de sonido](../imatges/ard/ard_21_04.png)
 
-Un cos de metall conductor sòlid encapsula les diferents parts del
-micròfon. La cara superior es cobreix amb un material porós amb l'ajuda
-de cola. Actua com a filtre de les partícules de pols. Els senyals de so/vibracions de l'aire passen a través del material porós i cauen sobre
-el diafragma a través de l'orifici que es mostra en la imatge de dalt.
+Un cuerpo de metal conductor sólido encapsula las diferentes partes del
+micrófono. La cara superior se cubre con un material poroso con la ayuda
+de cola. Actúa como filtro de las partículas de polvo. Las señales de sonido/vibraciones del aire pasan a través del material poroso y caen sobre
+el diafragma a través del orificio que se muestra en la imagen de arriba.
 
-## Connexionat
+## Conexionado
 
-Es mostra el cablejat per al mòdul de micròfon gran, però es idèntic si
-utilitzem el mòdul de micròfon xicotet.
+Se muestra el cableado para el módulo de micrófono grande, pero es idéntico si
+utilizamos el módulo de micrófono pequeño.
 
-![Connexionat mòdul de micròfon](../imatges/ard/ard_21_05.png)
+![Conexionado módulo de micrófono](../imatges/ard/ard_21_05.png)
 
-## Programació
+## Programación
 
 ```Arduino
 /*
-* Projecte nº: **ARD021**
-* Data: 06.11.2021
-* Descripcio: Modul deteccio so
+* Proyecto nº: **ARD021**
+* Fecha: 06.11.2021
+* Descripción: Módulo detección sonido
 * Nota:
 *
 */
@@ -115,10 +114,10 @@ void loop()
   {
     digitalWrite(Led,LOW);
   }
-  delay(50); // Pausa per a no sobrecarregar la interfície serie
+  delay(50); // Pausa para no sobrecargar la interfaz serie
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
