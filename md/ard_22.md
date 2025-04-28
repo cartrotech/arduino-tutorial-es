@@ -1,114 +1,114 @@
-# 22 - Mòdul d'interruptor magnètic
+# 22 - Módulo de interruptor magnético
 
 ## Material
 
-|                               Imatge                               | Descripció                          |
+|                               Imagen                               | Descripción                          |
 | :----------------------------------------------------------------: | :---------------------------------- |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.           |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió                  |
-| <img src="./../imatges/mat/mat_KY-025.png" width="50" height="50"> | Mòdul interruptor magnètic (KY-025) |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.           |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión                  |
+| <img src="./../imatges/mat/mat_KY-025.png" width="50" height="50"> | Módulo interruptor magnético (KY-025) |
 
-## Descripció
+## Descripción
 
-L'interruptor magnètic és una espècie de component electrònic passiu de
-commutació amb contactes amb una estructura simple, mida xicoteta i
-fàcil de controlar. Consisteix en un sobre de vidre segellat on hi ha
-dues llengüetes elàstiques ferroses i està ple d'un gas inert anomenat
-rodi.
+El interruptor magnético es una especie de componente electrónico pasivo de
+conmutación con contactos con una estructura simple, tamaño pequeño y
+fácil de controlar. Consiste en un envoltorio de vidrio sellado donde hay
+dos lengüetas elásticas ferrosas y está lleno de un gas inerte llamado
+rodio.
 
-Normalment, les dues llengüetes estan separades en el sobre. Quan una
-substància magnètica s'acosta a l'embolcall de vidre, les llengüetes
-s'uniran a causa del camp magnètic completant així un circuit elèctric.
-Quan el camp magnètic extern desapareix, dues llengüetes se separaran a
-causa de la seua elasticitat, el circuit també es desconnecta.
+Normalmente, las dos lengüetas están separadas en el envoltorio. Cuando una
+sustancia magnética se acerca al envoltorio de vidrio, las lengüetas
+se unirán debido al campo magnético completando así un circuito eléctrico.
+Cuando el campo magnético externo desaparece, las dos lengüetas se separarán
+debido a su elasticidad, el circuito también se desconecta.
 
-Per tant, com a dispositiu de commutació de circuits controlat per
-senyals de camp magnètic, l'interruptor de làmines també es pot
-utilitzar com a sensor per a comptar i limitar, etc. (aplicat en els
-sistemes de seguretat, utilitzat principalment per a la producció
-d'imants de portes i finestres), i és també àmpliament utilitzat en una
-varietat de dispositius de comunicació. En la pràctica, és comuna
-utilitzar els dos imants permanents per a controlar la connexió de dues
-làmines de metall, per la qual cosa també es denomina "magnetró".
+Por lo tanto, como dispositivo de conmutación de circuitos controlado por
+señales de campo magnético, el interruptor de láminas también se puede
+utilizar como sensor para contar y limitar, etc. (aplicado en los
+sistemas de seguridad, utilizado principalmente para la producción
+de imanes de puertas y ventanas), y también es ampliamente utilizado en una
+variedad de dispositivos de comunicación. En la práctica, es común
+utilizar los dos imanes permanentes para controlar la conexión de dos
+láminas de metal, por lo que también se denomina "magnetrón".
 
-## Especificacions
+## Especificaciones
 
-- Voltatge d'operació: 5 V
-- Pin d'eixida digital i analògica
-- Sensibilitat ajustable
-- Grandària: 42,5 x 15 mm
-- Pes: 2.964g
+- Voltaje de operación: 5 V
+- Pin de salida digital y analógica
+- Sensibilidad ajustable
+- Tamaño: 42,5 x 15 mm
+- Peso: 2.964g
 
-## Configuració de pins
+## Configuración de pins
 
-![Pins mòdul KY-025](../imatges/ard/ard_22_02.png)
+![Pins módulo KY-025](../imatges/ard/ard_22_02.png)
 
-Aquest interruptor de llengüeta ofereix una interfície analògica i
-digital. El pin "G" connectat a GND, el pin "+" a 5 Vcc, el pin
-"AO" ofereix l'eixida analògica mentre que el "DO" ofereix
-l'eixida digital. S'utilitza un potenciòmetre com a resistència de
+Este interruptor de lengüeta ofrece una interfaz analógica y
+digital. El pin "G" conectado a GND, el pin "+" a 5 Vcc, el pin
+"AO" ofrece la salida analógica mientras que el "DO" ofrece
+la salida digital. Se utiliza un potenciómetro como resistencia de
 pull-up.
 
-## Funcionament
+## Funcionamiento
 
-Encara que un interruptor magnètic es pot activar col·locant-lo dins
-d'una bobina elèctrica, molts interruptors i sensors magnètics
-s'utilitzen per a la detecció de proximitat i s'activen mitjançant un
-imant. Quan l'imant s'acosta al sensor/interruptor, el dispositiu
-s'activa. A mesura que l'imant es retira de la proximitat del sensor/interruptor, el dispositiu es desactiva. No obstant això, la interacció
-magnètica involucrada en l'activació dels contactes de l'interruptor
-no és necessàriament òbvia. Una manera de pensar en la interacció és que
-l'imant indueix pols magnètics en les parts metàl·liques de
-l'interruptor i l'atracció resultant entre els contactes elèctrics fa
-que s'active.
+Aunque un interruptor magnético se puede activar colocándolo dentro
+de una bobina eléctrica, muchos interruptores y sensores magnéticos
+se utilizan para la detección de proximidad y se activan mediante un
+imán. Cuando el imán se acerca al sensor/interruptor, el dispositivo
+se activa. A medida que el imán se aleja de la proximidad del sensor/interruptor, el dispositivo se desactiva. Sin embargo, la interacción
+magnética involucrada en la activación de los contactos del interruptor
+no es necesariamente obvia. Una forma de pensar en la interacción es que
+el imán induce polos magnéticos en las partes metálicas del
+interruptor y la atracción resultante entre los contactos eléctricos hace
+que se active.
 
-![Inducció](../imatges/ard/ard_22_03.png)
+![Inducción](../imatges/ard/ard_22_03.png)
 
-Una altra forma igualment vàlida de pensar sobre la interacció entre un
-imant i un interruptor magnètic és que l'imant indueix un flux magnètic
-a través dels contactes elèctrics. Quan el flux magnètic és prou alt,
-l'atracció magnètica entre els contactes fa que l'interruptor es
-tanque.
+Otra forma igualmente válida de pensar envoltorio la interacción entre un
+imán y un interruptor magnético es que el imán induce un flujo magnético
+a través de los contactos eléctricos. Cuando el flujo magnético es suficientemente alto,
+la atracción magnética entre los contactos hace que el interruptor se
+cierre.
 
-![Flux](../imatges/ard/ard_22_04.png)
+![Flujo](../imatges/ard/ard_22_04.png)
 
-## Camp d'acció
+## Campo de acción
 
-![Camp d'acció](../imatges/ard/ard_22_05.png)
+![Campo de acción](../imatges/ard/ard_22_05.png)
 
-Com pot veure's, l'orientació magnètica i la ubicació respecte a
-l'interruptor magnètic juguen un paper important en les distàncies
-d'activació. A més, la grandària de les regions activades (lòbuls)
-variarà segons la força de l'imant i la sensibilitat de l'interruptor.
-L'orientació adequada de l'imant respecte al sensor/interruptor
-magnètic és una consideració important per a complir amb els requisits
-de l'aplicació en tot el rang de tolerància per als sistemes mecànics,
-la força magnètica i el sensor de làmines o la sensibilitat de
-l'interruptor.
+Como se puede ver, la orientación magnética y la ubicación respecto al
+interruptor magnético juegan un papel importante en las distancias
+de activación. Además, el tamaño de las regiones activadas (lóbulos)
+variará según la fuerza del imán y la sensibilidad del interruptor.
+La orientación adecuada del imán respecto al sensor/interruptor
+magnético es una consideración importante para cumplir con los requisitos
+de la aplicación en todo el rango de tolerancia para los sistemas mecánicos,
+la fuerza magnética y el sensor de láminas o la sensibilidad del
+interruptor.
 
-## Connexió
+## Conexión
 
-![Esquema elèctric KY-025](../imatges/ard/ard_22_06.png)
-![Muntatge KY-025](../imatges/ard/ard_22_07.png)
+![Esquema eléctrico KY-025](../imatges/ard/ard_22_06.png)
+![Montaje KY-025](../imatges/ard/ard_22_07.png)
 
-## Programació
+## Programación
 
-Aquest primer codi llig el valor analògic del mòdul mitjançant una
-entrada analògica del arduino, presenta el valor llegit pel monitor
-serie i fa parpellejar el led de la placa segons el valor obtingut.
+Este primer código lee el valor analógico del módulo mediante una
+entrada analógica del arduino, presenta el valor leído por el monitor
+serie y hace parpadear el led de la placa según el valor obtenido.
 
 ```Arduino
 /*
-* Projecte nº: ARD022a
-* Data: 11.11.2021
-* Descripcio: Modul interruptor magnetic
+* Proyecto nº: ARD022a
+* Fecha: 11.11.2021
+* Descripción: Módulo interruptor magnético
 * Nota:
 *
 */
 
-int sensorPin = A0; // defineix la entrada analogica del sensor
-int ledPin = 13; // eixida led per veure l'activacio
-int sensorValue = 0; // variable per guardar el valor del sensor
+int sensorPin = A0; // define la entrada analógica del sensor
+int ledPin = 13; // salida led para ver la activación
+int sensorValue = 0; // variable para guardar el valor del sensor
 
 void setup()
 {
@@ -127,32 +127,32 @@ void loop()
 }
 ```
 
-El següent codi activa el led de la placa quan el sensor envia senyal
-alta per la eixida digital del mòdul.
+El siguiente código activa el led de la placa cuando el sensor envía señal
+alta por la salida digital del módulo.
 
 ```Arduino
 /*
-* Projecte nº: ARD022b
-* Data: 11.11.2021
-* Descripcio: Modul interruptor magnetic
+* Proyecto nº: ARD022b
+* Fecha: 11.11.2021
+* Descripción: Módulo interruptor magnético
 * Nota:
 *
 */
 
-int Led=13; //defineix el port LED
-int buttonpin=3; //defineix el port de l'interruptor
-int val; //defineix la variable digital val
+int Led=13; //define el puerto LED
+int buttonpin=3; //define el puerto del interruptor
+int val; //define la variable digital val
 
 void setup()
 {
-    pinMode(Led,OUTPUT);//defineix LED com pin de eixida
-    pinMode(buttonpin,INPUT);//defineix la entrada digital del interruptor
+    pinMode(Led,OUTPUT);//define LED como pin de salida
+    pinMode(buttonpin,INPUT);//define la entrada digital del interruptor
 }
 
 void loop()
 {
     val=digitalRead(buttonpin);//asigna el valor de la entrada 3 a val
-    if(val==HIGH)//quan el sensor envia señal, LED s'encen
+    if(val==HIGH)//cuando el sensor envía señal, LED se enciende
     {
         digitalWrite(Led,HIGH);
     }
@@ -163,6 +163,6 @@ void loop()
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
