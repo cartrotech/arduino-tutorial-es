@@ -1,94 +1,94 @@
-# 13 - Mòduls Transmisor i Receptor IR
+# 13 - Módulos Transmisor y Receptor IR
 
-## Finalitat
+## Finalidad
 
-En aquest experiment, aprendrem a utilitzar el mòdul transmissor
-d'infrarojos i el receptor d'infrarojos.
-De fet, en la nostra vida quotidiana juguen un paper important en la
-majoria dels electrodomèstics que s’utilitzen a aquest tipus de
-dispositius, com ara aire condicionat, TV, DVD, etc. En realitat es basa
-en la seua teledetecció sense fils i és molt convenient utilitzar-los.
+En este experimento, aprenderemos a utilizar el módulo transmisor
+de infrarrojos y el receptor de infrarrojos.
+De hecho, en nuestra vida cotidiana juegan un papel importante en la
+mayoría de los electrodomésticos que se utilizan en este tipo de
+dispositivos, como aire acondicionado, TV, DVD, etc. En realidad se basa
+en su teledetección sin hilos y es muy conveniente utilizarlos.
 
 ## Material
 
-|                               Imatge                               | Descripció                                                           |
+|                               Imagen                               | Descripción                                                           |
 | :----------------------------------------------------------------: | :------------------------------------------------------------------- |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o compatible amb S4A i amb el firmware per S4A carregat. |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió                                                   |
-| <img src="./../imatges/mat/mat_KY-022.png" width="50" height="50"> | Mòdul receptor IR KY022                                              |
-| <img src="./../imatges/mat/mat_KY-005.png" width="50" height="50"> | Mòdul emissor IR KY005                                               |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o compatible con S4A y con el firmware para S4A cargado. |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión                                                   |
+| <img src="./../imatges/mat/mat_KY-022.png" width="50" height="50"> | Módulo receptor IR KY022                                              |
+| <img src="./../imatges/mat/mat_KY-005.png" width="50" height="50"> | Módulo emisor IR KY005                                               |
 
-## Descripció del material
+## Descripción del material
 
 ### Receptor IR
 
-Sensor d'infrarojos tipus 1838 per a ús amb senyals IR de 38 KHz.
+Sensor de infrarrojos tipo 1838 para uso con señales IR de 38 KHz.
 
-- Tensió d’alimentació: 2,7 a 5,5 V
-- Freqüència: 37,9 KHz
-- Abast del receptor: 18 m (típic)
-- Angle de recepció: 90 °
+- Tensión de alimentación: 2,7 a 5,5 V
+- Frecuencia: 37,9 KHz
+- Alcance del receptor: 18 m (típico)
+- Ángulo de recepción: 90 °
 
 ![Receptor IR](../imatges/ard/ard_13_01.png)
 
-Els detectors IR són petits microxips amb fotocèl·lula que s’ajusten per
-escoltar la llum infraroja. Gairebé sempre s’utilitzen per a la detecció
-de control remot: cada reproductor de TV i DVD en té un a la part
-frontal per llegir el senyal IR des del comandament. A l'interior del
-comandament a distància hi ha un LED IR coincident, que emet impulsos IR
-per dir al televisor que s'encenga, s'apague o canvie de canal. La llum
-IR no és visible a l’ull humà, de manera que es necessita una mica més
-de treball per provar una configuració.
+Los detectores IR son pequeños microchips con fotorresistencia que se ajustan para
+escuchar la luz infrarroja. Casi siempre se utilizan para la detección
+de control remoto: cada reproductor de TV y DVD tiene uno en la parte
+frontal para leer la señal IR desde el mando a distancia. En el interior del
+mando a distancia hay un LED IR coincidente, que emite impulsos IR
+para decir al televisor que se encienda, se apague o cambie de canal. La luz
+IR no es visible al ojo humano, por lo que se necesita un poco más
+de trabajo para probar una configuración.
 
-Els detectors IR es filtren especialment per a la llum infraroja, no són
-bons per detectar la llum visible. D’altra banda, les fotocèl·lules són
-bones per detectar la llum visible de color groc/verd, no són bones
-per a la llum IR.
+Los detectores IR están filtrados especialmente para la luz infrarroja, no son
+buenos para detectar la luz visible. Por otro lado, las fotorresistencias son
+buenas para detectar la luz visible de color amarillo/verde, no son buenas
+para la luz IR.
 
-- Els detectors IR tenen un desmodulador a l’interior que busca IR
-  modulats a 38 kHz. No es detectarà la brillantor d’un LED d’IR, sinó que
-  haurà de parpellejar a 38 kHz. Les fotocèl·lules no tenen cap classe de
-  desmodulador i poden detectar qualsevol freqüència (inclosa la CC) dins
-  de la velocitat de resposta de la fotocèl·lula (que és d’uns 1 kHz).
-- Els detectors IR són de sortida digital: si detecten un senyal IR de
-  38 kHz, donen una sortida baixa (0V) o si bé no en detecten cap,
-  produeixen una sortida alta (5V). Les fotocèl·lules actuen com a
-  resistències, la resistència canvia en funció de la quantitat de llum a
-  què estan exposades.
+- Los detectores IR tienen un desmodulador en el interior que busca IR
+  modulados a 38 kHz. No se detectará el brillo de un LED de IR, sino que
+  tendrá que parpadear a 38 kHz. Las fotorresistencias no tienen ningún tipo de
+  desmodulador y pueden detectar cualquier frecuencia (incluida la CC) dentro
+  de la velocidad de respuesta de la fotorresistencia (que es de unos 1 kHz).
+- Los detectores IR son de salida digital: si detectan una señal IR de
+  38 kHz, dan una salida baja (0V) o si bien no detectan ninguna,
+  producen una salida alta (5V). Las fotorresistencias actúan como
+  resistencias, la resistencia cambia en función de la cantidad de luz a
+  la que están expuestas.
 
-### Transmissor IR
+### Transmisor IR
 
-Aquest mòdul s’utilitza generalment juntament amb el mòdul de receptor
-IR, les aplicacions d’aquest mòdul són molt àmplies en la nostra vida
-comuna. L'IR-LED es pot utilitzar per construir una barrera de llum o un
-transmissor de senyal de control remot IR.
+Este módulo se utiliza generalmente junto con el módulo de receptor
+IR, las aplicaciones de este módulo son muy amplias en nuestra vida
+común. El LED-IR se puede utilizar para construir una barrera de luz o un
+transmisor de señal de control remoto IR.
 
-Aquest mòdul és igual que un LED, però el color de la llum no es pot
-veure a l’ull humà, sinó que podeu veure la llum a través de la càmera
-del telèfon.
+Este módulo es igual que un LED, pero el color de la luz no se puede
+ver al ojo humano, sino que puedes ver la luz a través de la cámara
+del teléfono.
 
-![Emissor IR](../imatges/ard/ard_13_02.png)
+![Emisor IR](../imatges/ard/ard_13_02.png)
 
-## Muntatge
+## Montaje
 
-Aquest muntatge és molt senzill, no ens fa falta protoboard però en
-canvi necessitem dues plaques arduino.
+Este montaje es muy sencillo, no necesitamos protoboard pero en
+cambio necesitamos dos placas arduino.
 
-Els cables d’alimentació (5V i GND) tenen posicions fixes en la placa,
-els cables de dades els conectarem en la entrada/eixida corresponent
-segons indiquem en el codi
+Los cables de alimentación (5V y GND) tienen posiciones fijas en la placa,
+los cables de datos los conectaremos en la entrada/salida correspondiente
+según indicamos en el código
 
-![Muntatge receptor](../imatges/ard/ard_13_03.png)
-![Muntatge emissor](../imatges/ard/ard_13_05.png)
+![Montaje receptor](../imatges/ard/ard_13_03.png)
+![Montaje emisor](../imatges/ard/ard_13_05.png)
 
 ---
 
-![Esquema elèctric receptor](../imatges/ard/ard_13_04.png)
-![Esquema elèctric emissor](../imatges/ard/ard_13_06.png)
+![Esquema eléctrico receptor](../imatges/ard/ard_13_04.png)
+![Esquema eléctrico emisor](../imatges/ard/ard_13_06.png)
 
-## Programació
+## Programación
 
-Codi: ARD_13_IRe (pujar a la placa del emissor)
+Código: ARD_13_IRe (subir a la placa del emisor)
 
 ```Arduino
 
@@ -104,7 +104,7 @@ void setup()
 void loop()
 {
     digitalWrite(13,LOW);
-    irsend.sendRC5(0x0, 8); //send 0x0 code (8 bits)
+    irsend.sendRC5(0x0, 8); //enviar código 0x0 (8 bits)
     delay(200);
     digitalWrite(13,HIGH);
     irsend.sendRC5(0x1, 8);
@@ -113,50 +113,50 @@ void loop()
 
 ```
 
-Codi: ARD_13_IRr (pujar a la placa del receptor)
+Código: ARD_13_IRr (subir a la placa del receptor)
 
 ```Arduino
 
 #include <IRremote.h>
-#define RECV_PIN 11 //Pin de recepcio del senyal IR
-#define LED 13 //defineix LED pin
+#define RECV_PIN 11 //Pin de recepción de la señal IR
+#define LED 13 //define LED pin
 
-IRrecv irrecv(RECV_PIN); //crear l'objecte irrecv per al receptor IR en el pin indicat
+IRrecv irrecv(RECV_PIN); //crear el objeto irrecv para el receptor IR en el pin indicado
 
-decode_results results; //declarem la variable results (dades de la recepcio)
+decode_results results; //declaramos la variable results (datos de la recepción)
 
 void setup()
 {
-    pinMode(LED, OUTPUT); //inicialitza LED com eixida
+    pinMode(LED, OUTPUT); //inicializa LED como salida
     Serial.begin(9600);
-    irrecv.enableIRIn(); //activa l'objecte irrecv
+    irrecv.enableIRIn(); //activa el objeto irrecv
 }
 
 void loop()
 {
-    if (irrecv.decode(&results)) //comprovem si arriven dades
+    if (irrecv.decode(&results)) //comprobamos si llegan datos
     {
         int state;
-        if ( results.value ## 1 )
+        if ( results.value == 1 )
         {
-            state # HIGH;
+            state = HIGH;
         }
         else
         {
-            state # LOW;
+            state = LOW;
         }
     digitalWrite( LED, state );
     Serial.println(results.value);
-    irrecv.resume(); // comencem una nova recepció
+    irrecv.resume(); // comenzamos una nueva recepción
     }
 }
 
 ```
 
-## Conceptes importants
+## Conceptos importantes
 
-- Com funcionen el transmissor i el receptor de infrarojos.
+- Cómo funcionan el transmisor y el receptor de infrarrojos.
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
