@@ -1,137 +1,135 @@
-# 16 -- Mòdul làser
+# 16 -- Módulo láser
 
-## Objectiu
+## Objetivo
 
-En aquest experiment, aprendrem a utilitzar el mòdul làser.
+En este experimento, aprenderemos a utilizar el módulo láser.
 
 ## Material
 
-|                               Imatge                               | Descripció                |
+|                               Imagen                               | Descripción                |
 | :----------------------------------------------------------------: | :------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent. |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió        |
-| <img src="./../imatges/mat/mat_KY-008.png" width="50" height="50"> | Un mòdul laser KY-008     |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente. |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión        |
+| <img src="./../imatges/mat/mat_KY-008.png" width="50" height="50"> | Un módulo láser KY-008     |
 
-## Descripció
+## Descripción
 
-El mòdul transmissor làser, 650 nm (roig), emet un feix xicotet i
-intens. Encara que aquest mòdul és segur per al seu projecte, no mire
-directament al raig.
+El módulo transmisor láser, 650 nm (rojo), emite un haz pequeño e
+intenso. Aunque este módulo es seguro para su proyecto, no mire
+directamente al rayo.
 
-**Advertiment**: aquest làser de classe 3B pot causar lesions oculars, evite
-expossar-se al raig.
+**Advertencia**: este láser de clase 3B puede causar lesiones oculares, evite
+exponerse al rayo.
 
-![Mòdul làser](../imatges/ard/ard_16_01.png)
+![Módulo láser](../imatges/ard/ard_16_01.png)
 
-Especificacions:
+Especificaciones:
 
-- Voltatge de funcionament: 5 V
-- Longitud d'ona: 650 nm Color de la llum: roja
-- Grandària: 27 x 15 mm
-- Tipus: Classe 3B
+- Voltaje de funcionamiento: 5 V
+- Longitud de onda: 650 nm Color de la luz: roja
+- Tamaño: 27 x 15 mm
+- Tipo: Clase 3B
 
-## Què és i cóm funciona un làser
+## Qué es y cómo funciona un láser
 
-![Parts i funcionament del làser](../imatges/ard/ard_16_02.png)
+![Partes y funcionamiento del láser](../imatges/ard/ard_16_02.png)
 
-## Els components del làser
+## Los componentes del láser
 
-Un làser té tres parts bàsiques:
+Un láser tiene tres partes básicas:
 
-1. Una càrrega d'àtoms (un sòlid, líquid o gas) amb electrons a estimular al voltant del nucli, com hem vist. Això es coneix com el **medi làser** o, a vegades, el **mitjà d'amplificació** o «guany» (perquè "guany" és una altra manera de referir-se a l'amplificació).
-2. Una cosa amb la qual estimular els àtoms, com un tub de flaix (com
-   el llum de flaix de xenó en una càmera) o un altre làser. Això es
-   denomina **sistema de bombeig**.
-3. Una cavitat òptica o **ressonador.**
+1. Una carga de átomos (un sólido, líquido o gas) con electrones a estimular alrededor del núcleo, como hemos visto. Esto se conoce como el **medio láser** o, a veces, el **medio de amplificación** o «ganancia» (porque "ganancia" es otra manera de referirse a la amplificación).
+2. Una cosa con la que estimular los átomos, como un tubo de flash (como
+   el flash de xenón en una cámara) u otro láser. Esto se
+   denomina **sistema de bombeo**.
+3. Una cavidad óptica o **resonador.**
 
-## Cóm funciona un làser
+## Cómo funciona un láser
 
-1. Un subministrament elèctric fa que una font d'alimentació lluminosa
-   s'encenga i apague intermitentment.
-2. Cada vegada que la llum parpelleja, «bomba» energia al medi làser.
-   Els flaixos fan que s'injecte energia en el cristall de robí en
-   forma de fotons.
-3. Els àtoms en el medi absorbeixen aquesta energia en un procés
-   anomenat absorció. Els àtoms absorbeixen energia quan els seus
-   electrons salten a un nivell d'energia més alt (cercles amb creu),
-   com hem vist anteriorment. Després d'uns pocs mil·lisegons, els
-   electrons tornen al seu nivell d'energia original (estat
-   fonamental) emetent un fotó de llum (fletxes ondulades). Això es diu
-   emissió espontània.
-4. Els fotons emesos pels àtoms s'acosten i allunyen dins del cristall
-   de robí, viatjant a la velocitat de la llum.
-5. En alguns moments, un d'aquests fotons estimula un àtom ja excitat.
-   Quan això succeeix, l'àtom excitat emet un fotó i recuperem també
-   el nostre fotó original. Això es diu emissió estimulada. En aqueix
-   moment, un fotó de llum ha produït dos fotons de llum, així que
-   aquesta s'ha amplificat (augmentat en força). En altres paraules,
-   l'«amplificació de llum» (un augment en la quantitat de llum) ha
-   sigut causada per «emissió estimulada de radiació». D'ací el nom
-   "làser" (_acrònim anglès de Light Amplification by Stimulated
-   Emission of Radiation «amplificació de llum per emissió estimulada
-   de radiació»)_.
-6. Un espill en un extrem del tub làser manté els fotons rebotant cap
-   avant i cap endarrere dins del cristall.
-7. Un espill parcial en l'altre extrem del tub fa rebotar alguns
-   fotons en el cristall, però deixa escapar a alguns.
-8. Els fotons que escapen formen un feix molt concentrat llum làser
-   molt potent, que és el que s'usa, per exemple, per a tallar un tub
-   metàl·lic.
+1. Un suministro eléctrico hace que una fuente de alimentación luminosa
+   se encienda y apague intermitentemente.
+2. Cada vez que la luz parpadea, «bombea» energía al medio láser.
+   Los flashes hacen que se inyecte energía en el cristal de rubí en
+   forma de fotones.
+3. Los átomos en el medio absorben esta energía en un proceso
+   llamado absorción. Los átomos absorben energía cuando sus electrones saltan a un nivel de energía más alto (círculos con cruz),
+   como hemos visto anteriormente. Después de unos pocos milisegundos, los electrones vuelven a su nivel de energía original (estado
+   fundamental) emitiendo un fotón de luz (flechas onduladas). Esto se llama
+   emisión espontánea.
+4. Los fotones emitidos por los átomos se acercan y alejan dentro del cristal
+   de rubí, viajando a la velocidad de la luz.
+5. En algunos momentos, uno de estos fotones estimula un átomo ya excitado.
+   Cuando esto sucede, el átomo excitado emite un fotón y recuperamos también
+   nuestro fotón original. Esto se llama emisión estimulada. En ese
+   momento, un fotón de luz ha producido dos fotones de luz, así que
+   esta se ha amplificado (aumentado en fuerza). En otras palabras,
+   la «amplificación de luz» (un aumento en la cantidad de luz) ha
+   sido causada por «emisión estimulada de radiación». De ahí el nombre
+   "láser" (_acrónimo inglés de Light Amplification by Stimulated
+   Emission of Radiation «amplificación de luz por emisión estimulada
+   de radiación»)_.
+6. Un espejo en un extremo del tubo láser mantiene los fotones rebotando hacia
+   adelante y hacia atrás dentro del cristal.
+7. Un espejo parcial en el otro extremo del tubo hace rebotar algunos
+   fotones en el cristal, pero deja escapar a algunos.
+8. Los fotones que escapan forman un haz muy concentrado de luz láser
+   muy potente, que es el que se usa, por ejemplo, para cortar un tubo
+   metálico.
 
-Però tots aquests processos i components estan dins del xicotet
-encapsulat del mòdul, per tant l'única cosa que nosaltres veurem serà el
-raig de llum.
+Pero todos estos procesos y componentes están dentro del pequeño
+encapsulado del módulo, por lo tanto la única cosa que nosotros veremos será el
+rayo de luz.
 
-## Muntatge
+## Montaje
 
-En primer lloc farem que el làser s'encenga i s'apague alternativament,
-després un nou codi ens permetrà variar la intensitat del làser.
+En primer lugar haremos que el láser se encienda y se apague alternativamente,
+después un nuevo código nos permitirá variar la intensidad del láser.
 
-![Diagrama de muntatge mòdul làser](../imatges/ard/ard_16_03.png)
-![Esquema elèctric mòdul làser](../imatges/ard/ard_16_04.png)
+![Diagrama de montaje módulo láser](../imatges/ard/ard_16_03.png)
+![Esquema eléctrico módulo láser](../imatges/ard/ard_16_04.png)
 
-## Programació
+## Programación
 
-Aquí teniu dos programes molt senzills per provar aquest sensor, que
-podeu descarregar aquí:
+Aquí tenéis dos programas muy sencillos para probar este sensor, que
+podéis descargar aquí:
 [ARD_16a.ino](https://drive.google.com/file/d/1pCOO_AEN38eGd4omei5IUisHmrGPqtZt/view?usp=share_link),
 [ARD_16b.ino](https://drive.google.com/file/d/1YsyZ0doSccj-J1inmuhwv7s9aYoz8JwE/view?usp=share_link)
 
-**Codi: ARD_16a**
+**Código: ARD_16a**
 
 ```Arduino
 
 void setup ()
 {
-    pinMode (_9_, OUTPUT); // defineix el pin _9_ com eixida digital
+    pinMode (_9_, OUTPUT); // define el pin _9_ como salida digital
 }
 
 void loop ()
 {
-    digitalWrite (_9_, HIGH); // _activa el laser_
+    digitalWrite (_9_, HIGH); // _activa el láser_
     delay (1000); // _espera 1 seg_
-    digitalWrite (_9_, LOW); // _apaga el laser_
+    digitalWrite (_9_, LOW); // _apaga el láser_
     delay (1000); // _espera 1 seg_
 }
 ```
 
-**Codi: ARD_16b**
+**Código: ARD_16b**
 
 ```Arduino
 
-int laser = 0; //defineix la variable laser
+int laser = 0; //define la variable laser
 
 void setup()
 {
-    pinMode(9,OUTPUT); //configura el pin 9 com eixida
+    pinMode(9,OUTPUT); //configura el pin 9 como salida
 }
 
 void loop()
 {
     for (laser = 0; laser <= 255; laser += 1)
     {
-        analogWrite(9,laser); //escriu en el pin 9 el valor de laser
-        delay(5); //espera 5 mil·lisegons
+        analogWrite(9,laser); //escribe en el pin 9 el valor de laser
+        delay(5); //espera 5 milisegundos
     }
     for (laser = 255; laser >= 0; laser -= 1)
     {
@@ -141,12 +139,12 @@ void loop()
 }
 ```
 
-## Conclusió
+## Conclusión
 
-- Sabem com funciona un làser i com està construït
-- Hem conegut el mòdul làser (KY-008)
-- Veiem que podem regular la intensitat del raig
+- Sabemos cómo funciona un láser y cómo está construido
+- Hemos conocido el módulo láser (KY-008)
+- Vemos que podemos regular la intensidad del rayo
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
