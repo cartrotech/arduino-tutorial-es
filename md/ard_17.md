@@ -1,120 +1,120 @@
-# 17 - Mòdul led RGB SMD i mòdul led RGB
+# 17 - Módulo LED RGB SMD y módulo LED RGB
 
-## Objectiu
+## Objetivo
 
-En aquest experiment, aprendrem a utilitzar el mòdul LED SMD RGB i el
-mòdul LED RGB.
+En este experimento, aprenderemos a utilizar el módulo LED SMD RGB y el
+módulo LED RGB.
 
 ## Material
 
-|                               Imatge                               | Descripció                 |
+|                               Imagen                               | Descripción                 |
 | :----------------------------------------------------------------: | :------------------------- |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.  |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió         |
-| <img src="./../imatges/mat/mat_KY-009.png" width="50" height="50"> | Mòdul LED RGB SMD (KY-009) |
-| <img src="./../imatges/mat/mat_KY-016.png" width="50" height="50"> | Mòdul LED RGB (KY-016)     |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.  |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión         |
+| <img src="./../imatges/mat/mat_KY-009.png" width="50" height="50"> | Módulo LED RGB SMD (KY-009) |
+| <img src="./../imatges/mat/mat_KY-016.png" width="50" height="50"> | Módulo LED RGB (KY-016)     |
 
-## Introducció
+## Introducción
 
-En realitat, la funció del mòdul LED SMD RGB (KY-009) i del mòdul LED
-RGB (KY-016) és quasi la mateixa, però podem triar la forma que ens
-agrade o que necessitem.
+En realidad, la función del módulo LED SMD RGB (KY-009) y del módulo LED
+RGB (KY-016) es casi la misma, pero podemos elegir la forma que nos
+guste o que necesitemos.
 
-El mòdul LED SMD RGB i el mòdul LED RGB estan fets per tres leds (roig,
-verd i blau). En ajustar l'entrada de voltatge dels pins R (roig), G
-(verd), B (blau), podem ajustar la intensitat dels tres colors primaris
-(roig / blau / verd) per a obtindre tots els colors.
+El módulo LED SMD RGB y el módulo LED RGB están hechos por tres LEDs (rojo,
+verde y azul). Al ajustar el voltaje de entrada de los pines R (rojo), G
+(verde), B (azul), podemos ajustar la intensidad de los tres colores primarios
+(rojo / azul / verde) para obtener todos los colores.
 
-## Característiques
+## Características
 
-### Mòdul LED RGB SMD (KY-009)
+### Módulo LED RGB SMD (KY-009)
 
-![Mòdul led rgb smd](../imatges/ard/ard_17_01.jpeg)
+![Módulo led rgb smd](../imatges/ard/ard_17_01.jpeg)
 
-#### Descripció
+#### Descripción
 
-Mòdul LED RGB a tot color per a Arduino, emet una gamma de colors
-mesclant llum roja, verda i blava. La quantitat de cada color s'ajusta
-mitjançant modulació per control de pulsos (PWM).
+Módulo LED RGB a todo color para Arduino, emite una gama de colores
+mezclando luz roja, verde y azul. La cantidad de cada color se ajusta
+mediante modulación por control de pulsos (PWM).
 
-#### Especificacions
+#### Especificaciones
 
-El mòdul LED SMD a tot color RGB consta d'un LED SMD 5050, que**
-s'utilitza** **amb resistències limitadores** per a evitar que es
-creme. Compatible amb plataformes electròniques populars com Arduino,
-Raspberry Pi i ESP8266.
+El módulo LED SMD a todo color RGB consta de un LED SMD 5050, que
+**se utiliza** **con resistencias limitadoras** para evitar que se
+queme. Compatible con plataformas electrónicas populares como Arduino,
+Raspberry Pi y ESP8266.
 
-- Tensió de funcionament: 5 V màx.
-  - Roig: 1.8V ~ 2.4V
-  - Verd: 2.8V ~ 3.6V
-  - Blau: 2.8V ~ 3.6V
-- Corrent directa: 20mA ~ 30mA
-- Temp. de funcionament: -25 ° C a 85 ° C
-- Dimensions: 18,5 mm x 15 mm
+- Voltaje de funcionamiento: 5 V máx.
+  - Rojo: 1.8V ~ 2.4V
+  - Verde: 2.8V ~ 3.6V
+  - Azul: 2.8V ~ 3.6V
+- Corriente directa: 20mA ~ 30mA
+- Temp. de funcionamiento: -25 °C a 85 °C
+- Dimensiones: 18,5 mm x 15 mm
 
-### Mòdul LED RGB (KY-016)
+### Módulo LED RGB (KY-016)
 
-![Mòdul led rgb](../imatges/ard/ard_17_02.jpeg)
+![Módulo led rgb](../imatges/ard/ard_17_02.jpeg)
 
-#### Descripció
+#### Descripción
 
-Arduino LED RGB de 5 mm a tot color, es poden obtindre diferents colors
-mesclant els tres colors primaris.
+LED RGB de 5 mm a todo color para Arduino, se pueden obtener diferentes colores
+mezclando los tres colores primarios.
 
-#### Especificacions
+#### Especificaciones
 
-Aquest mòdul consta d'un LED RGB de 5 mm i tres resistències
-limitadores de 150 Ω per a evitar que es creme. L'ajust del senyal PWM
-en cada pin de color donarà com a resultat diferents colors.
+Este módulo consta de un LED RGB de 5 mm y tres resistencias
+limitadoras de 150 Ω para evitar que se queme. El ajuste de la señal PWM
+en cada pin de color dará como resultado diferentes colores.
 
-- Voltatge de funcionament: 5 V
-- Control: Mètode de càtode comú
-- LED diàmetre: 5 mm
-- Dimensions: 15 mm x 19 mm
+- Voltaje de funcionamiento: 5 V
+- Control: Método de cátodo común
+- Diámetro del LED: 5 mm
+- Dimensiones: 15 mm x 19 mm
 
-## Muntatge
+## Montaje
 
-### Mòdul LED RGB SMD
+### Módulo LED RGB SMD
 
-![Muntatge led rgb](../imatges/ard/ard_17_03.png)
-![Esquema elèctric led rgb](../imatges/ard/ard_17_04.png)
+![Montaje led rgb](../imatges/ard/ard_17_03.png)
+![Esquema eléctrico led rgb](../imatges/ard/ard_17_04.png)
 
-**Important:** aquest mòdul deu funcionar amb resistències per limitar
-la intensitat. Si no teniu els valors indicats podeu utilitzar tres
-resistències de 220Ω.
+**Importante:** este módulo debe funcionar con resistencias para limitar
+la intensidad. Si no tienen los valores indicados pueden utilizar tres
+resistencias de 220Ω.
 
-Nota: Al meu muntatge he tingut que intercanviar el cable roig i el
-verd. O bé el sensor està mal indicat, o bé té un error de fabricació.
+Nota: En mi montaje he tenido que intercambiar el cable rojo y el
+verde. O bien el sensor está mal indicado, o bien tiene un error de fabricación.
 
-### Mòdul LED RGB
+### Módulo LED RGB
 
-![Muntatge led rgb smd](../imatges/ard/ard_17_05.png)
-![Esquema eléctric led rgb smd](../imatges/ard/ard_17_06.png)
+![Montaje led rgb smd](../imatges/ard/ard_17_05.png)
+![Esquema eléctrico led rgb smd](../imatges/ard/ard_17_06.png)
 
-Aquest muntatge no necessita de resistències. Tampoc cal una protoboard
-perquè podem connectar el sensor directament amb els cables.
+Este montaje no necesita resistencias. Tampoco se necesita una protoboard
+porque podemos conectar el sensor directamente con los cables.
 
-## Programació
+## Programación
 
-Presentem dos codis com exemple. El primer varia la intensitat de cada
-component de color (roig, verd i blau) per separat i després la unió de
-dos dels components. El segon codi mostra colors aleatoris per
-combinació dels tres canals.
+Presentamos dos códigos como ejemplo. El primero varía la intensidad de cada
+componente de color (rojo, verde y azul) por separado y luego la unión de
+dos de los componentes. El segundo código muestra colores aleatorios por
+combinación de los tres canales.
 
-Codi: ARD_17a
+Código: ARD_17a
 
 ```Arduino
 /*
-* Projecte nº: ARD017
-* Data: 19.10.2021
-* Descripcio: Exemple de colors amb led rgb
-* Nota: Si s'utilitza un led rgb smd, recordeu ficar resistencies llimitadores
+* Proyecto nº: ARD017
+* Fecha: 19.10.2021
+* Descripción: Ejemplo de colores con led rgb
+* Nota: Si se utiliza un led rgb smd, recordad poner resistencias limitadoras
 *
 */
 
-int redpin = 11; //selecciona el pin per a LED roig
-int greenpin = 10; // selecciona el pin per a LED verd
-int bluepin = 9;// selecciona el pin per a LED blau
+int redpin = 11; //selecciona el pin para LED rojo
+int greenpin = 10; // selecciona el pin para LED verde
+int bluepin = 9;// selecciona el pin para LED azul
 int val;
 
 void setup()
@@ -127,7 +127,7 @@ void setup()
 
 void loop()
 {
-  for(val = 0; val \< 255; val++) //encen progressivament el led roig
+  for(val = 0; val < 255; val++) //enciende progresivamente el led rojo
   {
     analogWrite(redpin, val);
     analogWrite(bluepin, 0);
@@ -135,7 +135,7 @@ void loop()
     Serial.println(val);
     delay(10);
   }
-  for(val = 0; val \< 255; val++) //encen progresivament el led blau
+  for(val = 0; val < 255; val++) //enciende progresivamente el led azul
   {
     analogWrite(redpin, 0);
     analogWrite(bluepin, val);
@@ -143,7 +143,7 @@ void loop()
     Serial.println(val);
     delay(10);
   }
-  for(val = 0; val \< 255; val++) //encen progresivament el led verd
+  for(val = 0; val < 255; val++) //enciende progresivamente el led verde
   {
     analogWrite(redpin, 0);
     analogWrite(bluepin, 0);
@@ -151,7 +151,7 @@ void loop()
     Serial.println(val);
     delay(10);
   }
-  for(val = 0; val \< 255; val++) //encen progresivament el led roig i blau
+  for(val = 0; val < 255; val++) //enciende progresivamente el led rojo y azul
   {
     analogWrite(redpin, val);
     analogWrite(bluepin, val);
@@ -159,7 +159,7 @@ void loop()
     Serial.println(val);
     delay(10);
   }
-  for(val = 0; val \< 255; val++) //encen progresivament el led roig i verd
+  for(val = 0; val < 255; val++) //enciende progresivamente el led rojo y verde
   {
     analogWrite(redpin, val);
     analogWrite(bluepin, 0);
@@ -167,7 +167,7 @@ void loop()
     Serial.println(val);
     delay(10);
   }
-  for(val = 0; val \< 255; val++) //encen progresivament el led blau i verd
+  for(val = 0; val < 255; val++) //enciende progresivamente el led azul y verde
   {
     analogWrite(redpin, 0);
     analogWrite(bluepin, val);
@@ -178,20 +178,20 @@ void loop()
 }
 ```
 
-Codi: ARD_17b
+Código: ARD_17b
 
 ```Arduino
 /*
-* Projecte nº: ARD017b
-* Data: 19.10.2021
-* Descripcio: Colors aleatoris amb led rgb
-* Nota: Si s'utilitza un led rgb smd, recordeu ficar resistencies llimitadores
+* Proyecto nº: ARD017b
+* Fecha: 19.10.2021
+* Descripción: Colores aleatorios con led rgb
+* Nota: Si se utiliza un led rgb smd, recordad poner resistencias limitadoras
 *
 */
 
-int redpin = 11; //selecciona el pin per a LED roig
-int greenpin = 10; // selecciona el pin per a LED verd
-int bluepin = 9;// selecciona el pin per a LED blau
+int redpin = 11; //selecciona el pin para LED rojo
+int greenpin = 10; // selecciona el pin para LED verde
+int bluepin = 9;// selecciona el pin para LED azul
 int randomRed;
 int randomGreen;
 int randomBlue;
@@ -216,11 +216,11 @@ void loop()
 }
 ```
 
-## Resum
+## Resumen
 
-- Presentació del mòduls LED RGB i LED RGB SMD
-- Utilitat i funcionament dels pins del mòdul
+- Presentación de los módulos LED RGB y LED RGB SMD
+- Utilidad y funcionamiento de los pines del módulo
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
