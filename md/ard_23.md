@@ -1,131 +1,131 @@
-# 23 - Mòdul sensor digital de temperatura
+# 23 - Módulo sensor digital de temperatura
 
-![Sensor de temperatura KY028](./../imatges/ard/ard_23_01.png)
+En este tutorial aprenderemos a utilizar el módulo de temperatura digital KY-028, un sensor que nos permite medir la temperatura ambiente de forma precisa y económica. Este módulo utiliza un termistor NTC (Negative Temperature Coefficient) que cambia su resistencia según la temperatura, permitiéndonos obtener lecturas tanto digitales como analógicas.
 
 ## Material
 
-|                                 Imatge                                 | Descripció                     |
+|                                 Imagen                                 | Descripción                     |
 | :--------------------------------------------------------------------: | :----------------------------- |
-|   <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino Uno o equivalent.      |
+|   <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">    | Arduino Uno o equivalente.      |
 | <img src="./../imatges/mat/mat_protoboard.png" width="50" height="50"> | Protoboard                     |
-|   <img src="./../imatges/mat/mat_cables.png" width="50" height="50">   | Cables de connexió             |
-|   <img src="./../imatges/mat/mat_KY-028.png" width="50" height="50">   | Mòdul sensor temperatura KY028 |
+|   <img src="./../imatges/mat/mat_cables.png" width="50" height="50">   | Cables de conexión             |
+|   <img src="./../imatges/mat/mat_KY-028.png" width="50" height="50">   | Módulo sensor temperatura KY028 |
 
-## Finalitat
+## Finalidad
 
-En aquest experiment, aprendrem a usar el mòdul de temperatura digital i
-el mòdul de temperatura analògic.
+En este experimento, aprenderemos a usar el módulo de temperatura digital y
+el módulo de temperatura analógico.
 
-## Mòdul de temperatura digital
+## Módulo de temperatura digital
 
-Mòdul de detecció de temperatura usant un termistor NTC. El senyal
-d'eixida en 'DO' canvia a nivell alt quan s'aconsegueix la
-temperatura preestablida (ajustable). Un senyal d'eixida analògica del
-sensor està disponible en el pin 'AO'.
+Módulo de detección de temperatura usando un termistor NTC. La señal
+de salida en 'DO' cambia a nivel alto cuando se alcanza la
+temperatura preestablecida (ajustable). Una señal de salida analógica del
+sensor está disponible en el pin 'AO'.
 
-![Pins mòdul KY-028](../imatges/ard/ard_23_02.png)
+![Pines módulo KY-028](../imatges/ard/ard_23_02.png)
 
-## Especificacions
+## Especificaciones
 
-Aquest mòdul consta d'un termistor NTC, un comparador diferencial dual
-LM393, un potenciòmetre d'ajust, 6 resistències, 2 LED i 4 pins de
-capçal mascle. El mòdul compta amb eixides analògiques i digitals.
+Este módulo consta de un termistor NTC, un comparador diferencial dual
+LM393, un potenciómetro de ajuste, 6 resistencias, 2 LED y 4 pines de
+cabecera macho. El módulo cuenta con salidas analógicas y digitales.
 
-- Voltatge de funcionament: 3,3 V ~ 5,5 V
-- Rang de mesurament de temperatura: -55 °C a 125 °C
-- Precisió de mesurament: ±0,5 °C
-- Dimensions de la placa: 15 mm x 36 mm
+- Voltaje de funcionamiento: 3,3 V ~ 5,5 V
+- Rango de medición de temperatura: -55 °C a 125 °C
+- Precisión de medición: ±0,5 °C
+- Dimensiones de la placa: 15 mm x 36 mm
 
-## Configuració de pins
+## Configuración de pines
 
-Connecteu l'eixida analògica (A0) de la placa al pin A0 del Arduino i
-l'eixida digital (D0) al pin 3. Connecte la línia d'alimentació (+) i
-terra (G) a 5V i GND respectivament.
+Conecte la salida analógica (A0) de la placa al pin A0 del Arduino y
+la salida digital (D0) al pin 3. Conecte la línea de alimentación (+) y
+tierra (G) a 5V y GND respectivamente.
 
-| Módul | Arduino |
+| Módulo | Arduino |
 | ----- | ------- |
 | A0    | Pin A0  |
 | G     | GND     |
 | +     | +5V     |
 | D0    | Pin 2   |
 
-## Què és un termistor NTC?
+## ¿Qué es un termistor NTC?
 
 ![Termistor](../imatges/ard/ard_23_02a.png)
 
-Els termistors són elements sensors de temperatura fets de material
-semiconductor que ha sigut sinteritzat per a mostrar grans canvis de
-resistència en proporció a xicotets canvis de temperatura.
+Los termistores son elementos sensores de temperatura hechos de material
+semiconductor que ha sido sinterizado para mostrar grandes cambios de
+resistencia en proporción a pequeños cambios de temperatura.
 
-Aquesta resistència es pot mesurar utilitzant un corrent continu xicotet
-i mesura, o cc, que passa a través del termistor per a mesurar la
-caiguda de voltatge produïda.
+Esta resistencia se puede medir utilizando una corriente continua pequeña
+y medir, o cc, que pasa a través del termistor para medir la
+caída de voltaje producida.
 
-![Funcionament d'un termistor](../imatges/ard/ard_23_03.png)
+![Funcionamiento de un termistor](../imatges/ard/ard_23_03.png)
 
-Els termistors NTC són resistències no lineals que alteren les seues
-característiques de resistència amb la temperatura.
+Los termistores NTC son resistencias no lineales que alteran sus
+características de resistencia con la temperatura.
 
-La resistència de NTC disminuirà a mesura que augmente la temperatura.
-La forma en què la resistència disminueix està relacionada amb una
-constant coneguda en la indústria electrònica com a beta o ß. Beta es
-mesura en °K.
+La resistencia de NTC disminuirá a medida que aumente la temperatura.
+La forma en que la resistencia disminuye está relacionada con una
+constante conocida en la industria electrónica como beta o ß. Beta se
+mide en °K.
 
-El Arduino té diversos ports ADC que podem usar per a llegir un
-voltatge, o més aviat un 'valor ADC'. Si el port analògic està
-connectat a Vcc, el valor màxim que es llig és 1023 i, per descomptat,
-quan està connectat a terra és 0.
+El Arduino tiene varios puertos ADC que podemos usar para
+leer un voltaje, o más bien un 'valor ADC'. Si el puerto analógico está
+conectado a Vcc, el valor máximo que se lee es 1023 y, por supuesto,
+cuando está conectado a tierra es 0.
 
-Ara, si fem un divisor de voltatge que és típicament dues resistències
-en sèrie entre Vcc i terra i el port analògic en el mig, la lectura
-dependrà de la relació de les dues resistències, si són iguals, la
-lectura serà 512, a la meitat de 1023. Si un dels resistors, diguem que
-l'inferior és un NTC, les lectures en el port analògic variaran amb la
-temperatura. Si la temperatura baixa, el valor de la resistència
-augmenta i també el farà la lectura en el port analògic.
+Ahora, si hacemos un divisor de voltaje que típicamente son dos resistencias
+en serie entre Vcc y tierra y el puerto analógico en el medio, la lectura
+dependerá de la relación de las dos resistencias, si son iguales, la
+lectura será 512, a la mitad de 1023. Si una de las resistencias, digamos que
+la inferior es un NTC, las lecturas en el puerto analógico variarán con la
+temperatura. Si la temperatura baja, el valor de la resistencia
+aumenta y también lo hará la lectura en el puerto analógico.
 
-Suposem que tenim una resistència Sèrie 10k i un NTC que ara com ara
-diem 'R'.
+Supongamos que tenemos una resistencia Serie 10k y un NTC que por ahora
+decimos 'R'.
 
-Llavors el voltatge que es pot mesurar en el mig és
+Entonces el voltaje que se puede medir en el medio es
 
 $$V_{o}=\frac{R}{R + 10K} \cdot V_{cc}$$
 
-No obstant això, les lectures del port analògic no donen un voltatge
-sinó un valor ADC que es pot calcular fàcilment.
+Sin embargo, las lecturas del puerto analógico no dan un voltaje
+sino un valor ADC que se puede calcular fácilmente.
 
 $$Valor ADC = 1023 \cdot \frac{V_{o}}{V_{cc}}$$
 
-si, per exemple, Vo = 4 volts, l'ADC = 818 o el valor ADC = 1023 \*(Vo/VCC)
+si, por ejemplo, Vo = 4 voltios, el ADC = 818 o el valor ADC = 1023 \*(Vo/VCC)
 
-Si ara combinem les dues fórmules o, com es diu, 'substituïm' Vo en la
-fórmula per a ADC, obtenim el següent:
+Si ahora combinamos las dos fórmulas o, como se dice, 'sustituimos' Vo en la
+fórmula para ADC, obtenemos lo siguiente:
 
 $$Valor ADC= \frac{R}{R + 10K} \cdot V_{cc} \cdot \frac{1023}{Vcc}$$
 
-A mesura que multipliquem per Vcc però també dividim per Vcc, podem
-traure això de l'equació i acabar amb
+A medida que multiplicamos por Vcc pero también dividimos por Vcc, podemos
+sacar esto de la ecuación y terminar con
 
 $$Valor ADC= \frac{R}{R + 10K} \cdot 1023$$
 
-si volem traure el valor de R d'aqueixa equació, això es converteix en
+si queremos sacar el valor de R de esta ecuación, esto se convierte en
 
 $$R = \frac{10K}{(\frac{1023}{ADC}-1)}$$
 
-Llavors, sempre que sapiem el valor de la resistència en sèrie, podem
-calcular el valor del NTC a partir del valor ADC mesurat. Ara recorde,
-això és vàlid per a una configuració pull-up. Si es tracta d'una
-configuració pull-down, el càlcul del valor de l'ADC a la resistència
-és l'invers.
+Entonces, siempre que sepamos el valor de la resistencia en serie, podemos
+calcular el valor del NTC a partir del valor ADC medido. Ahora recuerde,
+esto es válido para una configuración pull-up. Si se trata de una
+configuración pull-down, el cálculo del valor del ADC a la resistencia
+es el inverso.
 
-$R_{ntc} = 10K \cdot (\frac{1023}{ADC}-1)$; per a la configuració pull-down
+$R_{ntc} = 10K \cdot (\frac{1023}{ADC}-1)$; para la configuración pull-down
 
-$R_{ntc} = 10K / (\frac{1023}{ADC}-1)$; per a la configuració pull-up
+$R_{ntc} = 10K / (\frac{1023}{ADC}-1)$; para la configuración pull-up
 
-**_Aleshores, com es veuria això en un programa?_**
+**_Entonces, ¿cómo se vería esto en un programa?_**
 
 ```Arduino
-//Medint el valor de resistencia de NTC
+//Midiendo el valor de resistencia de NTC
 
 byte NTCPin = A0;
 const int SERIESRESISTOR = 10000;
@@ -140,7 +140,7 @@ void loop()
   float ADCvalue;
   float Resistance;
   ADCvalue = analogRead(NTCPin);
-  Serial.print("Analoge ");
+  Serial.print("Analógico ");
   Serial.print(ADCvalue);
   Serial.print(" = ");
 
@@ -154,30 +154,30 @@ void loop()
 }
 ```
 
-Conéixer la resistència del NTC és bo però no ens diu molt sobre la
-temperatura... o sí?
+Conocer la resistencia del NTC es bueno pero no nos dice mucho sobre la
+temperatura... ¿o sí?
 
-Bé, molts NTC tenen un valor nominal que es mesura a 25 ºC, per la qual
-cosa si té un NTC de 10k i mesura 10k, això significa que hi han 25ºC en
-aqueix moment. Això no t'ajuda molt quan la mesura és diferent.
+Bueno, muchos NTC tienen un valor nominal que se mide a 25 ºC, por lo que
+si tiene un NTC de 10k y mide 10k, esto significa que hay 25ºC en
+este momento. Esto no te ayuda mucho cuando la medida es diferente.
 
-Podria mantindre una taula en la qual cada valor de resistència
-represente una temperatura. Aqueixes taules són molt precises però
-requereixen molta faena i espai de memòria.
+Podría mantener una tabla en la que cada valor de resistencia
+represente una temperatura. Estas tablas son muy precisas pero
+requieren mucho trabajo y espacio de memoria.
 
-No obstant això, hi ha una fórmula, l'equació de Steinhart-Hart, que fa
-una bona aproximació per a convertir els valors de resistència d'un NTC
-en temperatura. No és tan exacte com la taula de termistors (després de
-tot, és una aproximació), però és bastant precís.
+Sin embargo, hay una fórmula, la ecuación de Steinhart-Hart, que hace
+una buena aproximación para convertir los valores de resistencia de un NTC
+en temperatura. No es tan exacta como la tabla de termistores (después de
+todo, es una aproximación), pero es bastante precisa.
 
-L'equació de Steinhart-Hart es veu així:
+La ecuación de Steinhart-Hart se ve así:
 
 $${\frac{1}{T} = {A + {B \cdot \ln}}{(R)} + {C \cdot {({\ln{(R)}})}^{3}}}$$
 
-Aquesta és una equació bastant complexa que requereix diversos
-paràmetres (A, B, C) que normalment no tenim per al funcionament del
-NTC. Hi ha dues coses que podem fer. Podem prendre 3 lectures amb una
-temperatura calibrada i després calcular els paràmetres A, B i C.
+Esta es una ecuación bastante compleja que requiere varios
+parámetros (A, B, C) que normalmente no tenemos para el funcionamiento del
+NTC. Hay dos cosas que podemos hacer. Podemos tomar 3 lecturas con una
+temperatura calibrada y luego calcular los parámetros A, B y C.
 
 $$
 {\begin{bmatrix}
@@ -195,20 +195,20 @@ C \\
 \end{bmatrix}
 $$
 
-però afortunadament hi ha una simplificació d'aquesta fórmula,
-anomenada Equació del paràmetre B. Aqueix es veu de la següent manera:
+pero afortunadamente hay una simplificación de esta fórmula,
+llamada Ecuación del parámetro B. Esta se ve de la siguiente manera:
 
 $${\frac{1}{T} = {\frac{1}{T_{0}} + {\frac{1}{B} \cdot \ln}}}{(\frac{R}{R_{0}})}$$
 
-T~0~ és la temperatura nominal, 25 °C en Kelvin (= 298,15 K). B és el
-coeficient del termistor (3950 és un valor comú). R~o~ és la resistència
-nominal del NTC (per tant, a 25ºC). Diguem que tenim un NTC de 10Kohm.
-Només necessitem substituir R (la resistència mesurada) per a obtindre T
-(temperatura en Kelvin) que després convertim a °C.
+T~0~ es la temperatura nominal, 25 °C en Kelvin (= 298,15 K). B es el
+coeficiente del termistor (3950 es un valor común). R~o~ es la resistencia
+nominal del NTC (por lo tanto, a 25ºC). Digamos que tenemos un NTC de 10Kohm.
+Solo necesitamos sustituir R (la resistencia medida) para obtener T
+(temperatura en Kelvin) que luego convertimos a °C.
 
-## Codi
+## Código
 
-**Codi ARD023**
+**Código ARD023**
 
 ```Arduino
 
@@ -228,11 +228,11 @@ void loop()
   float ADCvalue;
   float Resistance;
   ADCvalue = analogRead(NTCPin);
-  Serial.print("Analoge ");
+  Serial.print("Analógico ");
   Serial.print(ADCvalue);
   Serial.print(" = ");
 
-  //convert value to resistance
+  //convertir valor a resistencia
 
   Resistance = (1023 / ADCvalue) - 1;
   Resistance = SERIESRESISTOR / Resistance;
@@ -244,8 +244,8 @@ void loop()
   steinhart = log(steinhart); // ln(R/Ro)
   steinhart /= BCOEFFICIENT; // 1/B \* ln(R/Ro)
   steinhart += 1.0 / (NOMINAL_TEMPERATURE + 273.15); // + (1/To)
-  steinhart = 1.0 / steinhart; // Invert
-  steinhart -= 273.15; // convert to C
+  steinhart = 1.0 / steinhart; // Invertir
+  steinhart -= 273.15; // convertir a C
   Serial.print(steinhart);
   Serial.println(" oC");
 
@@ -253,11 +253,11 @@ void loop()
 }
 ```
 
-## Muntatge
+## Montaje
 
-![Muntatge KY-028](../imatges/ard/ard_23_04.png)
-![Esquema elèctric KY-028](../imatges/ard/ard_23_05.png)
+![Montaje KY-028](../imatges/ard/ard_23_04.png)
+![Esquema eléctrico KY-028](../imatges/ard/ard_23_05.png)
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
