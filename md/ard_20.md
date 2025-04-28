@@ -1,59 +1,59 @@
-# 20 -- Mòdul LDR (foto resistència)
+# 20 -- Módulo LDR (fotorresistencia)
 
-## Objectiu
+## Objetivo
 
-En aquest exemple, aquest mòdul llegirà el valor de la resistència i
-l'imprimirà en el monitor serial. Aquests valors poden reflectir la
-intensitat de la llum ambiental.
+En este ejemplo, este módulo leerá el valor de la resistencia y
+lo imprimirá en el monitor serial. Estos valores pueden reflejar la
+intensidad de la luz ambiental.
 
 ## Material
 
-|                               Imatge                               | Descripció                      |
+|                               Imagen                               | Descripción                      |
 | :----------------------------------------------------------------: | :------------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.       |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió              |
-| <img src="./../imatges/mat/mat_KY-018.png" width="50" height="50"> | Mòdul fotorresistència (KY-018) |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.       |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión              |
+| <img src="./../imatges/mat/mat_KY-018.png" width="50" height="50"> | Módulo fotorresistencia (KY-018) |
 
-## Descripció
+## Descripción
 
-La resistència dependent de la llum, també anomenada fotoresistència,
-són dispositius sensibles a la llum que s'utilitzen amb major
-freqüència per a indicar la presència o absència de llum, o per a
-mesurar la intensitat de la llum.
+La resistencia dependiente de la luz, también llamada fotorresistencia,
+son dispositivos sensibles a la luz que se utilizan con mayor
+frecuencia para indicar la presencia o ausencia de luz, o para
+medir la intensidad de la luz.
 
-## Especificacions
+## Especificaciones
 
-- Voltatge de funcionament: 3,3 - 5 V
-- Tipus de eixida: Analògica
-- Dimensions: 28 x 15 mm
-- Pes: 2 g
+- Voltaje de funcionamiento: 3,3 - 5 V
+- Tipo de salida: Analógica
+- Dimensiones: 28 x 15 mm
+- Peso: 2 g
 
-## Configuració de pin
+## Configuración de pines
 
-| Identificació | Pin                                                               |
+| Identificación | Pin                                                               |
 | :-----------: | ----------------------------------------------------------------- |
-|       S       | Pin d'eixida analògica, senyal de voltatge d'eixida en temps real |
+|       S       | Pin de salida analógica, señal de voltaje de salida en tiempo real |
 |       +       | + 5V                                                              |
 |       -       | GND                                                               |
 
-## Muntatge
+## Montaje
 
-![Muntatge mòdul KY-018](../imatges/ard/ard_20_01.png)
+![Montaje módulo KY-018](../imatges/ard/ard_20_01.png)
 
-## Programació
+## Programación
 
 ```Arduino
 /*
-* Projecte nº: ARD020
-* Data: 01.11.2021
-* Descripcio: Modul LDR - fotoresistencia
+* Proyecto nº: ARD020
+* Fecha: 01.11.2021
+* Descripción: Módulo LDR - fotorresistencia
 * Nota:
 *
 */
 
-int sensorPin = A0; // defineix l'entrada per a la fotoresistència
-int ledPin = 13; // defineix el pin led
-int sensorValue = 0; // variable per a guardar el valor del sensor
+int sensorPin = A0; // define la entrada para la fotorresistencia
+int ledPin = 13; // define el pin led
+int sensorValue = 0; // variable para guardar el valor del sensor
 
 void setup()
 {
@@ -72,6 +72,6 @@ void loop()
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
