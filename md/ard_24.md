@@ -1,79 +1,79 @@
-# 24 - Mòdul de sensor magnètic lineal
+# 24 - Módulo de sensor magnético lineal
 
-## Finalitat
+## Finalidad
 
-En aquest experiment, aprendrem a usar el mòdul de sensor de corredor
-lineal (KY024).
+En este experimento, aprenderemos a usar el módulo de sensor de corredor
+lineal (KY024). Este sensor es una herramienta fundamental para detectar campos magnéticos y puede ser utilizado en diversos proyectos como sistemas de posicionamiento, detección de movimiento o control de dispositivos. A través de este tutorial, entenderemos cómo funciona el sensor, cómo conectarlo correctamente a Arduino y cómo programarlo tanto para obtener lecturas analógicas como digitales.
 
-## Mòdul de sensor de corredor magnètic lineal
+## Módulo de sensor de corredor magnético lineal
 
-El Mòdul Sensor magnètic lineal KY024 pot detectar la presència d'un
-camp magnètic prop del sensor. Variables com la intensitat del camp, la
-polaritat i la posició de l'imant en relació amb el sensor afectaran el
-punt en el qual l'eixida 'DO' canvia a un nivell alt (és a dir, alt
-actiu). La sensibilitat del circuit es pot ajustar amb un potenciòmetre.
+El Módulo Sensor magnético lineal KY024 puede detectar la presencia de un
+campo magnético cerca del sensor. Variables como la intensidad del campo, la
+polaridad y la posición del imán en relación con el sensor afectarán el
+punto en el que la salida 'DO' cambia a un nivel alto (es decir, alto
+activo). La sensibilidad del circuito se puede ajustar con un potenciómetro.
 
-Un senyal d'eixida analògica del sensor està disponible en el pin
+Una señal de salida analógica del sensor está disponible en el pin
 'AO'.
 
-![Connexions del mòdul KY-024](../imatges/ard/ard_24_01.png)
+![Conexiones del módulo KY-024](../imatges/ard/ard_24_01.png)
 
 ## Material
 
-|                               Imatge                               | Descripció                          |
+|                               Imagen                               | Descripción                          |
 | :----------------------------------------------------------------: | :---------------------------------- |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.           |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió                  |
-| <img src="./../imatges/mat/mat_KY-028.png" width="50" height="50"> | Mòdul sensor magnètic lineal KY-024 |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.           |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión                  |
+| <img src="./../imatges/mat/mat_KY-028.png" width="50" height="50"> | Módulo sensor magnético lineal KY-024 |
 
-## Hall sensor
+## Sensor Hall
 
-_Especificacions_
+_Especificaciones_
 
-![Especificacions](../imatges/ard/ard_24_02.png)
+![Especificaciones](../imatges/ard/ard_24_02.png)
 
-_Tensió d'eixida de l'efecte Hall_
+_Tensión de salida del efecto Hall_
 
 ![Output Hall-effect voltage](../imatges/ard/ard_24_03.png)
 
-_Mecanismes de detecció_
+_Mecanismos de detección_
 
-![Mecanisme de detecció](../imatges/ard/ard_24_04.png)
+![Mecanismo de detección](../imatges/ard/ard_24_04.png)
 
-## Factors de disseny: tipus magnètics
+## Factores de diseño: tipos magnéticos
 
-**Unipolar**: Només un pol sud operarà el sensor. El sensor s'encén amb
-el pol sud (+) i s'apaga quan es lleva el pol sud.
+**Unipolar**: Solo un polo sur operará el sensor. El sensor se enciende con
+el polo sur (+) y se apaga cuando se quita el polo sur.
 
-**Bipolar**: l'eixida del sensor depén dels pols. Un pol sud (+) està
-dissenyat per a activar el sensor; un pol nord (-) està dissenyat per a
-desactivar-se. És possible que el sensor s'apague i encara estiga dins
-d'un nivell de Gauss positiu.
+**Bipolar**: la salida del sensor depende de los polos. Un polo sur (+) está
+diseñado para activar el sensor; un polo norte (-) está diseñado para
+desactivarse. Es posible que el sensor se apague y aún esté dentro
+de un nivel de Gauss positivo.
 
-**Enganxament**: Les especificacions són més estrictes en
-l'enganxament. A vegades està dissenyat per a assegurar-se que quan es
-lleva el pol sud (+) del sensor, romandrà encés fins que veja el pol
-oposat (-).
+**Enganche**: Las especificaciones son más estrictas en
+el enganche. A veces está diseñado para asegurarse de que cuando se
+quita el polo sur (+) del sensor, permanecerá encendido hasta que vea el polo
+opuesto (-).
 
-**Omnipolar**: El sensor està dissenyat per a operar amb radiomètric
-lineal: l'eixida és proporcional a la intensitat del camp magnètic. El
-rang de sensibilitat d'eixida és de 2,5 a 3,75 mV per unitat de Gauss.
+**Omnipolar**: El sensor está diseñado para operar con radiométrico
+lineal: la salida es proporcional a la intensidad del campo magnético. El
+rango de sensibilidad de salida es de 2,5 a 3,75 mV por unidad de Gauss.
 
-## Connexionat
+## Conexionado
 
-![Connexionat](../imatges/ard/ard_24_05.png)
-![Esquema elèctric](../imatges/ard/ard_24_06.png)
+![Conexionado](../imatges/ard/ard_24_05.png)
+![Esquema eléctrico](../imatges/ard/ard_24_06.png)
 
-## Programació
+## Programación
 
-**Codi ARD24a -- Eixida analogica**
+**Código ARD24a -- Salida analógica**
 
 ```Arduino
 /*
-* Projecte nº: ARD024a
-* Data: 11.11.2021
-* Descripcio: Modul sensor magnetic lineal
-* Nota: Eixida analogica
+* Proyecto nº: ARD024a
+* Fecha: 11.11.2021
+* Descripción: Módulo sensor magnético lineal
+* Nota: Salida analógica
 *
 */
 
@@ -98,18 +98,18 @@ void loop()
 }
 ```
 
-_Exemple de gràfica_
+_Ejemplo de gráfica_
 
-![Gràfica](../imatges/ard/ard_24_07.png)
+![Gráfica](../imatges/ard/ard_24_07.png)
 
-**Codi ARD24b -- Eixida digitals**
+**Código ARD24b -- Salida digital**
 
 ```Arduino
 /*
-* Projecte nº: ARD024b
-* Data: 11.11.2021
-* Descripcio: Modul sensor magnetic lineal
-* Nota: eixida digital
+* Proyecto nº: ARD024b
+* Fecha: 11.11.2021
+* Descripción: Módulo sensor magnético lineal
+* Nota: salida digital
 *
 */
 
@@ -137,6 +137,6 @@ void loop()
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
