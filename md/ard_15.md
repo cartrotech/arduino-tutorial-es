@@ -1,96 +1,96 @@
-# 15 - Mòdul de brunzidor passiu
+# 15 - Módulo de zumbador pasivo
 
-## Finalitat
+## Finalidad
 
-- Aprendre a utilitzar el brunzidor
-- Incloure avisos sonors en els nostres circuits
+- Aprender a utilizar el zumbador
+- Incluir avisos sonoros en nuestros circuitos
 
 ## Material
 
-|                               Imatge                               | Descripció                 |
+|                               Imagen                               | Descripción                 |
 | :----------------------------------------------------------------: | :------------------------- |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.  |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió         |
-| <img src="./../imatges/mat/mat_KY-006.png" width="50" height="50"> | Un brunzidor passiu KY-006 |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.  |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión         |
+| <img src="./../imatges/mat/mat_KY-006.png" width="50" height="50"> | Un zumbador pasivo KY-006 |
 
-## Descripció
+## Descripción
 
-### Què és?
+### ¿Qué es?
 
-Un brunzidor és un transductor electroacústic que produeix un so continu
-o intermitent d'un mateix to, generalment agut. El brunzidor transforma
-el senyal elèctric que rep en una vibració, que genera un soroll. Com
-més alta és el senyal que rep, més intensa és la vibració i més fort és
-el so.
+Un zumbador es un transductor electroacústico que produce un sonido continuo
+o intermitente de un mismo tono, generalmente agudo. El zumbador transforma
+la señal eléctrica que recibe en una vibración, que genera un ruido. Cuanto
+más alta es la señal que recibe, más intensa es la vibración y más fuerte es
+el sonido.
 
-### Especificacions
+### Especificaciones
 
-El mòdul de brunzidor passiu (KY-006) pot generar tons entre 1.5 a 2.5
-kHz en encendre-ho i apagar-ho en diferents freqüències usant retards o
+El módulo de zumbador pasivo (KY-006) puede generar tonos entre 1.5 a 2.5
+kHz al encenderlo y apagarlo en diferentes frecuencias usando retrasos o
 PWM.
 
 | Característica            | Valor           |
 | ------------------------- | --------------- |
-| Voltatge de funcionament  | 1,5 ~ 15 V CC   |
-| Rang de generació de tons | 1,5 ~ 2,5 kHz   |
-| Dimensions                | 18,5 mm x 15 mm |
+| Voltaje de funcionamiento  | 1,5 ~ 15 V CC   |
+| Rango de generación de tonos | 1,5 ~ 2,5 kHz   |
+| Dimensiones                | 18,5 mm x 15 mm |
 
-### Cóm funciona?
+### ¿Cómo funciona?
 
-El funcionament es basa en l'efecte piezoelèctric dels materials,
-Aquest efecte funciona de tal manera que quan apliquem un voltatge el
-volum del material canvia lleugerament. Els brunzidors estan construïts
-amb dues xicotetes plaques una metàl·lica i una ceràmica, les quals
-aprofiten aquest efecte però només generen un clic ja que els materials
-van canviar de forma però no tornen al seu estat natural fins que se'ls
-lleva el voltatge.
+El funcionamiento se basa en el efecto piezoeléctrico de los materiales.
+Este efecto funciona de tal manera que cuando aplicamos un voltaje, el
+volumen del material cambia ligeramente. Los zumbadores están construidos
+con dos pequeñas placas, una metálica y una cerámica, las cuales
+aprovechan este efecto pero solo generan un clic ya que los materiales
+cambian de forma pero no vuelven a su estado natural hasta que se les
+quita el voltaje.
 
-![Efecte piezoelèctric](../imatges/ard/ard_15_01.png)
+![Efecto piezoeléctrico](../imatges/ard/ard_15_01.png)
 
-Perquè es puga emetre un so continu les plaques necessiten vibrar
-constantment, per a això es necessita un oscil·lador que fa que els
-materials canvien d'estat una vegada i una altra, i així puguen canviar
-milers de vegades per a poder aconseguir un àudio perceptible.
+Para que se pueda emitir un sonido continuo, las placas necesitan vibrar
+constantemente. Para esto se necesita un oscilador que hace que los
+materiales cambien de estado una vez y otra, y así puedan cambiar
+miles de veces para poder conseguir un audio perceptible.
 
-En aquest cas ho aconseguirem canviant el estat d'una eixida digital de
-la placa arduino. Recordem que el so és audible des de 20 Hz fins al 20
-kHz, per tant, el nombre de vegades que la eixida deu canviar (anomenat
-freqüència) estarà entre les 20 i les 20000 vegades per segon.
+En este caso lo conseguiremos cambiando el estado de una salida digital de
+la placa Arduino. Recordemos que el sonido es audible desde 20 Hz hasta 20
+kHz, por tanto, el número de veces que la salida debe cambiar (llamado
+frecuencia) estará entre 20 y 20000 veces por segundo.
 
-![Muntatge del brunzidor](../imatges/ard/ard_15_02.png)
-![Esquema elèctric](../imatges/ard/ard_15_03.png)
+![Montaje del zumbador](../imatges/ard/ard_15_02.png)
+![Esquema eléctrico](../imatges/ard/ard_15_03.png)
 
-El muntatge ho farem directament amb cables tipus Dupont M-F, connectant
-la eixida 8 amb la S (senyal) del brunzidor i per altra banda el pin GND
-de la placa amb el pin « -- « del mòdul.
+El montaje lo haremos directamente con cables tipo Dupont M-F, conectando
+la salida 8 con la S (señal) del zumbador y por otra parte el pin GND
+de la placa con el pin « -- « del módulo.
 
-![Muntatge final](../imatges/ard/ard_15_04.png)
+![Montaje final](../imatges/ard/ard_15_04.png)
 
-## Programació
+## Programación
 
-Codi: ARD_15
+Código: ARD_15
 
 ```Arduino
 
-int buzzer = 8; // estableix el pin digital de control del buzzer
+int buzzer = 8; // establece el pin digital de control del zumbador
 
 void setup()
 {
-  pinMode(buzzer, OUTPUT); // configura el pin 8 com eixida
+  pinMode(buzzer, OUTPUT); // configura el pin 8 como salida
 }
 
 void loop()
 {
-  for (int i = 0; i < 80; i++) // crea un so de 500 Hz
+  for (int i = 0; i < 80; i++) // crea un sonido de 500 Hz
   {
-    digitalWrite(buzzer, HIGH); // envia senyal alta al buzzer
+    digitalWrite(buzzer, HIGH); // envía señal alta al zumbador
     delay(1); // delay 1ms
-    digitalWrite(buzzer, LOW); // envia senyal baixa al buzzer
+    digitalWrite(buzzer, LOW); // envía señal baja al zumbador
     delay(1);
   }
   delay(50);
 
-  for (int j = 0; j < 100; j++)  //crea un so de 250 HZ
+  for (int j = 0; j < 100; j++)  //crea un sonido de 250 Hz
   {
     digitalWrite(buzzer, HIGH);
     delay(2); // delay 2ms
@@ -101,11 +101,11 @@ delay(100);
 }
 ```
 
-## Conceptes importants
+## Conceptos importantes
 
-- Efectes dels activadors acústics
-- Entendre què és la freqüència
+- Efectos de los activadores acústicos
+- Entender qué es la frecuencia
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
