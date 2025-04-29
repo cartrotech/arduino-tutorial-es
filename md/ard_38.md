@@ -1,58 +1,57 @@
-# 38 - Mòdul de teclat
+# 38 - Módulo de teclado
 
-## Descripció general
+## Descripción general
 
-En aquest projecte, veurem com integrar un teclat amb una placa UNO R3
-perquè puga llegir les tecles que pressiona un usuari.
+En este proyecto, veremos cómo integrar un teclado con una placa UNO R3
+para que pueda leer las teclas que presiona un usuario.
 
-Els teclats s'utilitzen en tota mena de dispositius, inclosos telèfons
-mòbils, màquines de fax, microones, forns, panys de portes, etc. Estan
-pràcticament a tot arreu. Tones de dispositius electrònics els usen per
-a l'entrada de l'usuari. Per tant, saber com connectar un teclat a un
-microcontrolador com una placa UN R3 és molt valuós per a construir
-molts tipus diferents de productes comercials.
+Los teclados se utilizan en toda clase de dispositivos, incluyendo teléfonos
+móviles, máquinas de fax, microondas, hornos, cerraduras de puertas, etc. Están
+prácticamente en todas partes. Muchos dispositivos electrónicos los usan para
+la entrada del usuario. Por lo tanto, saber cómo conectar un teclado a un
+microcontrolador como una placa UNO R3 es muy valioso para construir
+muchos tipos diferentes de productos comerciales.
 
-Al final, quan tot està correctament connectat i programat, quan es
-pressiona una tecla, apareix en el monitor serie de la seua computadora.
-Cada vegada que pressiona una tecla, apareix en el monitor serie. Per a
-simplificar, comencem simplement mostrant la tecla pressionada en la
+Al final, cuando todo está correctamente conectado y programado, cuando se
+presiona una tecla, aparece en el monitor serial de su computadora.
+Cada vez que presiona una tecla, aparece en el monitor serial. Para
+simplificar, comenzamos simplemente mostrando la tecla presionada en la
 computadora.
 
-Per a aquest projecte, el tipus de teclat que usarem és un teclat
-matricial. Aquest és un teclat que segueix un esquema de codificació que
-li permet tindre molts menys pins d'eixida que tecles.
+Para este proyecto, el tipo de teclado que usaremos es un teclado
+matricial. Este es un teclado que sigue un esquema de codificación que
+le permite tener muchos menos pines de salida que teclas.
 
-Per exemple, el teclat de matriu que estem usant té 16 tecles (0-9,
-A-D,\*, #), però només 8 pins d'eixida. Amb un teclat lineal, hauria
-d'haver-hi 17 pins d'eixida (un per a cada tecla i un pin de terra)
-perquè funcione. L'esquema de codificació matricial permet menys pins
-d'eixida i, per tant, moltes menys connexions que han de realitzar-se
-perquè el teclat funcione. D'aquesta manera, són més eficients que els
-teclats lineals, ja que tenen menys cablejat.
+Por ejemplo, el teclado de matriz que estamos usando tiene 16 teclas (0-9,
+A-D, *, #), pero solo 8 pines de salida. Con un teclado lineal, habría
+que tener 17 pines de salida (uno para cada tecla y un pin de tierra)
+para que funcione. El esquema de codificación matricial permite menos pines
+de salida y, por lo tanto, muchas menos conexiones que deben realizarse
+para que el teclado funcione. De esta manera, son más eficientes que los
+teclados lineales, ya que tienen menos cableado.
 
-![Mòdul de teclat](../imatges/ard/ard_38_01.png)
+![Módulo de teclado](../imatges/ard/ard_38_01.png)
 
 ## Material
 
-|                               Imatge                               | Descripció                |
+|                               Imagen                               | Descripción                |
 | :----------------------------------------------------------------: | :------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent. |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió        |
-| <img src="./../imatges/mat/mat_teclat.png" width="50" height="50"> | Mòdul de teclat matricial |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente. |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión        |
+| <img src="./../imatges/mat/mat_teclat.png" width="50" height="50"> | Módulo de teclado matricial |
 
-## Connexió
+## Conexión
 
-![Esquema elèctric](../imatges/ard/ard_38_02.png)
-![Cablejat](../imatges/ard/ard_38_03.png)
+![Esquema eléctrico](../imatges/ard/ard_38_02.png)
+![Cableado](../imatges/ard/ard_38_03.png)
 
-Per a connectar els pins a la placa UNO R3, els connectem als pins
-d'eixida digital, D9-D2. Connectem el primer pin del teclat a D9, el
-segon pin a D8, el tercer pin a D7, el quart pin a D6, el cinqué pin a
-D5, el sisé pin a D4, el seté pin a D3 i el huité pin a D2.
+Para conectar los pines a la placa UNO R3, los conectamos a los pines
+de salida digital, D9-D2. Conectamos el primer pin del teclado a D9, el
+segundo pin a D8, el tercer pin a D7, el cuarto pin a D6, el quinto pin a D5, el sexto pin a D4, el séptimo pin a D3 y el octavo pin a D2.
 
-Aquesta és la taula de connexions:
+Esta es la tabla de conexiones:
 
-| Pin teclat | Pin arduino |
+| Pin teclado | Pin arduino |
 | :--------: | :---------: |
 |     1      |     D9      |
 |     2      |     D8      |
@@ -63,24 +62,24 @@ Aquesta és la taula de connexions:
 |     7      |     D3      |
 |     8      |     D21     |
 
-## Programacio
+## Programación
 
 ```Arduino
 
 /*
-* Projecte nº: ARD038
-* Data: 11/02/2022
-* Descripcio: prova del teclat matricial
+* Proyecto nº: ARD038
+* Fecha: 11/02/2022
+* Descripción: prueba del teclado matricial
 * Nota:
 *
 */
 
 #include <Keypad.h>
 
-const byte ROWS = 4; //quatre files
-const byte COLS = 4; //quatre columnes
+const byte ROWS = 4; //cuatro filas
+const byte COLS = 4; //cuatro columnas
 
-//defineix els simbols dels polsador del teclat
+//define los símbolos de los pulsadores del teclado
 char hexaKeys[ROWS][COLS] =
 {
   {'1','2','3','A'},
@@ -88,10 +87,10 @@ char hexaKeys[ROWS][COLS] =
   {'7','8','9','C'},
   {'\*','0','\#','D'}
 };
-byte rowPins[ROWS] = {9, 8, 7, 6}; //connecteu-los als pins de fila del teclat
-byte colPins[COLS] = {5, 4, 3, 2}; //connecteu-los als pins de columna del teclat
+byte rowPins[ROWS] = {9, 8, 7, 6}; //conéctelos a los pines de fila del teclado
+byte colPins[COLS] = {5, 4, 3, 2}; //conéctelos a los pines de columna del teclado
 
-//inicialitza una instancia de la classe Newkepad
+//inicializa una instancia de la clase Newkepad
 Keypad customKeypad = Keypad( makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
 void setup()
@@ -109,11 +108,11 @@ void loop()
 }
 ```
 
-## Descàrrega
+## Descarga
 
-- [Codi ARD038](https://mega.nz/folder/2KoSwaTa#AxDfZl3717MrwnJ2LUacew)
-- [Fritzing part keypad 4x4](https://mega.nz/file/LXgWTI6I#fNptqZc9mlxgrD5jFckcs6ne6uef0DAioNTZ8yscEWs)
+- [Código ARD038](https://mega.nz/folder/2KoSwaTa#AxDfZl3717MrwnJ2LUacew)
+- [Fritzing parte keypad 4x4](https://mega.nz/file/LXgWTI6I#fNptqZc9mlxgrD5jFckcs6ne6uef0DAioNTZ8yscEWs)
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
