@@ -1,62 +1,50 @@
-# 29 - Mòdul de seguiment de línies
+# 29 - Módulo de seguimiento de líneas
 
-## Descripció
+## Descripción
 
-Amb aquest mòdul, el vostre cotxe o robot només pot caminar per una
-línia. Quan el detector es mou de blanc a negre, emet una senyal TTL,
-Així que si dibuixes una línia negra entre les dues rodes del teu cotxe,
-caminarà al llarg de la teva carretera esperada.
+Con este módulo, tu coche o robot solo puede caminar por una línea. Cuando el detector se mueve de blanco a negro, emite una señal TTL. Así que si dibujas una línea negra entre las dos ruedas de tu coche, caminará a lo largo de tu carretera esperada.
 
-![Pins del mòdul KY-033](../imatges/ard/ard_29_01.png)
+![Pines del módulo KY-033](../imatges/ard/ard_29_01.png)
 
 ## Material
 
-|                               Imatge                               | Descripció                            |
+|                               Imagen                               | Descripción                            |
 | :----------------------------------------------------------------: | :------------------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.             |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió                    |
-| <img src="./../imatges/mat/mat_KY-033.png" width="50" height="50"> | Un mòdul de seguiment de línies KY023 |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.             |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión                    |
+| <img src="./../imatges/mat/mat_KY-033.png" width="50" height="50"> | Un módulo de seguimiento de líneas KY023 |
 
-## Principi de treball
+## Principio de trabajo
 
-El sensor d'infraroig TCRT5000 conté un díode emisor d'infrarojos que
-continuament està emitint. Mentre no es reflexe cap raig IR o
-l'intensitat reflectida siga baixa, el fototransistor es mantindrà en
-tall i la eixida del mòdul estarà en ALT (HIGH). Quan un objecte entra
-en el rang de detecció, o la superfície de reflexió canvia, la
-intensitat dels raigs infrarojos reflectits és prou gran i el
-fototransistor entra en saturació, per lo qual la sortida del mòdul
-passa a nivell BAIX (LOW), i l'indicador LED s'il·lumina.
+El sensor de infrarrojo TCRT5000 contiene un diodo emisor de infrarrojos que continuamente está emitiendo. Mientras no se refleje ningún rayo IR o la intensidad reflejada sea baja, el fototransistor se mantendrá en corte y la salida del módulo estará en ALTO (HIGH). Cuando un objeto entra en el rango de detección, o la superficie de reflexión cambia, la intensidad de los rayos infrarrojos reflejados es lo suficientemente grande y el fototransistor entra en saturación, por lo que la salida del módulo pasa a nivel BAJO (LOW), y el indicador LED se ilumina.
 
-![Esquema elèctric mòdul KY-033](../imatges/ard/ard_29_02.png)
+![Esquema eléctrico módulo KY-033](../imatges/ard/ard_29_02.png)
 
-## Especificacions tècniques
+## Especificaciones técnicas
 
-- Alimentació: 3.3V to 5V
-- Consum: 20mA @ 5V
-- Rang de temperatura: 0°C \~ + 50°C
-- Sortida: Negre - BAIX(LOW), Blanc - ALT(HIGH)
-- Dimensions:48x10.5mm
+- Alimentación: 3.3V a 5V
+- Consumo: 20mA @ 5V
+- Rango de temperatura: 0°C ~ + 50°C
+- Salida: Negro - BAJO(LOW), Blanco - ALTO(HIGH)
+- Dimensiones: 48x10.5mm
 
-## Configuració de pins
+## Configuración de pines
 
-| Mòdul | Arduino  |
+| Módulo | Arduino  |
 | :---: | :------: |
 |   S   | Ent.dig. |
 |  V+   |   +5V    |
 |   G   |   GND    |
 
-## Exemple
+## Ejemplo
 
-L'exemple mostra que quan el sensor detecta l'àrea negra, el senyal de
-sortida del pin "S" és BAIX(LOW), llavors el LED13 s'apaga mentre la
-llum "L" en aquest mòdul s'activa. Al contrari, LED13 s'activa.
+El ejemplo muestra que cuando el sensor detecta el área negra, la señal de salida del pin "S" es BAJO(LOW), entonces el LED13 se apaga mientras la luz "L" en este módulo se activa. Por el contrario, LED13 se activa.
 
-La connexió a sota:
+La conexión a continuación:
 
-![Cablejat del mòdul KY-033](../imatges/ard/ard_29_03.png)
+![Cableado del módulo KY-033](../imatges/ard/ard_29_03.png)
 
-## Programació
+## Programación
 
 ```Arduino
 
@@ -83,6 +71,6 @@ val=digitalRead(tracking);
 
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
