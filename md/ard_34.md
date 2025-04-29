@@ -1,130 +1,129 @@
-# 34 -- Mòdul GY-521
+# 34 -- Módulo GY-521
 
-## Descripció general
+## Descripción general
 
-En aquesta lliçó, aprendrem a usar el mòdul GY-521 (MPU-6050), que és un
-dels millors sensors de mesurament d'inèrcia IMU (Inertia Measurement
-Unit), compatible amb Arduino.
+En esta lección, aprenderemos a usar el módulo GY-521 (MPU-6050), que es uno
+de los mejores sensores de medición de inercia IMU (Inertia Measurement
+Unit), compatible con Arduino.
 
-Els sensors IMU com el GY-521 (MPU-6050) s'utilitzen en robots
-auto-equilibrats, vehicles aeris no tripulats, telèfons intel·ligents,
+Los sensores IMU como el GY-521 (MPU-6050) se utilizan en robots
+auto-equilibrados, vehículos aéreos no tripulados, teléfonos inteligentes,
 etc.
 
-![Pins del mòdul GY-521](../imatges/ard/ard_34_01.jpeg)
+![Pines del módulo GY-521](../imatges/ard/ard_34_01.jpeg)
 
 ## Material
 
-|                               Imatge                               | Descripció                |
+|                               Imagen                               | Descripción                |
 | :----------------------------------------------------------------: | :------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent. |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió        |
-| <img src="./../imatges/mat/mat_GY-521.png" width="50" height="50"> | Mòdul GY-521              |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente. |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión        |
+| <img src="./../imatges/mat/mat_GY-521.png" width="50" height="50"> | Módulo GY-521              |
 
-## Introducció de components
+## Introducción de componentes
 
 ### Sensor GY-521
 
-El sensor InvenSense GY-521 conté un acceleròmetre MEMS i un giroscopi
-MEMS en un sol xip (MEMS = MicroElectroMechanic System). És molt precís,
-ja que conté maquinari de conversió d'analògic a digital de 16 bits per
-a cada canal. Per tant, captura el canal x, y i z al mateix temps. El
-sensor utilitza el bus I2C per a interactuar amb l'Arduino.
+El sensor InvenSense GY-521 contiene un acelerómetro MEMS y un giroscopio
+MEMS en un solo chip (MEMS = MicroElectroMechanic System). Es muy preciso,
+ya que contiene hardware de conversión de analógico a digital de 16 bits por
+cada canal. Por lo tanto, captura el canal x, y y z al mismo tiempo. El
+sensor utiliza el bus I2C para interactuar con el Arduino.
 
-El GY-521 no és car, especialment atés que combina un acceleròmetre i un
-giroscopi.
+El GY-521 no es caro, especialmente considerando que combina un acelerómetro y un
+giroscopio.
 
-Els sensors IMU són un dels tipus de sensors més inevitables que
-s'utilitzen hui dia en tota mena de dispositius electrònics.
+Los sensores IMU son uno de los tipos de sensores más inevitables que
+se utilizan hoy día en toda clase de dispositivos electrónicos.
 
-Es veuen en telèfons intel·ligents, dispositius portàtils, controladors
-de jocs, etc. Els sensors IMU ens ajuden a obtindre la posició d'un
-objecte adjunt al sensor en un espai tridimensional. Aquests valors
-solen estar en angles, la qual cosa ens ajuda a determinar la seua
-posició. Per tant, s'utilitzen en telèfons intel·ligents per a detectar
-la seua orientació. I també, en dispositius portàtils com la «fit band»,
-que usen sensors IMU per a rastrejar el moviment.
+Se ven en teléfonos inteligentes, dispositivos portátiles, controladores
+de juegos, etc. Los sensores IMU nos ayudan a obtener la posición de un
+objeto adjunto al sensor en un espacio tridimensional. Estos valores
+suelen estar en ángulos, lo que nos ayuda a determinar su posición. Por lo tanto, se utilizan en teléfonos inteligentes para detectar
+su orientación. Y también, en dispositivos portátiles como la "fit band",
+que usan sensores IMU para rastrear el movimiento.
 
-### Com funciona?
+### ¿Cómo funciona?
 
-Els sensors IMU generalment consten de dos o més parts. Enumerant-los
-per prioritat, són: **acceleròmetre, giroscopi, magnetòmetre i altímetre.** El GY-521 és un sensor IMU de 6 graus de llibertat (DOF =
-Degrees Of Freedom) o de sis eixos, cosa que significa que dona sis
-valors com a eixida. Tres valors de l'acceleròmetre i tres del
-giroscopi. El GY-521 és un sensor basat en tecnologia MEMS (Micro
-Electro Mechanical Systems). Tant l'acceleròmetre com el giroscopi
-estan integrats dins d'un sol xip. Aquest xip utilitza el protocol I2C
-(Inter Integrated Circuit) per a la comunicació.
+Los sensores IMU generalmente constan de dos o más partes. Enumerándolos
+por prioridad, son: **acelerómetro, giroscopio, magnetómetro y altímetro.** El GY-521 es un sensor IMU de 6 grados de libertad (DOF =
+Degrees Of Freedom) o de seis ejes, lo que significa que da seis
+valores como salida. Tres valores del acelerómetro y tres del
+giroscopio. El GY-521 es un sensor basado en tecnología MEMS (Micro
+Electro Mechanical Systems). Tanto el acelerómetro como el giroscopio
+están integrados dentro de un solo chip. Este chip utiliza el protocolo I2C
+(Inter Integrated Circuit) para la comunicación.
 
-### Com funciona un acceleròmetre?
+### ¿Cómo funciona un acelerómetro?
 
-![Funcionament d'un acceleròmetre](../imatges/ard/ard_34_02.png)
+![Funcionamiento de un acelerómetro](../imatges/ard/ard_34_02.png)
 
-Un acceleròmetre funciona segons el principi de l'efecte piezoelèctric.
-Ací, imagina una caixa amb forma de cub, amb una xicoteta bola dins, com
-en la imatge de dalt. Les parets d'aquesta caixa estan fetes amb
-cristalls piezoelèctrics.
+Un acelerómetro funciona según el principio del efecto piezoeléctrico.
+Aquí, imagina una caja con forma de cubo, con una pequeña bola dentro, como
+en la imagen de arriba. Las paredes de esta caja están hechas con
+cristales piezoeléctricos.
 
-Cada vegada que inclines la caixa, la bola es veu obligada a moure's en
-la direcció de la inclinació, a causa de la gravetat.
+Cada vez que inclinas la caja, la bola se ve obligada a moverse en
+la dirección de la inclinación, a causa de la gravedad.
 
-La paret amb la qual xoca la bola crea xicotets corrents piezoelèctrics.
-Hi ha en total, tres parells de parets oposades en un paral·lelepípede.
-Cada parell correspon a un eix en l'espai 3D: eixos X, Y i Z. Depenent
-del corrent produït per les parets piezoelèctriques, podem determinar
-l'adreça d'inclinació i la seua magnitud.
+La pared con la que choca la bola crea pequeñas corrientes piezoeléctricas.
+Hay en total, tres pares de paredes opuestas en un paralelepípedo.
+Cada par corresponde a un eje en el espacio 3D: ejes X, Y y Z. Dependiendo
+de la corriente producida por las paredes piezoeléctricas, podemos determinar
+la dirección de inclinación y su magnitud.
 
-![Eixos espacials](../imatges/ard/ard_34_03.png)
+![Ejes espaciales](../imatges/ard/ard_34_03.png)
 
-### Com funciona un giroscopi?
+### ¿Cómo funciona un giroscopio?
 
-Els giroscopis funcionen segons el principi de l'acceleració de
-Coriolis. Imagine que hi ha una estructura similar a una forqueta, que
-està en constant moviment cap avant i cap endarrere. Es manté en el seu
-lloc mitjançant cristalls piezoelèctrics. Cada vegada que intenta
-inclinar aquest arranjament, els cristalls experimenten una força en la
-direcció de la inclinació. Això es produeix com a resultat de la inèrcia
-de la forqueta en moviment.
+Los giroscopios funcionan según el principio de la aceleración de
+Coriolis. Imagina que hay una estructura similar a un tenedor, que
+está en constante movimiento hacia adelante y hacia atrás. Se mantiene en su
+lugar mediante cristales piezoeléctricos. Cada vez que intenta
+inclinar este arreglo, los cristales experimentan una fuerza en la
+dirección de la inclinación. Esto se produce como resultado de la inercia
+del tenedor en movimiento.
 
-Els cristalls produeixen així un corrent en consens amb l'efecte
-piezoelèctric, i aquest corrent s'amplifica. Després, els valors són
-refinats pel microcontrolador.
+Los cristales producen así una corriente en consenso con el efecto
+piezoeléctrico, y esta corriente se amplifica. Después, los valores son
+refinados por el microcontrolador.
 
-![Funcionament d'un giroscopi](../imatges/ard/ard_34_04.png)
+![Funcionamiento de un giroscopio](../imatges/ard/ard_34_04.png)
 
-## Connexió
+## Conexión
 
-![Esquema elèctric](../imatges/ard/ard_34_05.png)
-![Cablejat](../imatges/ard/ard_34_06.png)
+![Esquema eléctrico](../imatges/ard/ard_34_05.png)
+![Cableado](../imatges/ard/ard_34_06.png)
 
-## Programació
+## Programación
 
-Els exemples següents són traducció del article de Luis Llamas
+Los ejemplos siguientes son traducción del artículo de Luis Llamas
 (https://www.luisllamas.es/arduino-orientacion-imu-mpu-6050/).
 
-Per a realitzar la lectura del MPU-6050 usarem la llibreria
-desenvolupada per Jeff Rowberg disponible en [aquest
-enllaç](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050).
-També emprarem [la llibreria
+Para realizar la lectura del MPU-6050 usaremos la librería
+desarrollada por Jeff Rowberg disponible en [este
+enlace](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/MPU6050).
+También emplearemos [la librería
 I2Cdev](https://github.com/jrowberg/i2cdevlib/tree/master/Arduino/I2Cdev)
-desenvolupada pel mateix autor, que millora la comunicació I2C.
+desarrollada por el mismo autor, que mejora la comunicación I2C.
 
-La llibreria proporciona exemples de codi, que resulta aconsellable
-revisar. Els següents exemples són modificacions a partir dels
-disponibles en la llibreria.
+La librería proporciona ejemplos de código, que resulta aconsejable
+revisar. Los siguientes ejemplos son modificaciones a partir de los
+disponibles en la librería.
 
-### Llegir valors RAW
+### Leer valores RAW
 
-En el primer exemple, aprenem a llegir els valors directament
-proporcionats pel MPU-6050 (valors RAW) a través del bus I2C. Els valors
-RAW tenen un rang de mesurament entre -32768 i +32767.
+En el primer ejemplo, aprendemos a leer los valores directamente
+proporcionados por el MPU-6050 (valores RAW) a través del bus I2C. Los valores
+RAW tienen un rango de medición entre -32768 y +32767.
 
 ```Arduino
 
 /*
-* Projecte nº: ARD034a
-* Data: 03/02/2022
-* Descripcio: Llegir valors RAW
-* Nota: traduït de Luis Llamas
+* Proyecto nº: ARD034a
+* Fecha: 03/02/2022
+* Descripción: Leer valores RAW
+* Nota: traducido de Luis Llamas
 *
 */
 
@@ -137,7 +136,7 @@ RAW tenen un rang de mesurament entre -32768 i +32767.
 #include "MPU6050.h"
 #include "Wire.h"
 
-const int mpuAddress = 0x68; //Pot ser 0x68 o 0x69
+const int mpuAddress = 0x68; //Puede ser 0x68 o 0x69
 
 MPU6050 mpu(mpuAddress);
 
@@ -165,12 +164,12 @@ void setup()
     Serial.begin(9600);
     Wire.begin();
     mpu.initialize();
-    Serial.println(mpu.testConnection() ? F("IMU iniciat correctament") : F("Error al iniciar IMU"));
+    Serial.println(mpu.testConnection() ? F("IMU iniciado correctamente") : F("Error al iniciar IMU"));
 }
 
 void loop()
 {
-    // Llegir les acceleracions i velocitats angulars
+    // Leer las aceleraciones y velocidades angulares
     mpu.getAcceleration(&ax, &ay, &az);
     mpu.getRotation(&gx, &gy, &gz);
     printRAW();
@@ -179,22 +178,22 @@ void loop()
 
 ```
 
-### Llegir valors en Sistema Internacional
+### Leer valores en Sistema Internacional
 
-En el següent exemple apliquem una escala als valors RAW per a obtindre
-mesuraments amb significat físic. En l'exemple, emprarem valores G per
-a l'acceleració, i º/s per a la velocitat angular. Amb facilitat podreu
-modificar el codi perquè proporcione els valors en unitats del Sistema
-Internacional. L'escalat dependrà del rang de mesurament que
-seleccionem en el MPU-6050, que recordem pot ser 2g/4g/8g/16g per a
-l'acceleròmetre i 250/500/1000/2000 (°/s) per al giroscopi.
+En el siguiente ejemplo aplicamos una escala a los valores RAW para obtener
+mediciones con significado físico. En el ejemplo, emplearemos valores G para
+la aceleración, y º/s para la velocidad angular. Con facilidad podrás
+modificar el código para que proporcione los valores en unidades del Sistema
+Internacional. El escalado dependerá del rango de medición que
+seleccionemos en el MPU-6050, que recordamos puede ser 2g/4g/8g/16g para
+el acelerómetro y 250/500/1000/2000 (°/s) para el giroscopio.
 
 ```Arduino
 
 /*
-* Projecte nº: ARD034b
-* Data: 03/02/2022
-* Descripcio: Llegir valors en SI
+* Proyecto nº: ARD034b
+* Fecha: 03/02/2022
+* Descripción: Leer valores en SI
 * Nota:
 *
 */
@@ -208,14 +207,14 @@ l'acceleròmetre i 250/500/1000/2000 (°/s) per al giroscopi.
 #include "MPU6050.h"
 #include "Wire.h"
 
-const int mpuAddress = 0x68; // Pot ser 0x68 o 0x69
+const int mpuAddress = 0x68; // Puede ser 0x68 o 0x69
 
 MPU6050 mpu(mpuAddress);
 
 int ax, ay, az;
 int gx, gy, gz;
 
-// Factors de conversio
+// Factores de conversión
 const float accScale = 2.0 * 9.81 / 32768.0;
 const float gyroScale = 250.0 / 32768.0;
 
@@ -224,7 +223,7 @@ void printTab()
     Serial.print(F("t"));
 }
 
-// Mostrar mesures en Sistema Internacional
+// Mostrar medidas en Sistema Internacional
 void printRAW()
 {
     Serial.print(F("a[x y z](m/s2) g[x y z](deg/s):t"));
@@ -246,7 +245,7 @@ void setup()
 
 void loop()
 {
-    // Llegir les acceleracions i velocitats angulars
+    // Leer las aceleraciones y velocidades angulares
     mpu.getAcceleration(&ax, &ay, &az);
     mpu.getRotation(&gx, &gy, &gz);
     printRAW();
@@ -254,18 +253,18 @@ void loop()
 }
 ```
 
-## Llegir inclinació amb acceleròmetre
+## Leer inclinación con acelerómetro
 
-En el següent exemple, calculem la inclinació del MPU-6050 mitjançant la
-projecció del mesurament de la gravetat i les relacions trigonomètriques
-que podem veure en l'entrada [Cómo usar un acelerómetro con
+En el siguiente ejemplo, calculamos la inclinación del MPU-6050 mediante la
+proyección de la medición de la gravedad y las relaciones trigonométricas
+que podemos ver en la entrada [Cómo usar un acelerómetro con
 Arduino](https://www.luisllamas.es/como-usar-un-acelerometro-arduino/).
 
 ```Arduino
 /*
-* Projecte nº: ARD034c
-* Data: 03/02/2022
-* Descripcio: Llegir inclinacio amb accelerometre
+* Proyecto nº: ARD034c
+* Fecha: 03/02/2022
+* Descripción: Leer inclinación con acelerómetro
 * Nota:
 *
 */
@@ -279,7 +278,7 @@ Arduino](https://www.luisllamas.es/como-usar-un-acelerometro-arduino/).
 #include "MPU6050.h"
 #include "Wire.h"
 
-const int mpuAddress = 0x68; // Pot ser 0x68 o 0x69
+const int mpuAddress = 0x68; // Puede ser 0x68 o 0x69
 
 MPU6050 mpu(mpuAddress);
 
@@ -291,40 +290,40 @@ void setup()
     Serial.begin(9600);
     Wire.begin();
     mpu.initialize();
-    Serial.println(mpu.testConnection() ? F("IMU iniciat correctament") : F("Error al iniciar IMU"));
+    Serial.println(mpu.testConnection() ? F("IMU iniciado correctamente") : F("Error al iniciar IMU"));
 }
 
 void loop()
 {
-    // Llegir les acceleracions
+    // Leer las aceleraciones
     mpu.getAcceleration(&ax, &ay, &az);
 
-    //Calcular els angles d'inclinacio
+    //Calcular los ángulos de inclinación
     float accel_ang_x = atan(ax / sqrt(pow(ay, 2) + pow(az, 2)))*(180.0 / 3.14);
     float accel_ang_y = atan(ay / sqrt(pow(ax, 2) + pow(az, 2)))*(180.0 / 3.14);
 
-    // Mostrar resultats
-    Serial.print(F("Inclinacion en X: "));
+    // Mostrar resultados
+    Serial.print(F("Inclinación en X: "));
     Serial.print(accel_ang_x);
-    Serial.print(F("Inclinacion en Y:"));
+    Serial.print(F("Inclinación en Y:"));
     Serial.println(accel_ang_y);
 
     delay(10);
 }
 ```
 
-### Obtindre orientació amb giroscopi
+### Obtener orientación con giroscopio
 
-En el següent exemple, realitzem la integració del senyal de la
-velocitat del giroscopi per a obtindre l'orientació del MPU-6050, com
-podem veure en l'entrada [Cómo usar un giroscopio con
+En el siguiente ejemplo, realizamos la integración de la señal de la
+velocidad del giroscopio para obtener la orientación del MPU-6050, como
+podemos ver en la entrada [Cómo usar un giroscopio con
 Arduino](https://www.luisllamas.es/como-usar-un-giroscopio-arduino/).
 
 ```Arduino
 /*
-* Projecte nº: ARD034d
-* Data: 03/02/2022
-* Descripcio: Obtindre orientació amb giroscopi
+* Proyecto nº: ARD034d
+* Fecha: 03/02/2022
+* Descripción: Obtener orientación con giroscopio
 * Nota:
 *
 */
@@ -338,7 +337,7 @@ Arduino](https://www.luisllamas.es/como-usar-un-giroscopio-arduino/).
 #include "MPU6050.h"
 #include "Wire.h"
 
-const int mpuAddress = 0x68; // Pot ser 0x68 o 0x69
+const int mpuAddress = 0x68; // Puede ser 0x68 o 0x69
 
 MPU6050 mpu(mpuAddress);
 
@@ -363,38 +362,38 @@ void setup()
     Serial.begin(9600);
     Wire.begin();
     mpu.initialize();
-    Serial.println(mpu.testConnection() ? F("IMU iniciat correctament ") :F("Error al iniciar IMU"));
+    Serial.println(mpu.testConnection() ? F("IMU iniciado correctamente ") :F("Error al iniciar IMU"));
 }
 
 void loop()
 {
-    // Llegir les velocitats angulars
+    // Leer las velocidades angulares
     mpu.getRotation(&gx, &gy, &gz);
     updateGiro();
 
-    // Mostrar resultats
-    Serial.print(F("Rotacio en X: "));
+    // Mostrar resultados
+    Serial.print(F("Rotación en X: "));
     Serial.print(girosc_ang_x);
-    Serial.print(F("Rotacio en Y: "));
+    Serial.print(F("Rotación en Y: "));
     Serial.println(girosc_ang_y);
 
     delay(10);
 }
 ```
 
-### Obtindre l'orientació amb filtre complementari
+### Obtener la orientación con filtro complementario
 
-Aquest exemple emprem un filtre complementari per a combinar el senyal
-de l'acceleròmetre i giroscopi per a obtindre un millor mesurament de
-l'orientació del MPU-6050, com podem veure en l'entrada [Medir la
+Este ejemplo emplea un filtro complementario para combinar la señal
+del acelerómetro y giroscopio para obtener una mejor medición de
+la orientación del MPU-6050, como podemos ver en la entrada [Medir la
 inclinación de un IMU con Arduino y filtro
 complementario.](https://www.luisllamas.es/medir-la-inclinacion-imu-arduino-filtro-complementario/)
 
 ```Arduino
 /*
-* Projecte nº: ARD034e
-* Data: 03/02/2022
-* Descripcio: Obtindre l'orientació amb filtre complementari
+* Proyecto nº: ARD034e
+* Fecha: 03/02/2022
+* Descripción: Obtener la orientación con filtro complementario
 * Nota:
 *
 */
@@ -408,7 +407,7 @@ complementario.](https://www.luisllamas.es/medir-la-inclinacion-imu-arduino-filt
 #include "MPU6050.h"
 #include "Wire.h"
 
-const int mpuAddress = 0x68; // Pot ser 0x68 o 0x69
+const int mpuAddress = 0x68; // Puede ser 0x68 o 0x69
 
 MPU6050 mpu(mpuAddress);
 
@@ -424,11 +423,11 @@ void updateFiltered()
     dt = (millis() - tiempo_prev) / 1000.0;
     tiempo_prev = millis();
 
-    //Calcular els angles amb accelerometre
+    //Calcular los ángulos con acelerómetro
     float accel_ang_x = atan(ay / sqrt(pow(ax, 2) + pow(az, 2)))*(180.0 / 3.14);
     float accel_ang_y = atan(-ax / sqrt(pow(ay, 2) + pow(az, 2)))*(180.0 / 3.14);
 
-    //Calcular angle de rotacio amb giroscopi i filtre complementari
+    //Calcular ángulo de rotación con giroscopio y filtro complementario
     ang_x = 0.98*(ang_x_prev + (gx / 131)*dt) + 0.02*accel_ang_x;
     ang_y = 0.98*(ang_y_prev + (gy / 131)*dt) + 0.02*accel_ang_y;
     ang_x_prev = ang_x;
@@ -440,39 +439,39 @@ void setup()
     Serial.begin(9600);
     Wire.begin();
     mpu.initialize();
-    Serial.println(mpu.testConnection() ? F("IMU iniciat correctament") :F("Error al iniciar IMU"));
+    Serial.println(mpu.testConnection() ? F("IMU iniciado correctamente") :F("Error al iniciar IMU"));
 }
 
 void loop()
 {
-    // Llegir les acceleracions i velocitats angulars
+    // Leer las aceleraciones y velocidades angulares
     mpu.getAcceleration(&ax, &ay, &az);
     mpu.getRotation(&gx, &gy, &gz);
     updateFiltered();
-    Serial.print(F("Rotacio en X: "));
+    Serial.print(F("Rotación en X: "));
     Serial.print(ang_x);
-    Serial.print(F(" Rotacio en Y: "));
+    Serial.print(F(" Rotación en Y: "));
     Serial.println(ang_y);
     delay(10);
 }
 ```
 
-### Obtindre l'orientació mitjançant el DMP
+### Obtener la orientación mediante el DMP
 
-En aquest últim exemple emprem el DMP integrat en el MPU-6050 per a
-realitzar la combinació del mesurament de l'acceleròmetre i el
-giroscopi, la qual cosa proporciona millor resultats que emprar un
-filtre complementari, i a més allibera a Arduino del procés de càlcul.
+En este último ejemplo empleamos el DMP integrado en el MPU-6050 para
+realizar la combinación de la medición del acelerómetro y el
+giroscopio, lo que proporciona mejores resultados que emplear un
+filtro complementario, y además libera a Arduino del proceso de cálculo.
 
-Perquè l'exemple funcione és necessari connectar el pin INT del MPU6050
-a un pin amb interrupcions (en l'exemple, amb Arduino UNO o Nano,
-connectar al Pin 2).
+Para que el ejemplo funcione es necesario conectar el pin INT del MPU6050
+a un pin con interrupciones (en el ejemplo, con Arduino UNO o Nano,
+conectar al Pin 2).
 
 ```Arduino
 /*
-* Projecte nº: ARD034g
-* Data: 03/02/2022
-* Descripcio: Obtindre l'orientació mitjançant el DMP
+* Proyecto nº: ARD034g
+* Fecha: 03/02/2022
+* Descripción: Obtener la orientación mediante el DMP
 * Nota:
 *
 */
@@ -538,7 +537,7 @@ void setup()
     mpu.initialize();
     pinMode(INTERRUPT_PIN, INPUT);
 
-    // Comprobar conexion
+    // Comprobar conexión
     Serial.println(F("Testing device connections..."));
     Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
 
@@ -546,7 +545,7 @@ void setup()
     Serial.println(F("Initializing DMP..."));
     devStatus = mpu.dmpInitialize();
 
-    // Valores de calibracion
+    // Valores de calibración
     mpu.setXGyroOffset(220);
     mpu.setYGyroOffset(76);
     mpu.setZGyroOffset(-85);
@@ -558,7 +557,7 @@ void setup()
         Serial.println(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
 
-        // Activar interrupcion
+        // Activar interrupción
         attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), dmpDataReady, RISING);
         mpuIntStatus = mpu.getIntStatus();
         Serial.println(F("DMP ready! Waiting for first interrupt..."));
@@ -581,13 +580,13 @@ void setup()
 
 void loop()
 {
-    // Si fallo al iniciar, parar programa
+    // Si falló al iniciar, parar programa
     if (!dmpReady) return;
 
-    // Ejecutar mientras no hay interrupcion
+    // Ejecutar mientras no hay interrupción
     while (!mpuInterrupt && fifoCount < packetSize)
     {
-    // AQUI EL RESTO DEL CODIGO DE TU PROGRRAMA
+    // AQUI EL RESTO DEL CODIGO DE TU PROGRAMA
     }
 
     mpuInterrupt = false;
@@ -613,7 +612,7 @@ void loop()
         // track FIFO count here in case there is > 1 packet available (this lets us immediately read more without waiting for an interrupt)
         fifoCount -= packetSize;
 
-        // MMostrar Yaw, Pitch, Roll
+        // Mostrar Yaw, Pitch, Roll
         mpu.dmpGetQuaternion(&q, fifoBuffer);
         mpu.dmpGetGravity(&gravity, &q);
         mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
@@ -624,7 +623,7 @@ void loop()
         Serial.print("\t");
         Serial.println(ypr[2] * 180/M_PI);
 
-        // Mostrar aceleracion
+        // Mostrar aceleración
         mpu.dmpGetQuaternion(&q, fifoBuffer);
         mpu.dmpGetAccel(&aa, fifoBuffer);
         mpu.dmpGetGravity(&gravity, &q);
@@ -639,6 +638,6 @@ void loop()
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
