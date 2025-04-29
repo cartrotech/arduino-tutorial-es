@@ -1,98 +1,98 @@
-# 37 - Mòdul de rellotge en temps real
+# 37 - Módulo de reloj en tiempo real
 
-## Què és un rellotge de temps real RTC?
+## ¿Qué es un reloj de tiempo real RTC?
 
-Un rellotge de temps real (RTC) és un dispositiu electrònic que permet
-obtindre mesuraments de temps en les unitats temporals que emprem de
-manera quotidiana.
+Un reloj de tiempo real (RTC) es un dispositivo electrónico que permite
+obtener mediciones de tiempo en las unidades temporales que empleamos de
+manera cotidiana.
 
-El terme RTC es va crear per a diferenciar aquest tipus de rellotges
-dels rellotges electrònics habituals, que simplement mesuren el temps
-comptabilitzant polsos d'un senyal, sense existir relació directa amb
-unitats temporals. Per contra els RTC són més semblants als rellotges i
-calendaris que usem habitualment, i que funcionen amb segons, minuts,
-hores, dies, setmanes, mesos i anys.
+El término RTC se creó para diferenciar este tipo de relojes
+de los relojes electrónicos habituales, que simplemente miden el tiempo
+contabilizando pulsos de una señal, sin existir relación directa con
+unidades temporales. Por el contrario, los RTC son más similares a los relojes y
+calendarios que usamos habitualmente, y que funcionan con segundos, minutos,
+horas, días, semanas, meses y años.
 
-Els RTC normalment estan formats per un ressonador de cristall integrat
-amb l'electrònica necessària per a comptabilitzar de manera correcta el
-pas del temps. L'electrònica dels RTC tenen en compte les peculiaritats
-de la nostra manera de mesurar el temps, com per exemple el sistema
-sexagesimal, els mesos amb diferents dies, o els anys de traspàs.
+Los RTC normalmente están formados por un resonador de cristal integrado
+con la electrónica necesaria para contabilizar de manera correcta el
+paso del tiempo. La electrónica de los RTC tiene en cuenta las peculiaridades
+de nuestra manera de medir el tiempo, como por ejemplo el sistema
+sexagesimal, los meses con diferentes días, o los años bisiestos.
 
-Els RTC aporten l'avantatge de reduir el consum d'energia, aportar
-major precisió i alliberar a Arduino d'haver de realitzar la
-comptabilització del temps. A més, sovint els RTC incorporen algun tipus
-de bateria que permet mantindre el valor del temps en cas de pèrdua
-d'alimentació.
+Los RTC aportan la ventaja de reducir el consumo de energía, aportar
+mayor precisión y liberar a Arduino de tener que realizar la
+contabilización del tiempo. Además, a menudo los RTC incorporan algún tipo
+de batería que permite mantener el valor del tiempo en caso de pérdida
+de alimentación.
 
-En el món de l'electrònica casolana i Arduino existeixen dues RTC
-habituals el DS1307 i el DS3231, tots dos fabricats per Maxim
-(anteriorment Dallas Semiconductor). El DS3231 té una precisió molt
-superior i pot considerar-se substitut del DS1307.
+En el mundo de la electrónica casera y Arduino existen dos RTC
+habituales: el DS1307 y el DS3231, ambos fabricados por Maxim
+(anteriormente Dallas Semiconductor). El DS3231 tiene una precisión mucho
+superior y puede considerarse sustituto del DS1307.
 
-En el model DS1307 les variacions de temperatura que afecten el
-mesurament del temps dels cristalls ressonadors es tradueixen en errors
-en un desfasament acumulat. Això fa que el DS1307 patisca d'un
-desfasament temporal, que pot arribar a ser 1 o 2 minuts al dia.
+En el modelo DS1307 las variaciones de temperatura que afectan al
+medición del tiempo de los cristales resonadores se traducen en errores
+en un desfase acumulado. Esto hace que el DS1307 padezca de un
+desfase temporal, que puede llegar a ser 1 o 2 minutos al día.
 
-Per a solucionar-ho, el DS3231 incorpora mesurament i compensació de la
-temperatura garantint una precisió d'almenys 2ppm, la qual cosa equival
-a un desfasament màxim 172ms/dia o un segon cada 6 dies. En el món real
-normalment aconsegueixen precisions superiors, equivalent a desfasaments
-de 1-2 segons al mes.
+Para solucionarlo, el DS3231 incorpora medición y compensación de la
+temperatura garantizando una precisión de al menos 2ppm, lo que equivale
+a un desfase máximo de 172ms/día o un segundo cada 6 días. En el mundo real
+normalmente consiguen precisiones superiores, equivalentes a desfases
+de 1-2 segundos al mes.
 
-![Pins del mòdul](../imatges/ard/ard_37_01.jpeg)
+![Pines del módulo](../imatges/ard/ard_37_01.jpeg)
 
-La comunicació en tots dos models es realitza a través del bus I2C, per
-la qual cosa és senzill obtindre les dades mesurades. La tensió
-d'alimentació és 4.5 a 5.5 per al DS1307, i 2.3 a 5.5V per al DS3231.
+La comunicación en ambos modelos se realiza a través del bus I2C, por
+lo que es sencillo obtener los datos medidos. La tensión
+de alimentación es de 4.5 a 5.5V para el DS1307, y de 2.3 a 5.5V para el DS3231.
 
-Sovint aquests mòduls també incorporen una xicoteta EEPROM AT24C32, que
-pot ser emprada per a emmagatzemar registres i mesuraments. En el cas
-del DS3231, el mesurament de temperatura també està disponible, encara
-que té una precisió baixa ±3 °C, i el temps d'adquisició pot durar fins
-a 1 segon.
+A menudo estos módulos también incorporan una pequeña EEPROM AT24C32, que
+puede ser empleada para almacenar registros y mediciones. En el caso
+del DS3231, la medición de temperatura también está disponible, aunque
+tiene una precisión baja de ±3 °C, y el tiempo de adquisición puede durar hasta
+1 segundo.
 
-També incorporen una bateria CR2032 per a mantindre el dispositiu en
-hora en retirar l'alimentació. Aquesta bateria hauria de ser capaç de
-mantindre alimentat durant diversos anys al DS1307, i durant mesos al
-DS3231. La tensió d'alimentació de bateria és de 2.0 a 3.5 per al
-DS1307 i de 2.3 a 5.0 per al DS3231.
+También incorporan una batería CR2032 para mantener el dispositivo en
+hora al retirar la alimentación. Esta batería debería ser capaz de
+mantener alimentado durante varios años al DS1307, y durante meses al
+DS3231. La tensión de alimentación de batería es de 2.0 a 3.5V para el
+DS1307 y de 2.3 a 5.0V para el DS3231.
 
-Els RTC són dispositius àmpliament utilitzats en electrònica. Tots els
-ordinadors personals, servidors, tauletes, i telèfon intel·ligent
-incorporen un. També són molt freqüents en sistemes embeguts i, en
-general, en multitud de dispositius que requereixen realitzar un
-registre del temps.
+Los RTC son dispositivos ampliamente utilizados en electrónica. Todos los
+ordenadores personales, servidores, tablets y teléfonos inteligentes
+incorporan uno. También son muy frecuentes en sistemas embebidos y, en
+general, en multitud de dispositivos que requieren realizar un
+registro del tiempo.
 
-En els nostres projectes d'electrònica sovint necessitàrem un RTC. Per
-exemple, podem temporitzar l'encesa de llums o sistemes de reg,
-realitzar un datalogger, o fins i tot encendre i apagar el propi Arduino
-per a estalvia bateria.
+En nuestros proyectos de electrónica a menudo necesitaremos un RTC. Por
+ejemplo, podemos temporizar el encendido de luces o sistemas de riego,
+realizar un datalogger, o incluso encender y apagar el propio Arduino
+para ahorrar batería.
 
 # Material
 
-|                               Imatge                               | Descripció                |
+|                               Imagen                               | Descripción                |
 | :----------------------------------------------------------------: | :------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent. |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió        |
-|  <img src="./../imatges/mat/mat_RTC.png" width="50" height="50">   | Mòdul RTC                 |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente. |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión        |
+|  <img src="./../imatges/mat/mat_RTC.png" width="50" height="50">   | Módulo RTC                 |
 
-## Connexió
+## Conexión
 
-![Esquema elèctric](../imatges/ard/ard_37_02.png)
-![Cablejat](../imatges/ard/ard_37_03.png)
+![Esquema eléctrico](../imatges/ard/ard_37_02.png)
+![Cableado](../imatges/ard/ard_37_03.png)
 
-## Programació
+## Programación
 
-Per fer funcionar el codi de exemple és necessari instal·lar la
-biblioteca «DS3231» que podeu trobar en la secció de descàrrega.
+Para hacer funcionar el código de ejemplo es necesario instalar la
+biblioteca «DS3231» que puedes encontrar en la sección de descarga.
 
 ```Arduino
 /*
-* Projecte nº: ARD037
-* Data: 09/02/2022
-* Descripcio: Prova del modul RTC
+* Proyecto nº: ARD037
+* Fecha: 09/02/2022
+* Descripción: Prueba del módulo RTC
 * Nota:
 *
 */
@@ -106,25 +106,25 @@ RTCDateTime dt;
 void setup()
 {
     Serial.begin(9600);
-    Serial.println("Inicialitza el modul RTC");
+    Serial.println("Inicializa el módulo RTC");
     clock.begin();
 
     // Manual (YYYY, MM, DD, HH, II, SS
     // clock.setDateTime(2016, 12, 9, 11, 46, 00);
-    // Envia el temps de compilació d'esbós a Arduino
+    // Envía el tiempo de compilación de sketch a Arduino
 
     clock.setDateTime(__DATE__, __TIME__);
 
     /*
-    Consells: aquesta ordre s'executarà cada cop que es reiniciï Arduino.
-    Comenta aquesta línia per emmagatzemar la memòria del mòdul DS3231
+    Consejos: esta orden se ejecutará cada vez que se reinicie Arduino.
+    Comenta esta línea para almacenar la memoria del módulo DS3231
     */
 }
 
 void loop()
 {
     dt = clock.getDateTime();
-    Serial.print("Raw data: ");
+    Serial.print("Datos raw: ");
     Serial.print(dt.year); Serial.print("-");
     Serial.print(dt.month); Serial.print("-");
     Serial.print(dt.day); Serial.print(" ");
@@ -136,19 +136,19 @@ void loop()
 }
 ```
 
-## Altres exemples de codi
+## Otros ejemplos de código
 
-Per a realitzar la lectura del DS1307 i del DS3231 usarem la llibreria
-desenvolupada per [Adafruit](https://github.com/adafruit/RTClib) vàlida
-per a tots dos models, disponible en la secció descàrrega. La llibreria
-proporciona exemples de codi, que resulta aconsellable revisar.
+Para realizar la lectura del DS1307 y del DS3231 usaremos la librería
+desarrollada por [Adafruit](https://github.com/adafruit/RTClib) válida
+para ambos modelos, disponible en la sección descarga. La librería
+proporciona ejemplos de código, que resulta aconsejable revisar.
 
-### Obtindre la data i hora
+### Obtener la fecha y hora
 
-El primer exemple empra el RTC per a obtindre les dades de data i hora
-actual. Posteriorment s'empren aquests valors per a mostrar-los per
-port serie. També es mostra com fixar la data i l'hora, i detectar la
-perduda d'energia.
+El primer ejemplo emplea el RTC para obtener los datos de fecha y hora
+actual. Posteriormente se emplean estos valores para mostrarlos por
+puerto serie. También se muestra cómo fijar la fecha y la hora, y detectar la
+pérdida de energía.
 
 ```Arduino
 #include <Wire.h>
@@ -157,7 +157,7 @@ perduda d'energia.
 // RTC_DS1307 rtc;
 RTC_DS3231 rtc;
 
-String daysOfTheWeek[7] = { "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
+String daysOfTheWeek[7] = { "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado" };
 String monthsNames[12] = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
 
 void setup()
@@ -166,14 +166,14 @@ void setup()
     delay(1000);
     if (!rtc.begin())
     {
-        Serial.println(F("Couldn't find RTC"));
+        Serial.println(F("No se pudo encontrar el RTC"));
         while (1);
     }
 
     // Si se ha perdido la corriente, fijar fecha y hora
     if (rtc.lostPower())
     {
-        // Fijar a fecha y hora de compilacion
+        // Fijar a fecha y hora de compilación
         rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
 
         // Fijar a fecha y hora específica. En el ejemplo, 21 de Enero de 2016 a
@@ -210,18 +210,18 @@ void loop()
 }
 ```
 
-## Encesa i apagat programat
+## Encendido y apagado programado
 
-El següent exemple un projecte habitual, emprar un RTC per a activar o
-desactivar un dispositiu en un horari i dates determinats. Per exemple,
-pot servir per a controlar el reg d'un jardí, encendre les llums, la
-calefacció, desplegar un tendal, o controlar qualsevol altre dispositiu
-mitjançant un relé.
+El siguiente ejemplo es un proyecto habitual, emplear un RTC para activar o
+desactivar un dispositivo en un horario y fechas determinados. Por ejemplo,
+puede servir para controlar el riego de un jardín, encender las luces, la
+calefacción, desplegar un tendedero, o controlar cualquier otro dispositivo
+mediante un relé.
 
-La funció **IsScheduledON** controla l'encesa o apagat. En l'exemple,
-està programat l'encesa els dimecres, dissabte, i diumenge de 09.30 a
-11.30 i de 21.00 a 23.00. Modificant el cos d'aquesta funció, podeu
-programar la condició d'encesa i apagat que necessiteu.
+La función **IsScheduledON** controla el encendido o apagado. En el ejemplo,
+está programado el encendido los miércoles, sábados y domingos de 09:30 a
+11:30 y de 21:00 a 23:00. Modificando el cuerpo de esta función, puedes
+programar la condición de encendido y apagado que necesites.
 
 ```Arduino
 
@@ -240,7 +240,7 @@ void setup()
     delay(1000);
     if (!rtc.begin())
     {
-        Serial.println(F("Couldn't find RTC"));
+        Serial.println(F("No se pudo encontrar el RTC"));
         while (1);
     }
     if (rtc.lostPower())
@@ -249,7 +249,7 @@ void setup()
     }
 }
 
-// Comprobar si esta programado el encendido
+// Comprobar si está programado el encendido
 bool isScheduledON(DateTime date)
 {
     int weekDay = date.dayOfTheWeek();
@@ -258,7 +258,7 @@ bool isScheduledON(DateTime date)
     // De 09:30 a 11:30 y de 21:00 a 23:00
     bool hourCondition = (hours > 9.50 && hours < 11.50) || (hours > 21.00 && hours < 23.00);
 
-    // Miercoles, Sabado o Domingo
+    // Miércoles, Sábado o Domingo
     bool dayCondition = (weekDay == 3 || weekDay == 6 || weekDay == 0);
 
     if (hourCondition && dayCondition)
@@ -277,32 +277,32 @@ void loop()
         state = true;
         Serial.print("Activado");
     }
-    else if (state == true && !isScheduledON(now)) // Encendido y deberia estar apagado
+    else if (state == true && !isScheduledON(now)) // Encendido y debería estar apagado
     {
         digitalWrite(outputPin, LOW);
         state = false;
-        Serial.print("Desactivar");
+        Serial.print("Desactivado");
     }
     delay(3000);
 }
 ```
 
-## Datalogger amb RTC
+## Datalogger con RTC
 
-El següent exemple mostra un altre cas molt habitual, l'ús d'un RTC
-per a generar un **Datalogger**, és a dir, un dispositiu que
-periòdicament registra el mesurament d'un sensor. En l'exemple, usarem
-una targeta SD per a guardar els valors.
+El siguiente ejemplo muestra otro caso muy habitual, el uso de un RTC
+para generar un **Datalogger**, es decir, un dispositivo que
+periódicamente registra la medición de un sensor. En el ejemplo, usaremos
+una tarjeta SD para guardar los valores.
 
-Simplement, obtenim la data, hora, i valor del sensor, que en l'exemple
-simulem amb la funció **readSensor()**, i guardem les dades en la
-targeta amb la funció **logValue(,,)**.
+Simplemente, obtenemos la fecha, hora y valor del sensor, que en el ejemplo
+simulamos con la función **readSensor()**, y guardamos los datos en la
+tarjeta con la función **logValue(,,)**.
 
-En un projecte real podríem guardar una o diversos mesuraments,
-separades per comes, per exemple. També podríem variar el moment del
-mesurament, que en l'exemple es realitza cada 10 segons a, per exemple,
-quan ocórrega un esdeveniment, o en unes certes hores del dia emprant el
-propi RTC.
+En un proyecto real podríamos guardar una o varias mediciones,
+separadas por comas, por ejemplo. También podríamos variar el momento de la
+medición, que en el ejemplo se realiza cada 10 segundos a, por ejemplo,
+cuando ocurra un evento, o en ciertas horas del día empleando el
+propio RTC.
 
 ```Arduino
 
@@ -327,7 +327,7 @@ void setup()
     Serial.println(F("Iniciado correctamente"));
 }
 
-// Funcion que simula la lectura de un sensor
+// Función que simula la lectura de un sensor
 int readSensor()
 {
     return 0;
@@ -371,13 +371,13 @@ void loop()
 
 ```
 
-## Descàrrega
+## Descarga
 
-- [Codi ARD037](https://mega.nz/folder/ee4UharQ#wf_KDJsDrr8pQQlBTt8TEA)
+- [Código ARD037](https://mega.nz/folder/ee4UharQ#wf_KDJsDrr8pQQlBTt8TEA)
 - [Fritzing part Real Time Clock Module - DS1307 RTC Breakout Board](https://mega.nz/file/mDhG3YzR#SxeFgBbHX91ffjRCZkSOqI1vkHtydJynLVofyOY31Bs)
-- [Llibreria DS3231.zip](https://mega.nz/file/nehSTYTC#D3vGWMlD7JKl5dYlAQXs0UOWuh6Ry2Fk-7mGsqJERfA)
-- [Llibreria Adafruit RTClib](https://mega.nz/file/WXgwDAKZ#SCBhuhfib79dAgiHLheFRjpoQD3xmajfFhTInhglVHM)
+- [Librería DS3231.zip](https://mega.nz/file/nehSTYTC#D3vGWMlD7JKl5dYlAQXs0UOWuh6Ry2Fk-7mGsqJERfA)
+- [Librería Adafruit RTClib](https://mega.nz/file/WXgwDAKZ#SCBhuhfib79dAgiHLheFRjpoQD3xmajfFhTInhglVHM)
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
