@@ -1,74 +1,74 @@
-# 32 - Mòdul de relé
+# 32 - Módulo de relé
 
-## Descripció general
+## Descripción general
 
-En aquest experiment, aprendrem a usar el mòdul de relé.
+En este experimento, aprenderemos a usar el módulo de relé.
 
-Un **relé** és un dispositiu electromagnètic, que permet modificar
-l'estat d'un commutador elèctric gràcies a l'electricitat. A grans
-trets, és un commutador elèctric que és accionat per un electroimant que
-obre o tanca un o diversos contactes. Una característica important
-d'aquest component és que permet controlar circuits elèctrics de
-voltatge o intensitat més elevada, amb un senyal elèctric de comandament
-molt inferior al que es pretén commutar.
+Un **relé** es un dispositivo electromagnético, que permite modificar
+el estado de un interruptor eléctrico gracias a la electricidad. A grandes
+rasgos, es un interruptor eléctrico que es accionado por un electroimán que
+abre o cierra uno o varios contactos. Una característica importante
+de este componente es que permite controlar circuitos eléctricos de
+voltaje o intensidad más elevada, con una señal eléctrica de control
+muy inferior a la que se pretende conmutar.
 
-## Mòdul de relé
+## Módulo de relé
 
-Un mòdul de relé adequat per a la connexió directa a una placa Arduino.
-El mòdul requereix una font d'alimentació de 5 V. El senyal de control
-d'entrada s'identifica amb una 'S'. El relé té un contacte inversor.
-És capaç de commutar càrregues resistives de fins a 10 A a 250 VAC i de
-fins a 10 A a 30 V com a màxim.
+Un módulo de relé adecuado para la conexión directa a una placa Arduino.
+El módulo requiere una fuente de alimentación de 5 V. La señal de control
+de entrada se identifica con una 'S'. El relé tiene un contacto inversor.
+Es capaz de conmutar cargas resistivas de hasta 10 A a 250 VAC y de
+hasta 10 A a 30 V como máximo.
 
-![Pins del mòdul KY-019](../imatges/ard/ard_32_01.png)
+![Pines del módulo KY-019](../imatges/ard/ard_32_01.png)
 
-## Introducció als components
+## Introducción a los componentes
 
 ### Relé
 
-Un relé és un interruptor accionat elèctricament. Molts relés usen un
-electroimant per a operar mecànicament un interruptor, però també
-s'usen altres principis operatius, com els **relés d'estat sòlid**.
-Els relés s'utilitzen quan és necessari controlar un circuit mitjançant
-un senyal de baixa potència (amb aïllament elèctric complet entre el
-control i els circuits controlats), o quan diversos circuits han de ser
-controlats per un sol senyal.
+Un relé es un interruptor accionado eléctricamente. Muchos relés usan un
+electroimán para operar mecánicamente un interruptor, pero también
+se usan otros principios operativos, como los **relés de estado sólido**.
+Los relés se utilizan cuando es necesario controlar un circuito mediante
+una señal de baja potencia (con aislamiento eléctrico completo entre el
+control y los circuitos controlados), o cuando varios circuitos han de ser
+controlados por una sola señal.
 
-![Relè en repòs](../imatges/ard/ard_32_02.png)
-![Relé activat](../imatges/ard/ard_32_03.png)
+![Relé en reposo](../imatges/ard/ard_32_02.png)
+![Relé activado](../imatges/ard/ard_32_03.png)
 
-Un tipus de relé que pot manejar l'alta potència requerida per a
-controlar directament un motor elèctric o altres càrregues es diu
-**contactor**. Els relés d'estat sòlid controlen els circuits de
-potència sense parts mòbils, sinó que utilitzen un dispositiu
-semiconductor per a realitzar la commutació.
+Un tipo de relé que puede manejar la alta potencia requerida para
+controlar directamente un motor eléctrico u otras cargas se llama
+**contactor**. Los relés de estado sólido controlan los circuitos de
+potencia sin partes móviles, sino que utilizan un dispositivo
+semiconductor para realizar la conmutación.
 
-Els relés amb característiques operatives calibrades i, a vegades,
-múltiples bobines operatives s'utilitzen per a protegir els circuits
-elèctrics de sobrecàrregues o falles; en els sistemes d'energia
-elèctrica moderns, aquestes funcions les realitzen instruments digitals
-que encara es denominen "**relés de protecció**".
+Los relés con características operativas calibradas y, a veces,
+múltiples bobinas operativas se utilizan para proteger los circuitos
+eléctricos de sobrecargas o fallos; en los sistemas de energía
+eléctrica modernos, estas funciones las realizan instrumentos digitales
+que aún se denominan "**relés de protección**".
 
 ## Material
 
-|                               Imatge                               | Descripció                |
+|                               Imagen                               | Descripción                |
 | :----------------------------------------------------------------: | :------------------------ |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent. |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió        |
-| <img src="./../imatges/mat/mat_KY-019.png" width="50" height="50"> | Mòdul relé KY019          |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente. |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión        |
+| <img src="./../imatges/mat/mat_KY-019.png" width="50" height="50"> | Módulo relé KY019          |
 
-## Connexió
+## Conexión
 
-![Esquema elèctric mòdul KY-019](../imatges/ard/ard_32_04.png)
-![Cablejat mòdul KY-019](../imatges/ard/ard_32_05.png)
+![Esquema eléctrico módulo KY-019](../imatges/ard/ard_32_04.png)
+![Cableado módulo KY-019](../imatges/ard/ard_32_05.png)
 
-## Programació
+## Programación
 
 ```Arduino
 /*
-* Projecte nº: ARD32
-* Data: 31/01/2022
-* Descripcio: Prova del modul rele
+* Proyecto nº: ARD32
+* Fecha: 31/01/2022
+* Descripción: Prueba del módulo relé
 * Nota:
 *
 */
@@ -89,6 +89,6 @@ void loop()
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
