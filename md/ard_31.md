@@ -1,156 +1,156 @@
-# 31 - Mòdul codificador rotatori
+# 31 - Módulo codificador rotatorio
 
-## Descripció general
+## Descripción general
 
-El codificador rotatori és un dispositiu d'entrada rotatori que
-proporciona una indicació de quant s'ha girat la perilla i en quina
-direcció està girant.
+El codificador rotatorio es un dispositivo de entrada rotatorio que
+proporciona una indicación de cuánto se ha girado la perilla y en qué
+dirección está girando.
 
-És un gran dispositiu per al control de motors pas a pas i servo. També
-pot usar-ho per a controlar dispositius com a potenciòmetres digitals.
+Es un gran dispositivo para el control de motores paso a paso y servo. También
+puede usarlo para controlar dispositivos como potenciómetros digitales.
 
-![Pins del mòdul KY-040](../imatges/ard/ard_31_01.png)
+![Pines del módulo KY-040](../imatges/ard/ard_31_01.png)
 
 ## Material
 
-|                               Imatge                               | Descripció                       |
+|                               Imagen                               | Descripción                       |
 | :----------------------------------------------------------------: | :------------------------------- |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.        |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió               |
-| <img src="./../imatges/mat/mat_KY-040.png" width="50" height="50"> | Mòdul codificador rotatori KY040 |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.        |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión               |
+| <img src="./../imatges/mat/mat_KY-040.png" width="50" height="50"> | Módulo codificador rotatorio KY040 |
 
-## Especificacions
+## Especificaciones
 
-- Voltatge de funcionament: 5V
-- Angle mecànic: 360 graus
-- Eixida: codi gris de 2 bits
-- Posicions per revolució: 30
+- Voltaje de funcionamiento: 5V
+- Ángulo mecánico: 360 grados
+- Salida: código gris de 2 bits
+- Posiciones por revolución: 30
 
-## Funcionament
+## Funcionamiento
 
-### Mesurament de posició rotatòria
+### Medición de posición rotatoria
 
-Un codificador rotatori o de "eix" és un dispositiu de mesurament
-angular. S'utilitza per a mesurar amb precisió la rotació dels motors o
-per a crear controladors de roda que poden girar infinitament (sense
-topall final com ho té un potenciòmetre). Alguns d'ells també estan
-equipats amb un botó polsador quan pressiones l'eix (com els que
-s'usen per a la navegació en molts controladors de música). Venen en
-tota mena de resolucions, des de potser 16 fins almenys 1024 passos per
-revolució. Els codificadors industrials venen de 1200PPR a 10000PPR
-(Pols per revolució).
+Un codificador rotatorio o de "eje" es un dispositivo de medición
+angular. Se utiliza para medir con precisión la rotación de los motores o
+para crear controladores de rueda que pueden girar infinitamente (sin
+tope final como lo tiene un potenciómetro). Algunos de ellos también están
+equipados con un botón pulsador cuando presionas el eje (como los que
+se usan para la navegación en muchos controladores de música). Vienen en
+todo tipo de resoluciones, desde quizás 16 hasta al menos 1024 pasos por
+revolución. Los codificadores industriales vienen de 1200PPR a 10000PPR
+(Pulsos por revolución).
 
-### Principi de mesurament
+### Principio de medición
 
-Els codificadors rotatoris tenen dues o tres eixides A, B i Z. A i B
-s'utilitzen per a determinar la direcció de rotació, i comptar el
-nombre de polsos donarà la posició de rotació. Z està disponible en
-codificadors de grau industrial. És pols de posició zero. Només dona un
-pols en una revolució.
+Los codificadores rotatorios tienen dos o tres salidas A, B y Z. A y B
+se utilizan para determinar la dirección de rotación, y contar el
+número de pulsos dará la posición de rotación. Z está disponible en
+codificadores de grado industrial. Es pulso de posición cero. Solo da un
+pulso en una revolución.
 
-## Conceptes bàsics del codificador rotatori
+## Conceptos básicos del codificador rotatorio
 
-Un codificador rotatori té un nombre fix de posicions per revolució
-(PPR). El mòdul Keyes KY-040 té trenta d'aquestes posicions.
+Un codificador rotatorio tiene un número fijo de posiciones por revolución
+(PPR). El módulo Keyes KY-040 tiene treinta de estas posiciones.
 
-En un costat de l'interruptor hi ha tres pins. En el cas del KY-040,
-estan orientats com es mostra.
+En un lado del interruptor hay tres pines. En el caso del KY-040,
+están orientados como se muestra.
 
-![Pins del mòdul KY-040](../imatges/ard/ard_31_02.png)
+![Pines del módulo KY-040](../imatges/ard/ard_31_02.png)
 
-Dins del codificador hi ha dos interruptors. Un interruptor connecta el
-pin 1 al pin 2, i l'altre interruptor connecta el pin 1 al 3.
+Dentro del codificador hay dos interruptores. Un interruptor conecta el
+pin 1 al pin 2, y el otro interruptor conecta el pin 1 al 3.
 
-En cada posició del codificador, tots dos interruptors estan oberts o
-tancats. Cada moviment angular fa que aquests interruptors canvien
-d'estat de la següent manera:
+En cada posición del codificador, ambos interruptores están abiertos o
+cerrados. Cada movimiento angular hace que estos interruptores cambien
+de estado de la siguiente manera:
 
-- Si tots dos interruptors estan tancats, girar el codificador en
-  sentit horari o antihorari una posició farà que tots dos
-  interruptors s'òbriguen
-- Si tots dos interruptors estan oberts, girar el codificador en
-  sentit horari o antihorari una posició farà que tots dos
-  interruptors es tanquen.
+- Si ambos interruptores están cerrados, girar el codificador en
+  sentido horario o antihorario una posición hará que ambos
+  interruptores se abran
+- Si ambos interruptores están abiertos, girar el codificador en
+  sentido horario o antihorario una posición hará que ambos
+  interruptores se cierren.
 
-La següent il·lustració és representativa de com es construeix
-l'interruptor.
+La siguiente ilustración es representativa de cómo se construye
+el interruptor.
 
-![Tipus de codificador rotatiu](../imatges/ard/ard_31_03.png)
+![Tipo de codificador rotativo](../imatges/ard/ard_31_03.png)
 
-La mesura del angle de rotació es calcula amb la següent formula:
+La medición del ángulo de rotación se calcula con la siguiente fórmula:
 
-$$Angle = \left(\frac{360}{ppr}\right)·polsos$$
+$$Angulo = \left(\frac{360}{ppr}\right)·pulsos$$
 
-L'eixida A està connectada a la interrupció (ASCENS) i quan ocorre la
-interrupció, depenent de l'estat de l'eixida B, el comptatge de polsos
-s'incrementa o disminueix.
+La salida A está conectada a la interrupción (ASCENSO) y cuando ocurre la
+interrupción, dependiendo del estado de la salida B, el conteo de pulsos
+se incrementa o disminuye.
 
-Com podem veure, la posició angular de la terminal A i la terminal B és
+Como podemos ver, la posición angular de la terminal A y la terminal B es
 tal que:
 
-- Girar l'interruptor en el sentit de les agulles del rellotge farà
-  que l'interruptor que connecta A i C canvie primer d'estat.
-- Girar l'interruptor en sentit contrari a les agulles del rellotge
-  farà que l'interruptor que connecta B i C canvie primer d'estat.
+- Girar el interruptor en el sentido de las agujas del reloj hará
+  que el interruptor que conecta A y C cambie primero de estado.
+- Girar el interruptor en sentido contrario a las agujas del reloj hará
+  que el interruptor que conecta B y C cambie primero de estado.
 
-Si haguérem de representar l'obertura i el tancament dels interruptors
-com a formes d'ona, es veuria així:
+Si tuviéramos que representar la apertura y el cierre de los interruptores
+como formas de onda, se vería así:
 
-![Principi bàsic d'eixida](../imatges/ard/ard_31_04.gif)
+![Principio básico de salida](../imatges/ard/ard_31_04.gif)
 
-Hi ha molts codificadors disponibles en el mercat, tots tenen el
-principi bàsic d'eixida A,B, com es mostra en la figura. Alguns dels
-codificadors tenen GND, +V, SW, DT, CLK. La configuració de pins
-d'aquests codificadors és:
+Hay muchos codificadores disponibles en el mercado, todos tienen el
+principio básico de salida A,B, como se muestra en la figura. Algunos de los
+codificadores tienen GND, +V, SW, DT, CLK. La configuración de pines
+de estos codificadores es:
 
 - CLK = A
 - DT = B
-- SW = interruptor de pressió
+- SW = interruptor de presión
 - VCC = (+) 5V
 - GND = (-)
 
-El mòdul està dissenyat perquè l'eixida siga baixa quan els
-interruptors estan tancats i alta quan els interruptors estan oberts.
+El módulo está diseñado para que la salida sea baja cuando los
+interruptores están cerrados y alta cuando los interruptores están abiertos.
 
-El nivell baix es genera col·locant una connexió a terra en el pin C i
-passant-la als pins CLK i DT quan els interruptors estan tancats.
+El nivel bajo se genera colocando una conexión a tierra en el pin C y
+pasándola a los pines CLK y DT cuando los interruptores están cerrados.
 
-El nivell alt es genera amb una entrada de subministrament de 5 V i
-resistències pull-up, de manera que CLK i DT estan alts quan els
-interruptors estan oberts.
+El nivel alto se genera con una entrada de suministro de 5 V y
+resistencias pull-up, de manera que CLK y DT están altos cuando los
+interruptores están abiertos.
 
-No es va esmentar anteriorment l'existència d'un interruptor de botó
-que és part integral del codificador. Si espenta l'eix, un interruptor
-normalment obert es tancarà. La funció és útil si desitja canviar la
-funció de l'interruptor. Per exemple, és possible que desitge tindre la
-capacitat de realitzar ajustos gruixuts i fins.
+No se mencionó anteriormente la existencia de un interruptor de botón
+que es parte integral del codificador. Si empuja el eje, un interruptor
+normalmente abierto se cerrará. La función es útil si desea cambiar la
+función del interruptor. Por ejemplo, es posible que desee tener la
+capacidad de realizar ajustes gruesos y finos.
 
-## Connexió
+## Conexión
 
-![Esquema elèctric mòdul KY-040](../imatges/ard/ard_31_05.png)
-![Cablejat mòdul KY-040](../imatges/ard/ard_31_06.png)
+![Esquema eléctrico módulo KY-040](../imatges/ard/ard_31_05.png)
+![Cableado módulo KY-040](../imatges/ard/ard_31_06.png)
 
-## Programació
+## Programación
 
-Codi: ARD031
+Código: ARD031
 
 ```Arduino
 /*
-* Projecte nº: ARD031
-* Data: 29/01/2022
-* Descripcio: Prova del modul encoder KY040
+* Proyecto nº: ARD031
+* Fecha: 29/01/2022
+* Descripción: Prueba del módulo encoder KY040
 * Nota:
 *
 */
 
-//Define the pin connection
+//Define la conexión de pines
 
 int CLK = 2;//CLK->D2
 int DT = 3;//DT->D3
 int SW = 4;//SW->D4
 const int interrupt0 = 0;
-int count = 0;//Define the count
-int lastCLK = 0;//CLK initial value
+int count = 0;//Define el contador
+int lastCLK = 0;//Valor inicial de CLK
 
 void setup()
 {
@@ -158,36 +158,36 @@ void setup()
     digitalWrite(SW, HIGH);
     pinMode(CLK, INPUT);
     pinMode(DT, INPUT);
-    attachInterrupt(interrupt0, ClockChanged, CHANGE);//Set the interrupt 0 handler, trigger level change
+    attachInterrupt(interrupt0, ClockChanged, CHANGE);//Configura el manejador de interrupción 0, nivel de disparo cambio
     Serial.begin(9600);
 }
 
 void loop()
 {
-    if (!digitalRead(SW) && count != 0) //Read the button press and the count value to 0 when the counter reset
+    if (!digitalRead(SW) && count != 0) //Lee la presión del botón y el valor del contador a 0 cuando se reinicia el contador
     {
         count = 0;
-        Serial.print("count:");
+        Serial.print("contador:");
         Serial.println(count);
     }
 }
 
-//The interrupt handlers
+//Los manejadores de interrupción
 
 void ClockChanged()
 {
-    int clkValue = digitalRead(CLK);//Read the CLK pin level
-    int dtValue = digitalRead(DT);//Read the DT pin level
+    int clkValue = digitalRead(CLK);//Lee el nivel del pin CLK
+    int dtValue = digitalRead(DT);//Lee el nivel del pin DT
     if (lastCLK != clkValue)
     {
         lastCLK = clkValue;
-        count += (clkValue != dtValue ? 1 : -1);//CLK and inconsistent DT, +1, otherwise -1
-        Serial.print("count:");
+        count += (clkValue != dtValue ? 1 : -1);//CLK y DT inconsistentes, +1, en caso contrario -1
+        Serial.print("contador:");
         Serial.println(count);
     }
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
