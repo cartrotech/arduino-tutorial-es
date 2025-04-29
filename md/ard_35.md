@@ -1,141 +1,141 @@
-# 35 - Mòdul sensor PIR HC-SR501
+# 35 - Módulo sensor PIR HC-SR501
 
-## Descripció general
+## Descripción general
 
-En aquesta lliçó aprendrà a utilitzar un detector de moviment PIR amb un
+En esta lección aprenderá a utilizar un detector de movimiento PIR con un
 Arduino UNO.
 
-L'arduino UNO és el cor d'aquest projecte. 'Escolta' al sensor PIR i
-quan detecta moviment, indica al LED que s'encenga o s'apague.
+El Arduino UNO es el corazón de este proyecto. 'Escucha' al sensor PIR y
+cuando detecta movimiento, indica al LED que se encienda o se apague.
 
 ## Material
 
-|                                Imatge                                | Descripció                |
+|                                Imagen                                | Descripción                |
 | :------------------------------------------------------------------: | :------------------------ |
-|  <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">   | Arduino Uno o equivalent. |
-|  <img src="./../imatges/mat/mat_cables.png" width="50" height="50">  | Cables de connexió        |
-| <img src="./../imatges/mat/mat_HC-SR501.png" width="50" height="50"> | Módul sensor PIR HC-SR501 |
+|  <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">   | Arduino Uno o equivalente. |
+|  <img src="./../imatges/mat/mat_cables.png" width="50" height="50">  | Cables de conexión        |
+| <img src="./../imatges/mat/mat_HC-SR501.png" width="50" height="50"> | Módulo sensor PIR HC-SR501 |
 
-## Introducció als components
+## Introducción a los componentes
 
-![Parts del mòdul](../imatges/ard/ard_35_01.png)
+![Partes del módulo](../imatges/ard/ard_35_01.png)
 
-### Sensor pir
+### Sensor PIR
 
-Els sensors PIR són més complicats que molts dels altres sensors
-explicats en aquest tutorial (com a fotocèl·lules, interruptors
-d'inclinació, ...) perquè existeixen múltiples variables que afecten
-l'entrada i eixida dels sensors.
+Los sensores PIR son más complicados que muchos de los otros sensores
+explicados en este tutorial (como fotocélulas, interruptores
+de inclinación, ...) porque existen múltiples variables que afectan
+la entrada y salida de los sensores.
 
-El sensor PIR en si té dues ranures. Cada ranura està feta d'un
-material especial que és sensible a IR. La lent utilitzada ací realment
-no està fent molt, per la qual cosa veiem que les dues ranures poden
-'veure' més enllà d'una certa distància (bàsicament, la sensibilitat
-del sensor). Quan el sensor està inactiu, totes dues ranures detecten la
-mateixa quantitat d'IR, la quantitat ambiental radiada des de
-l'habitació, les parets o l'exterior. Quan passa un cos calent com un
-ésser humà o un animal, primer intercepta la meitat del sensor PIR, la
-qual cosa provoca un canvi diferencial positiu entre les dues parts.
-Quan el cos calent ix de l'àrea de detecció, ocorre el contrari, per la
-qual cosa el sensor genera un canvi diferencial negatiu. Aquests polsos
-de canvi són el que es detecta.
+El sensor PIR en sí tiene dos ranuras. Cada ranura está hecha de un
+material especial que es sensible a IR. La lente utilizada aquí realmente
+no está haciendo mucho, por lo que vemos que las dos ranuras pueden
+'ver' más allá de una cierta distancia (básicamente, la sensibilidad
+del sensor). Cuando el sensor está inactivo, ambas ranuras detectan la
+misma cantidad de IR, la cantidad ambiental radiada desde
+la habitación, las paredes o el exterior. Cuando pasa un cuerpo caliente como un
+ser humano o un animal, primero intercepta la mitad del sensor PIR, lo
+que provoca un cambio diferencial positivo entre las dos partes.
+Cuando el cuerpo caliente sale del área de detección, ocurre lo contrario, por lo
+que el sensor genera un cambio diferencial negativo. Estos pulsos
+de cambio son los que se detectan.
 
-![Funcionament](../imatges/ard/ard_35_02.jpeg)
+![Funcionamiento](../imatges/ard/ard_35_02.jpeg)
 
-| Pin del mòdul            | Funció                                                                                                |
+| Pin del módulo            | Función                                                                                                |
 | ------------------------ | ----------------------------------------------------------------------------------------------------- |
-| Ajust de retard          | Estableix quant temps roman alta l'eixida després de detectar moviment.... Entre 5 segons i 5 minuts. |
-| Ajust de sensibilitat    | Estableix el rang de detecció... de 3 metres a 7 metres                                               |
-| Pont de selecció de tret | Joc de ponts per a trets simples o repetibles.                                                        |
+| Ajuste de retardo          | Establece cuánto tiempo permanece alta la salida después de detectar movimiento.... Entre 5 segundos y 5 minutos. |
+| Ajuste de sensibilidad    | Establece el rango de detección... de 3 metros a 7 metros                                               |
+| Puente de selección de disparo | Juego de puentes para disparos simples o repetibles.                                                        |
 | GND                      | GND                                                                                                   |
-| Pin d'eixida             | LOW quan no es detecta moviment. HIGH quan es detecta moviment.                                       |
-| Vcc                      | Alimentació                                                                                           |
+| Pin de salida             | LOW cuando no se detecta movimiento. HIGH cuando se detecta movimiento.                                       |
+| Vcc                      | Alimentación                                                                                           |
 
-## HC SR501 PIR Descripció funcional
+## HC SR501 PIR Descripción funcional
 
-El SR501 detectarà canvis infrarojos i, si s'interpreta com a moviment,
-establirà la seua eixida en un nivell alt. El que s'interpreta o no com
-a moviment depén en gran manera de la configuració i els ajustos de
-l'usuari.
+El SR501 detectará cambios infrarrojos y, si se interpreta como movimiento,
+establecerá su salida en un nivel alto. Lo que se interpreta o no como
+movimiento depende en gran medida de la configuración y los ajustes del
+usuario.
 
-### Inicialització del dispositiu
+### Inicialización del dispositivo
 
-El dispositiu requereix quasi un minut per a inicialitzar-se. Durant
-aquest període, pot emetre senyals de detecció falses, i amb freqüència
-ho farà. La lògica del circuit o del controlador ha de tindre en compte
-aquest període d'inicialització.
+El dispositivo requiere casi un minuto para inicializarse. Durante
+este período, puede emitir señales de detección falsas, y con frecuencia
+lo hará. La lógica del circuito o del controlador debe tener en cuenta
+este período de inicialización.
 
-### Àrea de detecció del dispositiu
+### Área de detección del dispositivo
 
-El dispositiu detectarà moviment dins d'un con de 110 graus amb un
-abast de 3 a 7 metres.
+El dispositivo detectará movimiento dentro de un cono de 110 grados con un
+alcance de 3 a 7 metros.
 
-![Àrea de detecció](../imatges/ard/ard_35_03.jpeg)
+![Área de detección](../imatges/ard/ard_35_03.jpeg)
 
-### HC SR501 Àrea de visualització
+### HC SR501 Área de visualización
 
-Ajust del rang PIR (Sensibilitat) com es va esmentar, el rang ajustable
-és d'aproximadament 3 a 7 metres. La següent taula mostra aquest ajust.
+Ajuste del rango PIR (Sensibilidad) como se mencionó, el rango ajustable
+es de aproximadamente 3 a 7 metros. La siguiente tabla muestra este ajuste.
 
-|                                Gir                                 | Descripció                                                                                                      |
+|                                Giro                                 | Descripción                                                                                                      |
 | :----------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------- |
-| <img src="./../imatges/ard/ard_35_04.jpeg" width="50" height="50"> | Cap a la dreta. Disminuir la sensibilitat. Totalment a la dreta i l'abast serà d'aproximadament 3 metres.       |
-| <img src="./../imatges/ard/ard_35_05.jpeg" width="50" height="50"> | Cap a l'esquerra. Augmenta la sensibilitat. Completament a l'esquerra i l'abast serà d'aproximadament 7 metres. |
+| <img src="./../imatges/ard/ard_35_04.jpeg" width="50" height="50"> | Hacia la derecha. Disminuir la sensibilidad. Totalmente a la derecha y el alcance será de aproximadamente 3 metros.       |
+| <img src="./../imatges/ard/ard_35_05.jpeg" width="50" height="50"> | Hacia la izquierda. Aumenta la sensibilidad. Completamente a la izquierda y el alcance será de aproximadamente 7 metros. |
 
-### HC SR501 Ajust de retard de temps
+### HC SR501 Ajuste de retardo de tiempo
 
-L'ajust de retard de temps determina quant temps romandrà alta
-l'eixida del mòdul del sensor PIR després de la detecció de moviment.
-El rang és d'aproximadament 3 segons a cinc minuts.
+El ajuste de retardo de tiempo determina cuánto tiempo permanecerá alta
+la salida del módulo del sensor PIR después de la detección de movimiento.
+El rango es de aproximadamente 3 segundos a cinco minutos.
 
-|                                Gir                                 | Descripció                                                                                                        |
+|                                Giro                                 | Descripción                                                                                                        |
 | :----------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------- |
-| <img src="./../imatges/ard/ard_35_04.jpeg" width="50" height="50"> | Cap a la dreta. Augmentar el retard. Totalment a la dreta i el retard serà d'aproximadament 5 min.                |
-| <img src="./../imatges/ard/ard_35_05.jpeg" width="50" height="50"> | Cap a l'esquerra. Augmenta la sensibilitat. Completament a l'esquerra i el retard serà d'aproximadament 3 segons. |
+| <img src="./../imatges/ard/ard_35_04.jpeg" width="50" height="50"> | Hacia la derecha. Aumentar el retardo. Totalmente a la derecha y el retardo será de aproximadamente 5 min.                |
+| <img src="./../imatges/ard/ard_35_05.jpeg" width="50" height="50"> | Hacia la izquierda. Aumenta la sensibilidad. Completamente a la izquierda y el retardo será de aproximadamente 3 segundos. |
 
-**IMPORTANT**: són necessaris 3 segons d'inactivitat desprès que es complete
-el temps de retard.
+**IMPORTANTE**: son necesarios 3 segundos de inactividad después de que se complete
+el tiempo de retardo.
 
-L'eixida d'aquest dispositiu passarà a BAIX (o apagat) durant
-aproximadament 3 segons després que finalitze el temps de retard. En
-altres paraules, tota la detecció de moviment es bloqueja durant aquest
-període de tres segons.
+La salida de este dispositivo pasará a BAJO (o apagado) durante
+aproximadamente 3 segundos después de que finalice el tiempo de retardo. En
+otras palabras, toda la detección de movimiento se bloquea durante este
+período de tres segundos.
 
-Per exemple:
+Por ejemplo:
 
-Imagina que estàs en el mode de tret únic i el teu temps de retard està
-establit en 5 segons. El PIR detectarà moviment i ho configurarà alt
-durant 5 segons. Després de cinc segons, el PIR establirà la seua eixida
-baixa durant uns 3 segons. Durant els tres segons, el PIR no detectarà
-moviment. Després de tres segons, el PIR detectarà moviment novament i
-el moviment detectat establirà una vegada més l'eixida alta.
+Imagina que estás en el modo de disparo único y tu tiempo de retardo está
+establecido en 5 segundos. El PIR detectará movimiento y lo configurará alto
+durante 5 segundos. Después de cinco segundos, el PIR establecerá su salida
+baja durante unos 3 segundos. Durante los tres segundos, el PIR no detectará
+movimiento. Después de tres segundos, el PIR detectará movimiento nuevamente y
+el movimiento detectado establecerá una vez más la salida alta.
 
-### Pont de selecció de mode de tret
+### Puente de selección de modo de disparo
 
-El pont de selecció de mode de tret li permet seleccionar entre trets
-simples i repetibles. L'efecte d'aquesta configuració de pont és
-determinar quan comença el retard de temps.
+El puente de selección de modo de disparo le permite seleccionar entre disparos
+simples y repetibles. El efecto de esta configuración de puente es
+determinar cuándo comienza el retardo de tiempo.
 
-- **DISPARADOR ÚNIC**: el temps de retard comença immediatament quan es
-  detecta moviment per primera vegada.
-- **DISPARADOR REPETIBLE**: cada moviment detectat restableix el retard de
-  temps. Així, el retard de temps comença amb l'últim moviment
-  detectat.
+- **DISPARADOR ÚNICO**: el tiempo de retardo comienza inmediatamente cuando se
+  detecta movimiento por primera vez.
+- **DISPARADOR REPETIBLE**: cada movimiento detectado reinicia el retardo de
+  tiempo. Así, el retardo de tiempo comienza con el último movimiento
+  detectado.
 
-## Connexió
+## Conexión
 
-![Esquema elèctric](../imatges/ard/ard_35_06.png)
-![Cablejat](../imatges/ard/ard_35_07.png)
+![Esquema eléctrico](../imatges/ard/ard_35_06.png)
+![Cableado](../imatges/ard/ard_35_07.png)
 
-## Programació
+## Programación
 
-**Codi:ARD035**
+**Código:ARD035**
 
 ```Arduino
 /*
-* Projecte nº: ARD035
-* Data: 07/02/2022
-* Descripcio: Prova del sensor HC SR501
+* Proyecto nº: ARD035
+* Fecha: 07/02/2022
+* Descripción: Prueba del sensor HC SR501
 * Nota:
 *
 */
@@ -166,6 +166,6 @@ void loop()
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
