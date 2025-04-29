@@ -1,56 +1,50 @@
-# 27 -- Mòdul led flash de set colors
+# 27 -- Módulo LED flash de siete colores
 
-## Descripció general
+## Descripción general
 
-En aquest experiment, aprendrem a usar el mòdul LED de flaix de set
-colors.
+En este experimento, aprenderemos a usar el módulo LED de flash de siete colores.
 
-## Mòdul led flash de set colors
+## Módulo LED flash de siete colores
 
-LED transparent de 5 mm per a funcionament directe des de 5V. El color
-del LED canvia automàticament a través d\'una seqüència de set colors.
-L'alimentació de 5 V es connecta al pin \'S\' i es connecta a terra el
-pin central.
+LED transparente de 5 mm para funcionamiento directo desde 5V. El color del LED cambia automáticamente a través de una secuencia de siete colores. La alimentación de 5 V se conecta al pin 'S' y se conecta a tierra el pin central.
 
-![Pins del mòdul KY-034](../imatges/ard/ard_27_01.png)
+![Pines del módulo KY-034](../imatges/ard/ard_27_01.png)
 
 ## Material
 
-|                               Imatge                               | Descripció                           |
+|                               Imagen                               | Descripción                           |
 | :----------------------------------------------------------------: | :----------------------------------- |
-| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent.            |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de connexió                   |
-| <img src="./../imatges/mat/mat_KY-034.png" width="50" height="50"> | Un mòdul led flash de 7 colors KY034 |
+| <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente.            |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50"> | Cables de conexión                   |
+| <img src="./../imatges/mat/mat_KY-034.png" width="50" height="50"> | Un módulo LED flash de 7 colores KY034 |
 
-## Components
+## Componentes
 
-### Led flash de set colors
+### LED flash de siete colores
 
-El mòdul LED intermitent de 7 colors utilitza automàticament un díode
-emissor de llum redó d\'alta lluentor de 5 mm que té les següents
-característiques:
+El módulo LED intermitente de 7 colores utiliza automáticamente un diodo emisor de luz redondo de alta luminosidad de 5 mm que tiene las siguientes características:
 
-- Tipus de producte: LED
-- Model del producte: YB-3120B4 Pn YG-PM
-- Forma: LED redó tipus DIP de 5 mm
-- Color: rosa groc verd (alta lluentor) Tipus de lent: boira blanca
-- Voltatge directe estàndard: 3.0-4 .5V
+- Tipo de producto: LED
+- Modelo del producto: YB-3120B4 Pn YG-PM
+- Forma: LED redondo tipo DIP de 5 mm
+- Color: rosa amarillo verde (alta luminosidad) Tipo de lente: niebla blanca
+- Voltaje directo estándar: 3.0-4.5V
 
-## Connexions
+## Conexiones
 
-![Esquema elèctric mòdul KY-034](../imatges/ard/ard_27_02.png)
-![Cablejat mòdul KY-034](../imatges/ard/ard_27_03.png)
+![Esquema eléctrico módulo KY-034](../imatges/ard/ard_27_02.png)
+![Cableado módulo KY-034](../imatges/ard/ard_27_03.png)
 
-## Programació
+## Programación
 
-Codi: ARD027
+Código: ARD027
 
 ```Arduino
 /*
-* Projecte nº: ARD027
-* Data: 20/01/2022
-* Descripcio: Us del led flash de 7 colors
-* Nota: Encen el LED i va repetint la sequencia
+* Proyecto nº: ARD027
+* Fecha: 20/01/2022
+* Descripción: Uso del LED flash de 7 colores
+* Nota: Enciende el LED y va repitiendo la secuencia
 */
 
 void setup()
@@ -64,6 +58,6 @@ void loop()
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
