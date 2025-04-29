@@ -1,126 +1,125 @@
-# 33 - Mòdul sensor ultrasònic
+# 33 - Módulo sensor ultrasónico
 
-## Descripció general
+## Descripción general
 
-El sensor ultrasònic és excel·lent per a tota mena de projectes que
-necessiten mesuraments de distància, evitar obstacles per exemple.
+El sensor ultrasónico es excelente para todo tipo de proyectos que
+necesitan mediciones de distancia, como evitar obstáculos por ejemplo.
 
-L'HC-SR04 és econòmic i fàcil d'usar, ja que disposem d'una biblioteca
-dissenyada específicament per a aquests sensors.
+El HC-SR04 es económico y fácil de usar, ya que disponemos de una biblioteca
+diseñada específicamente para estos sensores.
 
-![Módul sensor ultrasònic HC-SR04](../imatges/ard/ard_33_01.png)
+![Módulo sensor ultrasónico HC-SR04](../imatges/ard/ard_33_01.png)
 
 ## Material
 
-|                               Imatge                                | Descripció                |
+|                               Imagen                                | Descripción                |
 | :-----------------------------------------------------------------: | :------------------------ |
-|  <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalent. |
-| <img src="./../imatges/mat/mat_cables.png" width="50" height="50">  | Cables de connexió        |
-| <img src="./../imatges/mat/mat_HC-SR04.png" width="50" height="50"> | Mòdul ultrasònic HC-SR04  |
+|  <img src="./../imatges/mat/mat_unor3.png" width="50" height="50">  | Arduino Uno o equivalente. |
+| <img src="./../imatges/mat/mat_cables.png" width="50" height="50">  | Cables de conexión        |
+| <img src="./../imatges/mat/mat_HC-SR04.png" width="50" height="50"> | Módulo ultrasónico HC-SR04  |
 
-## Introducció de components
+## Introducción de componentes
 
-### Sensor ultrasònic
+### Sensor ultrasónico
 
-Els sensors ultrasònics funcionen emetent ones de so amb una freqüència
-que és massa alta perquè un humà les escolte. Aquestes ones sonores
-viatgen per l'aire a la velocitat del so, aproximadament 343 m/s. Si hi
-ha un objecte enfront del sensor, les ones sonores es reflecteixen i el
-receptor del sensor ultrasònic les detecta. En mesurar quant temps va
-passar entre l'enviament i la recepció de les ones de so, es pot
-calcular la distància entre el sensor i l'objecte.
+Los sensores ultrasónicos funcionan emitiendo ondas de sonido con una frecuencia
+que es demasiado alta para que un humano las escuche. Estas ondas sonoras
+viajan por el aire a la velocidad del sonido, aproximadamente 343 m/s. Si hay
+un objeto frente al sensor, las ondas sonoras se reflejan y el receptor del sensor
+ultrasónico las detecta. Al medir cuánto tiempo pasó entre el envío y la recepción
+de las ondas de sonido, se puede calcular la distancia entre el sensor y el objeto.
 
-![Funcionament del sensor ultrasònic](../imatges/ard/ard_33_02.png)
+![Funcionamiento del sensor ultrasónico](../imatges/ard/ard_33_02.png)
 
-A 20 °C, la velocitat del so és d'aproximadament 343 m/s o 0,034 cm/µs.
-Diguem que el temps entre l'enviament i la recepció de les ones sonores
-és de 2000 µs (microsegons). Si multipliques la velocitat del so pel
-temps que van recórrer les ones sonores, obtens la distància que van
-recórrer les ones sonores.
+A 20 °C, la velocidad del sonido es de aproximadamente 343 m/s o 0,034 cm/µs.
+Digamos que el tiempo entre el envío y la recepción de las ondas sonoras
+es de 2000 µs (microsegundos). Si multiplicas la velocidad del sonido por el
+tiempo que recorrieron las ondas sonoras, obtienes la distancia que recorrieron
+las ondas sonoras.
 
-$$Distància = Velocitat · Temps$$
+$$Distancia = Velocidad · Tiempo$$
 
-Però aqueix no és el resultat que busquem. La distància entre el sensor
-i l'objecte és en realitat només la meitat d'aquesta distància perquè
-les ones sonores van viatjar del sensor a l'objecte i de tornada de
-l'objecte al sensor. Llavors necessites dividir el resultat per dos.
+Pero este no es el resultado que buscamos. La distancia entre el sensor
+y el objeto es en realidad solo la mitad de esta distancia porque
+las ondas sonoras viajaron del sensor al objeto y de vuelta del
+objeto al sensor. Entonces necesitas dividir el resultado por dos.
 
-$$Distància (cm) = \frac{V_{so}(cm/\mu s) · T (\mu s)}{2}$$
+$$Distancia (cm) = \frac{V_{sonido}(cm/\mu s) · T (\mu s)}{2}$$
 
-I així, per a l'exemple, això es converteix en:
+Y así, para el ejemplo, esto se convierte en:
 
-$$Distància (cm) = \frac{0,0343(cm/\mu s) · 2000 (\mu s)}{2} = 34,3 cm$$
+$$Distancia (cm) = \frac{0,0343(cm/\mu s) · 2000 (\mu s)}{2} = 34,3 cm$$
 
-### Dependència de la velocitat del so amb la temperatura
+### Dependencia de la velocidad del sonido con la temperatura
 
-La velocitat del so en realitat depén en gran manera de la temperatura i
-en un grau molt de menor de la humitat de l'aire. Wikipedia afirma que
-la velocitat del so augmenta aproximadament 0,6 m/s per grau Celsius.
-Per a la majoria dels casos a 20 °C, pot usar 343 m/s, però si desitja
-obtindre lectures més precises, pot calcular la velocitat del so amb la
-següent fórmula:
+La velocidad del sonido en realidad depende en gran medida de la temperatura y
+en un grado mucho menor de la humedad del aire. Wikipedia afirma que
+la velocidad del sonido aumenta aproximadamente 0,6 m/s por grado Celsius.
+Para la mayoría de los casos a 20 °C, puede usar 343 m/s, pero si desea
+obtener lecturas más precisas, puede calcular la velocidad del sonido con la
+siguiente fórmula:
 
-$$V_{so} (m/s) = 331,3 + (0,606 · T (ºC))$$
+$$V_{sonido} (m/s) = 331,3 + (0,606 · T (ºC))$$
 
-- V = Velocitat del so (m/s)
-- T = Temperatura de l'aire (°C)
+- V = Velocidad del sonido (m/s)
+- T = Temperatura del aire (°C)
 
-Aquesta fórmula no inclou la humitat ja que el seu efecte sobre la
-velocitat del so és molt xicotet.
+Esta fórmula no incluye la humedad ya que su efecto sobre la
+velocidad del sonido es muy pequeño.
 
-Podem usar un sensor de temperatura i humitat DHT11 per a calibrar la
-velocitat del so i obtindre una lectura de distància més precisa amb
-l'HC-SR04.
+Podemos usar un sensor de temperatura y humedad DHT11 para calibrar la
+velocidad del sonido y obtener una lectura de distancia más precisa con
+el HC-SR04.
 
-## Com funciona l'HC-SR04
+## Cómo funciona el HC-SR04
 
-En la part frontal del sensor HC-SR04, pot trobar dos cilindres
-platejats (transductors ultrasònics), un és el transmissor de les ones
-de so i l'altre és el receptor. Per a permetre que el sensor genere una
-explosió sònica, ha de configurar el pin Trig alt durant almenys 10 µs.
-Després, el sensor crea una ràfega d'ultrasò de 8 cicles a 40 kHz.
+En la parte frontal del sensor HC-SR04, puede encontrar dos cilindros
+plateados (transductores ultrasónicos), uno es el transmisor de las ondas
+de sonido y el otro es el receptor. Para permitir que el sensor genere una
+explosión sónica, debe configurar el pin Trig en alto durante al menos 10 µs.
+Después, el sensor crea una ráfaga de ultrasonido de 8 ciclos a 40 kHz.
 
-Aquest esclat sònic viatja a la velocitat del so, rebota i és rebut pel
-receptor del sensor. El pin Echo després emet el temps que les ones de
-so van viatjar en microsegons.
+Esta explosión sónica viaja a la velocidad del sonido, rebota y es recibida por el
+receptor del sensor. El pin Echo luego emite el tiempo que las ondas de
+sonido viajaron en microsegundos.
 
-Pot usar la funció _pulseIn()_ en el codi Arduino per a llegir la
-longitud del pols del pin Echo. Després d'això, pot usar la fórmula
-esmentada anteriorment per a calcular la distància entre el sensor i
-l'objecte.
+Puede usar la función _pulseIn()_ en el código Arduino para leer la
+longitud del pulso del pin Echo. Después de esto, puede usar la fórmula
+mencionada anteriormente para calcular la distancia entre el sensor y el
+objeto.
 
-## Especificacions
+## Especificaciones
 
-- Voltatge de funcionament: 5 V
-- Corrent de funcionament: 15 dt.
-- Freqüència: 40kHz
-- Rang de mesurament: 2 -- 400 cm
-- Resolució: 3mm
-- Angle de mesurament: 15 graus
-- Senyal d'entrada de tret (trigger): 10 µs de pols alt
+- Voltaje de funcionamiento: 5 V
+- Corriente de funcionamiento: 15 mA
+- Frecuencia: 40kHz
+- Rango de medición: 2 -- 400 cm
+- Resolución: 3mm
+- Ángulo de medición: 15 grados
+- Señal de entrada de disparo (trigger): 10 µs de pulso alto
 
-## Connexions
+## Conexiones
 
-![Esquema elèctric connexió HC-SR04](../imatges/ard/ard_33_03.png)
-![Cablejat HC-SR04](../imatges/ard/ard_33_04.png)
+![Esquema eléctrico conexión HC-SR04](../imatges/ard/ard_33_03.png)
+![Cableado HC-SR04](../imatges/ard/ard_33_04.png)
 
 | HC-SR04 | Arduino |
 | :-----: | :-----: |
 |   VCC   |   5 V   |
 |  Trig   |  Pin 2  |
-|  Echo   | Pin 31  |
+|  Echo   | Pin 3   |
 |   GND   |   GND   |
 
-## Programació
+## Programación
 
-El següent codi prova el funcionament del sensor fent ús de la
+El siguiente código prueba el funcionamiento del sensor haciendo uso de la
 biblioteca «NewPing».
 
 ```Arduino
 /*
-* Projecte nº: ARD033
-* Data: 01/02/2022
-* Descripcio: Prova del HC-SR04 amb bibliteca
+* Proyecto nº: ARD033
+* Fecha: 01/02/2022
+* Descripción: Prueba del HC-SR04 con biblioteca
 * Nota:
 *
 */
@@ -141,66 +140,66 @@ void loop()
 {
   delay(500);
   unsigned int uS = sonar.ping();
-  Serial.print(\"Ping: \");
+  Serial.print("Ping: ");
   Serial.print(uS / US_ROUNDTRIP_CM);
-  Serial.println(\"cm\");
+  Serial.println("cm");
 }
 ```
 
-Aquest codi no utilitza cap biblioteca.
+Este código no utiliza ninguna biblioteca.
 
 ```Arduino
 /*
-* Projecte nº: ARD033b
-* Data: 01/02/2022
-* Descripcio: Prova de HC-SR04 sense biblioteca
+* Proyecto nº: ARD033b
+* Fecha: 01/02/2022
+* Descripción: Prueba de HC-SR04 sin biblioteca
 * Nota:
 *
 */
 
-// Defineix pins Trig and Echo
+// Define pins Trig and Echo
 #define trigPin 2
 #define echoPin 3
 
-// Defineix variables
+// Define variables
 long duration;
 int distance;
 
 void setup()
 {
-  // Defineix entrades i eixides
+  // Define entradas y salidas
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
-  //Inicia comunicació serie a 9600 bps
+  //Inicia comunicación serie a 9600 bps
   Serial.begin(9600);
 }
 
 void loop()
 {
-  // Llimpia trigPin ficant l'eixida a LOW
+  // Limpia trigPin poniendo la salida a LOW
   digitalWrite(trigPin, LOW);
   delayMicroseconds(5);
 
-  // Dispara el sensor establint trigPin a HIGH per 10 microsegons:
+  // Dispara el sensor estableciendo trigPin a HIGH por 10 microsegundos:
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
 
-  // Llig echoPin, pulseIn() torna la duració en microsegons:
+  // Lee echoPin, pulseIn() devuelve la duración en microsegundos:
   duration = pulseIn(echoPin, HIGH);
 
   // Calcula la distancia
-  distance = duration \* 0.034 / 2;
+  distance = duration * 0.034 / 2;
 
-  // Imprimeix la distancia en el monitor serie
-  Serial.print(\"Distance = \");
+  // Imprime la distancia en el monitor serie
+  Serial.print("Distancia = ");
   Serial.print(distance);
-  Serial.println(\" cm\");
+  Serial.println(" cm");
   delay(50);
 }
 ```
 
-## Veure també
+## Ver también
 
 - [README](../README.md)
